@@ -43,6 +43,11 @@ $routes->post('/ciudades/insert', 'Ciudad::insert');
 $routes->post('/ciudades/update', 'Ciudad::update');
 $routes->post('/ciudades/delete', 'Ciudad::delete');
 
+$routes->get('/ciudades_alimentacion', 'CiudadAlimentacion::index');
+$routes->post('/ciudades_alimentacion/insert', 'CiudadAlimentacion::insert');
+$routes->post('/ciudades_alimentacion/update', 'CiudadAlimentacion::update');
+$routes->post('/ciudades_alimentacion/delete', 'CiudadAlimentacion::delete');
+
 $routes->get('/climas', 'Clima::index');
 $routes->post('/climas/insert', 'Clima::insert');
 $routes->post('/climas/update', 'Clima::update');
@@ -72,6 +77,11 @@ $routes->get('/paises', 'Pais::index');
 $routes->post('/paises/insert', 'Pais::insert');
 $routes->post('/paises/update', 'Pais::update');
 $routes->post('/paises/delete', 'Pais::delete');
+
+$routes->get('/paises_divisas', 'PaisDivisa::index');
+$routes->post('/paises_divisas/insert', 'PaisDivisa::insert');
+$routes->post('/paises_divisas/update', 'PaisDivisa::update');
+$routes->post('/paises_divisas/delete', 'PaisDivisa::delete');
 
 $routes->get('/estados', 'Estado::index');
 $routes->post('/estados/insert', 'Estado::insert');

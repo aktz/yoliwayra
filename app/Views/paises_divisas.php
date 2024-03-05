@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>Países</title>
+    <title>Divisas de País</title>
 
     <meta name="description" content="YoliWayra">
     <meta name="author" content="anysw">
@@ -113,7 +113,10 @@
                       <a class="link-fx" href="<?= base_url('config'); ?>">Configuraciones</a>
                     </li>
                     <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
-                      Países
+                      <a class="link-fx" href="<?= base_url('paises'); ?>">Países</a>
+                    </li>
+                    <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
+                      Divisas
                     </li>
                   </ol>
                 </nav>
@@ -166,7 +169,6 @@
                 echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
               echo '</div>';
             }
-            
 
           ?> 
           
@@ -179,8 +181,8 @@
                     <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                       <thead>
                         <tr>
-                          <th>Nombre</th>
-                          <th class="text-center" style="width: 12%;">Activo</th>
+                          <th>País</th>
+                          <th>Divisa</th>
                           <th class="text-center" style="width: 100px;"></th>
                         </tr>
                       </thead>
@@ -188,23 +190,16 @@
 
                         <?php
                             foreach ($array as $item) {
-                              $active = $item["activo"] == 1 ? "SI" : "NO";
-                              $name = $item["nombre"];
                               echo '<tr>';
-                                echo '<td>' . $item["nombre"] . '</td>';
-                                echo '<td class="text-center">' . $active . '</td>';
+                                echo '<td>' . $item["nombre_pais"] . '</td>';
+                                echo '<td>' . $item["nombre_divisa"] . '</td>';
                                 echo '<td class="text-center">';
                                   echo '<div class="btn-group">';
-                                    echo '<button type="button" class="btn btn-sm btn-alt-secondary"' .
-                                        ' data-bs-toggle="modal" data-bs-target="#modal-list" title="Opciones" >';
-                                      echo '<i class="fa fa-fw fa-list"></i>';
-                                    echo '</button>';
                                     echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
                                           ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
-                                          ' onclick="UpdateClick(' . 
-                                              $item["id"] . ', \'' . 
-                                              $item["nombre"] . '\', ' . 
-                                              $item['activo'] . ')">';
+                                          ' onclick="UpdateClick(' .  
+                                              $item["id_pais"] . '\', \'' . 
+                                              $item["id_divisa"] . '\', ';
                                       echo '<i class="fa fa-fw fa-pencil-alt"></i>';
                                     echo '</button>';
                                     echo '<button type="button" id="delete" onclick="DeleteClick(' . $item["id"] . ')" class="btn btn-sm btn-alt-secondary" title="Eliminar">';
@@ -234,7 +229,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="paises/insert" method="POST">
+              <form action="estados/insert" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Nuevo</h3>
                   <div class="block-options">
@@ -246,6 +241,20 @@
                 <div class="block-content fs-sm">
                   <div class="block-content block-content-full">
                     <div class="row">
+                      <div class="mb-4">
+                        <label class="form-label" for="pais-ins">País</label>
+                        <select class="form-select" id="pais-ins" name="pais-ins" size="5">
+
+                          <?php
+
+                            foreach ($paises as $pais) {
+                              echo '<option value="' . $pais["id"] . '">' . $pais["nombre"] . '</option>';
+                            }
+
+                          ?>
+
+                        </select>
+                      </div>
                       <div class="mb-4">
                         <label class="form-label" for="nombre-ins">Nombre</label>
                         <textarea class="form-control" id="nombre-ins" name="nombre-ins" rows="3"></textarea>
@@ -279,7 +288,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="paises/update" method="POST">
+              <form action="estados/update" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Modificación</h3>
                   <div class="block-options">
@@ -292,6 +301,18 @@
                   <div class="block-content block-content-full">
                     <div class="row">
                       <input type="hidden" id="hid-id-upd" name="hid-id-upd" />
+                      <div class="mb-4">
+                        <label class="form-label" for="pais-upd">País</label>
+                        <select class="form-select" id="pais-upd" name="pais-upd" size="5">
+
+                          <?php
+                            foreach ($paises as $pais) {
+                              echo '<option value="' . $pais["id"] . '">' . $pais["nombre"] . '</option>';
+                            }
+                          ?>
+
+                        </select>
+                      </div>
                       <div class="mb-4">
                         <label class="form-label" for="nombre-upd">Nombre</label>
                         <textarea class="form-control" id="nombre-upd" name="nombre-upd" rows="3"></textarea>
@@ -320,40 +341,6 @@
         </div>
       </div>
 
-      <!-- modal-list -->
-      <div class="modal" id="modal-list" tabindex="-1" role="dialog" aria-labelledby="modal-list" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
-            <div class="block block-rounded block-transparent mb-0">
-              <div class="block-header block-header-default">
-                <h3 class="block-title">Opciones</h3>
-                <div class="block-options">
-                  <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-fw fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="block-content fs-sm">
-                <div class="block-content block-content-full">
-                  <div class="row">
-                    <a class="btn btn-primary mb-2" href="<?= base_url('paises_divisas'); ?>">Gastronomía</a>
-                    <button type="button" class="btn btn-primary mb-2">Alojamiento</button>
-                    <button type="button" class="btn btn-primary mb-2">Bancos</button>
-                    <button type="button" class="btn btn-primary mb-2">Embajadas</button>
-                    <button type="button" class="btn btn-primary mb-2">Terminales</button>
-                    <button type="button" class="btn btn-primary mb-2">Transporte</button>
-                  </div>
-                </div>                      
-              </div>
-              <div class="block-content block-content-full text-end bg-body">
-                <button type="button" class="btn btn-sm btn-alt-secondary me-1" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Guardar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
     <!-- END Page Container -->
     <script src="assets/js/oneui.app.min.js"></script>
@@ -377,37 +364,37 @@
 
         setTimeout(function() {
           $('#div-insert-fail').hide();
-        }, 5000);
+        }, 4000);
 
         setTimeout(function() {
           $('#div-update-fail').hide();
-        }, 5000);
+        }, 4000);
         
         setTimeout(function() {
           $('#div-upsert-success').hide();
         }, 2000);
-        
+
         setTimeout(function() {
           $('#div-validation-errors').hide();
-        }, 5000);
+        }, 4000);
 
         $('#activo-ins').on('click', function() {
           if( $(this).is(':checked') ){
             $("#activoTitulo").text("Activo");
             $("#hidActivo-ins").val("1");
-            console.log("hidActivo: "  + $("#hidActivo-ins").val());
+            console.log("hidActivo: "  + $("#hidActivo").val());
           } else {
             $("#activoTitulo").text("Inactivo");
             $("#hidActivo-ins").val("0");
             console.log("hidActivo: "  + $("#hidActivo-ins").val());
           }
         });
-        
+
         $('#activo-upd').on('click', function() {
           if( $(this).is(':checked') ){
             $("#activoTitulo").text("Activo");
             $("#hidActivo-upd").val("1");
-            console.log("hidActivo: "  + $("#hidActivo-upd").val());
+            console.log("hidActivo: "  + $("#hidActivo").val());
           } else {
             $("#activoTitulo").text("Inactivo");
             $("#hidActivo-upd").val("0");
@@ -416,11 +403,12 @@
         });
       });
 
-      function UpdateClick(id, name, active) {
+      function UpdateClick(id, pais, nombre, activo) {
         $("#hid-id-upd").val(id);
-        $("#nombre-upd").val(name);
-        $("#activo-upd").prop("checked", active == 1 ? true : false);
-        $("#hid-activo-upd").val(active);
+        $("#pais-upd").val(pais);
+        $("#nombre-upd").val(nombre);
+        $("#activo-upd").prop("checked", activo == 1 ? true : false);
+        $("#hid-activo-upd").val(activo);
       }
 
       function DeleteClick(id) {
@@ -442,7 +430,7 @@
 
       function DeleteItem(id) {
         $.ajax({
-          url: '<?= base_url('/paises/delete'); ?>',
+          url: '<?= base_url('/estados/delete'); ?>',
           type: 'POST',
           data: { id: id },
           dataType: 'json'

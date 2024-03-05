@@ -249,6 +249,47 @@ class Validation extends BaseConfig
         ]
     ];
     
+    public $ciudades_alimentacion = [
+        'ciudad' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Ciudad es obligatorio.',
+                'integer' => 'El campo Ciudad debe ser un número entero.',
+                'min_length' => 'El campo Ciudad debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Ciudad debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'alimentacion' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Alimentación es obligatorio.',
+                'integer' => 'El campo Alimentación debe ser un número entero.',
+                'min_length' => 'El campo Alimentación debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Alimentación debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'descripcion' => [
+            'rules' => 'required|string|min_length[4]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
+            'errors' => [
+                'required' => 'El campo Descripción es obligatorio.',
+                'string' => 'El campo Descripción debe ser un texto.',
+                'min_length' => 'El campo Descripción debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Descripción debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Descripción debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'notas' => [
+            'rules' => 'required|string|min_length[4]|max_length[3000]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
+            'errors' => [
+                'required' => 'El campo Notas es obligatorio.',
+                'string' => 'El campo Notas debe ser un texto.',
+                'min_length' => 'El campo Notas debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Notas debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Notas debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+    ];
+    
     public $clima = [
         'nombre' => [
             'rules' => 'required|string|min_length[4]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
@@ -399,6 +440,27 @@ class Validation extends BaseConfig
                 'required' => 'El campo Activo es obligatorio.',
                 'integer' => 'El campo Activo debe ser un número entero.',
                 'exact_length' => 'El campo Activo debe tener una longitud exacta de 1.'
+            ]
+        ]
+    ];
+
+    public $pais_divisa = [
+        'pais' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo País es obligatorio.',
+                'integer' => 'El campo País debe ser un número entero.',
+                'min_length' => 'El campo País debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo País debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'divisa' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Divisa es obligatorio.',
+                'integer' => 'El campo Divisa debe ser un número entero.',
+                'min_length' => 'El campo Divisa debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Divisa debe tener una longitud máxima de 3.'
             ]
         ]
     ];
