@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>Países</title>
+    <title>Requerimientos de País</title>
 
     <meta name="description" content="YoliWayra">
     <meta name="author" content="anysw">
@@ -113,7 +113,10 @@
                       <a class="link-fx" href="<?= base_url('config'); ?>">Configuraciones</a>
                     </li>
                     <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
-                      Países
+                      <a class="link-fx" href="<?= base_url('paises'); ?>">Países</a>
+                    </li>
+                    <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
+                      Requerimientos
                     </li>
                   </ol>
                 </nav>
@@ -166,7 +169,6 @@
                 echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
               echo '</div>';
             }
-            
 
           ?> 
           
@@ -179,8 +181,8 @@
                     <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                       <thead>
                         <tr>
-                          <th>Nombre</th>
-                          <th class="text-center" style="width: 12%;">Activo</th>
+                          <th>País</th>
+                          <th>Idioma</th>
                           <th class="text-center" style="width: 100px;"></th>
                         </tr>
                       </thead>
@@ -188,25 +190,11 @@
 
                         <?php
                             foreach ($array as $item) {
-                              $active = $item["activo"] == 1 ? "SI" : "NO";
-                              $name = $item["nombre"];
                               echo '<tr>';
-                                echo '<td>' . $item["nombre"] . '</td>';
-                                echo '<td class="text-center">' . $active . '</td>';
+                                echo '<td>' . $item["nombre_pais"] . '</td>';
+                                echo '<td>' . $item["nombre_requerimiento"] . '</td>';
                                 echo '<td class="text-center">';
                                   echo '<div class="btn-group">';
-                                    echo '<button type="button" class="btn btn-sm btn-alt-secondary"' .
-                                        ' data-bs-toggle="modal" data-bs-target="#modal-list" title="Opciones" >';
-                                      echo '<i class="fa fa-fw fa-list"></i>';
-                                    echo '</button>';
-                                    echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
-                                          ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
-                                          ' onclick="UpdateClick(' . 
-                                              $item["id"] . ', \'' . 
-                                              $item["nombre"] . '\', ' . 
-                                              $item['activo'] . ')">';
-                                      echo '<i class="fa fa-fw fa-pencil-alt"></i>';
-                                    echo '</button>';
                                     echo '<button type="button" id="delete" onclick="DeleteClick(' . $item["id"] . ')" class="btn btn-sm btn-alt-secondary" title="Eliminar">';
                                       echo '<i class="fa fa-fw fa-times"></i>';
                                     echo '</button>';
@@ -234,7 +222,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="paises/insert" method="POST">
+              <form action="paises_requerimientos/insert" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Nuevo</h3>
                   <div class="block-options">
@@ -247,20 +235,29 @@
                   <div class="block-content block-content-full">
                     <div class="row">
                       <div class="mb-4">
-                        <label class="form-label" for="nombre-ins">Nombre</label>
-                        <textarea class="form-control" id="nombre-ins" name="nombre-ins" rows="3"></textarea>
+                        <label class="form-label" for="pais-ins">País</label>
+                        <select class="form-select" id="pais-ins" name="pais-ins" size="5">
+
+                          <?php
+                            foreach ($paises as $pais) {
+                              echo '<option value="' . $pais["id"] . '">' . $pais["nombre"] . '</option>';
+                            }
+                          ?>
+
+                        </select>
                       </div>
-                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="activo-ins" name="activo-ins" checked />
-                        <label class="form-check-label" for="activo-ins">
-                          <span class="d-flex align-items-center">
-                            <span class="ms-2">
-                              <input type="hidden" id="hidActivo-ins" name="hidActivo-ins" value="1" />
-                              <span id="activoTitulo">Activo</span>
-                            </span>
-                          </span>
-                        </label>
-                      </div>
+                      <div class="mb-4">
+                        <label class="form-label" for="requerimiento-ins">Idioma</label>
+                        <select class="form-select" id="requerimiento-ins" name="requerimiento-ins" size="5">
+
+                          <?php
+                            foreach ($requerimientos as $requerimiento) {
+                              echo '<option value="' . $requerimiento["id"] . '">' . $requerimiento["nombre"] . '</option>';
+                            }
+                          ?>
+
+                        </select>
+                      </div>                      
                     </div>
                   </div>                      
                 </div>
@@ -279,7 +276,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="paises/update" method="POST">
+              <form action="paises_requerimientos/update" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Modificación</h3>
                   <div class="block-options">
@@ -293,20 +290,29 @@
                     <div class="row">
                       <input type="hidden" id="hid-id-upd" name="hid-id-upd" />
                       <div class="mb-4">
-                        <label class="form-label" for="nombre-upd">Nombre</label>
-                        <textarea class="form-control" id="nombre-upd" name="nombre-upd" rows="3"></textarea>
+                        <label class="form-label" for="pais-upd">País</label>
+                        <select class="form-select" id="pais-upd" name="pais-upd" size="5">
+
+                          <?php
+                            foreach ($paises as $pais) {
+                              echo '<option value="' . $pais["id"] . '">' . $pais["nombre"] . '</option>';
+                            }
+                          ?>
+
+                        </select>
                       </div>
-                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="activo-upd" name="activo-upd" />
-                        <label class="form-check-label" for="activo-upd">
-                          <span class="d-flex align-items-center">
-                            <span class="ms-2">
-                              <input type="hidden" id="hidActivo-upd" name="hidActivo-upd" value="1" />
-                              <span id="activoTitulo">Activo</span>
-                            </span>
-                          </span>
-                        </label>
-                      </div>
+                      <div class="mb-4">
+                        <label class="form-label" for="requerimiento-upd">País</label>
+                        <select class="form-select" id="requerimiento-upd" name="pais-upd" size="5">
+
+                          <?php
+                            foreach ($requerimientos as $requerimiento) {
+                              echo '<option value="' . $requerimiento["id"] . '">' . $requerimiento["nombre"] . '</option>';
+                            }
+                          ?>
+
+                        </select>
+                      </div>                      
                     </div>
                   </div>                      
                 </div>
@@ -315,37 +321,6 @@
                   <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Guardar</button>
                 </div>
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- modal-list -->
-      <div class="modal" id="modal-list" tabindex="-1" role="dialog" aria-labelledby="modal-list" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
-            <div class="block block-rounded block-transparent mb-0">
-              <div class="block-header block-header-default">
-                <h3 class="block-title">Opciones</h3>
-                <div class="block-options">
-                  <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-fw fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="block-content fs-sm">
-                <div class="block-content block-content-full">
-                  <div class="row">
-                    <a class="btn btn-primary mb-2" href="<?= base_url('paises_divisas'); ?>">Divisas</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('paises_idiomas'); ?>">Idiomas</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('paises_requerimientos'); ?>">Requerimientos</a>
-                  </div>
-                </div>                      
-              </div>
-              <div class="block-content block-content-full text-end bg-body">
-                <button type="button" class="btn btn-sm btn-alt-secondary me-1" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Guardar</button>
-              </div>
             </div>
           </div>
         </div>
@@ -374,51 +349,20 @@
 
         setTimeout(function() {
           $('#div-insert-fail').hide();
-        }, 5000);
+        }, 4000);
 
         setTimeout(function() {
           $('#div-update-fail').hide();
-        }, 5000);
+        }, 4000);
         
         setTimeout(function() {
           $('#div-upsert-success').hide();
         }, 2000);
-        
+
         setTimeout(function() {
           $('#div-validation-errors').hide();
-        }, 5000);
-
-        $('#activo-ins').on('click', function() {
-          if( $(this).is(':checked') ){
-            $("#activoTitulo").text("Activo");
-            $("#hidActivo-ins").val("1");
-            console.log("hidActivo: "  + $("#hidActivo-ins").val());
-          } else {
-            $("#activoTitulo").text("Inactivo");
-            $("#hidActivo-ins").val("0");
-            console.log("hidActivo: "  + $("#hidActivo-ins").val());
-          }
-        });
-        
-        $('#activo-upd').on('click', function() {
-          if( $(this).is(':checked') ){
-            $("#activoTitulo").text("Activo");
-            $("#hidActivo-upd").val("1");
-            console.log("hidActivo: "  + $("#hidActivo-upd").val());
-          } else {
-            $("#activoTitulo").text("Inactivo");
-            $("#hidActivo-upd").val("0");
-            console.log("hidActivo: "  + $("#hidActivo-upd").val());
-          }
-        });
+        }, 4000);
       });
-
-      function UpdateClick(id, name, active) {
-        $("#hid-id-upd").val(id);
-        $("#nombre-upd").val(name);
-        $("#activo-upd").prop("checked", active == 1 ? true : false);
-        $("#hid-activo-upd").val(active);
-      }
 
       function DeleteClick(id) {
         Swal.fire({
@@ -439,7 +383,7 @@
 
       function DeleteItem(id) {
         $.ajax({
-          url: '<?= base_url('/paises/delete'); ?>',
+          url: '<?= base_url('/paises_requerimientos/delete'); ?>',
           type: 'POST',
           data: { id: id },
           dataType: 'json'

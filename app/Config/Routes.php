@@ -83,6 +83,16 @@ $routes->post('/paises_divisas/insert', 'PaisDivisa::insert');
 $routes->post('/paises_divisas/update', 'PaisDivisa::update');
 $routes->post('/paises_divisas/delete', 'PaisDivisa::delete');
 
+$routes->get('/paises_idiomas', 'PaisIdioma::index');
+$routes->post('/paises_idiomas/insert', 'PaisIdioma::insert');
+$routes->post('/paises_idiomas/update', 'PaisIdioma::update');
+$routes->post('/paises_idiomas/delete', 'PaisIdioma::delete');
+
+$routes->get('/paises_requerimientos', 'PaisRequerimiento::index');
+$routes->post('/paises_requerimientos/insert', 'PaisRequerimiento::insert');
+$routes->post('/paises_requerimientos/update', 'PaisRequerimiento::update');
+$routes->post('/paises_requerimientos/delete', 'PaisRequerimiento::delete');
+
 $routes->get('/estados', 'Estado::index');
 $routes->post('/estados/insert', 'Estado::insert');
 $routes->post('/estados/update', 'Estado::update');
@@ -97,3 +107,8 @@ $routes->get('/regiones', 'Region::index');
 $routes->post('/regiones/insert', 'Region::insert');
 $routes->post('/regiones/update', 'Region::update');
 $routes->post('/regiones/delete', 'Region::delete');
+
+$routes->get('/requerimientos', 'Requerimiento::index');
+$routes->post('/requerimientos/insert', 'Requerimiento::insert');
+$routes->post('/requerimientos/update', 'Requerimiento::update');
+$routes->post('/requerimientos/delete', 'Requerimiento::delete');

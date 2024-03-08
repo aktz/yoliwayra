@@ -25,9 +25,12 @@ use App\Models\EstadoModel;
 use App\Models\IdiomaModel;
 use App\Models\IndumentariaModel;
 use App\Models\PaisDivisaModel;
+use App\Models\PaisIdiomaModel;
+use App\Models\PaisRequerimientoModel;
 use App\Models\PaisModel;
 use App\Models\PerfilModel;
 use App\Models\RegionModel;
+use App\Models\RequerimientoModel;
 
 /**
  * Class BaseController
@@ -90,9 +93,12 @@ abstract class BaseController extends Controller
         $this->idioma = new IdiomaModel();
         $this->indumentaria = new IndumentariaModel();
         $this->pais_divisa = new PaisDivisaModel();
+        $this->pais_idioma = new PaisIdiomaModel();
+        $this->pais_requerimiento = new PaisRequerimientoModel();
         $this->pais = new PaisModel();
         $this->perfil = new PerfilModel();
         $this->region = new RegionModel();
+        $this->requerimiento = new RequerimientoModel();
 
         $this->session = \Config\Services::session();
         $this->request = \Config\Services::request();

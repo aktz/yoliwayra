@@ -465,6 +465,48 @@ class Validation extends BaseConfig
         ]
     ];
     
+    public $pais_idioma = [
+        'pais' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo País es obligatorio.',
+                'integer' => 'El campo País debe ser un número entero.',
+                'min_length' => 'El campo País debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo País debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'idioma' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Idioma es obligatorio.',
+                'integer' => 'El campo Idioma debe ser un número entero.',
+                'min_length' => 'El campo Idioma debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Idioma debe tener una longitud máxima de 3.'
+            ]
+        ]
+    ];
+    
+    public $pais_requerimiento = [
+        'pais' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo País es obligatorio.',
+                'integer' => 'El campo País debe ser un número entero.',
+                'min_length' => 'El campo País debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo País debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'requerimiento' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Requerimiento es obligatorio.',
+                'integer' => 'El campo Requerimiento debe ser un número entero.',
+                'min_length' => 'El campo Requerimiento debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Requerimiento debe tener una longitud máxima de 3.'
+            ]
+        ]
+    ];
+    
     public $estado = [
         'nombre' => [
             'rules' => 'required|string|min_length[4]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
@@ -557,6 +599,27 @@ class Validation extends BaseConfig
                 'min_length' => 'El campo Nombre debe tener al menos 5 caracteres.',
                 'max_length' => 'El campo Nombre debe tener como máximo 255 caracteres.',
                 'regex_match' => 'El campo Nombre debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'activo' => [
+            'rules' => 'required|integer|exact_length[1]',
+            'errors' => [
+                'required' => 'El campo Activo es obligatorio.',
+                'integer' => 'El campo Activo debe ser un número entero.',
+                'exact_length' => 'El campo Activo debe tener una longitud exacta de 1.'
+            ]
+        ]
+    ];
+
+    public $requerimiento = [
+        'nombre' => [
+            'rules' => 'required|string|min_length[4]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
+            'errors' => [
+                'required' => 'El campo Requerimiento es obligatorio.',
+                'string' => 'El campo Requerimiento debe ser un texto.',
+                'min_length' => 'El campo Requerimiento debe tener al menos 5 caracteres.',
+                'max_length' => 'El campo Requerimiento debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Requerimiento debe contener sólo caracteres alfanuméricos',
             ]
         ],
         'activo' => [

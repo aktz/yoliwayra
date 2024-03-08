@@ -239,7 +239,7 @@
                 </a>
                 </div>
                 <div class="col-6 col-md-3 col-xxl-2">
-                <a class="block block-rounded text-center bg-primary" href="javascript:void(0)">
+                <a class="block block-rounded text-center bg-primary" href="<?= base_url('requerimientos'); ?>">
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="fs-sm fw-semibold my-3 text-uppercase text-white">Requerimientos</div>
                     </div>

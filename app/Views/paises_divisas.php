@@ -195,13 +195,6 @@
                                 echo '<td>' . $item["nombre_divisa"] . '</td>';
                                 echo '<td class="text-center">';
                                   echo '<div class="btn-group">';
-                                    echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
-                                          ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
-                                          ' onclick="UpdateClick(' .  
-                                              $item["id_pais"] . '\', \'' . 
-                                              $item["id_divisa"] . '\', ';
-                                      echo '<i class="fa fa-fw fa-pencil-alt"></i>';
-                                    echo '</button>';
                                     echo '<button type="button" id="delete" onclick="DeleteClick(' . $item["id"] . ')" class="btn btn-sm btn-alt-secondary" title="Eliminar">';
                                       echo '<i class="fa fa-fw fa-times"></i>';
                                     echo '</button>';
@@ -229,7 +222,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="estados/insert" method="POST">
+              <form action="paises_divisas/insert" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Nuevo</h3>
                   <div class="block-options">
@@ -246,30 +239,25 @@
                         <select class="form-select" id="pais-ins" name="pais-ins" size="5">
 
                           <?php
-
                             foreach ($paises as $pais) {
                               echo '<option value="' . $pais["id"] . '">' . $pais["nombre"] . '</option>';
                             }
-
                           ?>
 
                         </select>
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="nombre-ins">Nombre</label>
-                        <textarea class="form-control" id="nombre-ins" name="nombre-ins" rows="3"></textarea>
-                      </div>
-                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="activo-ins" name="activo-ins" checked />
-                        <label class="form-check-label" for="activo-ins">
-                          <span class="d-flex align-items-center">
-                            <span class="ms-2">
-                              <input type="hidden" id="hidActivo-ins" name="hidActivo-ins" value="1" />
-                              <span id="activoTitulo">Activo</span>
-                            </span>
-                          </span>
-                        </label>
-                      </div>
+                        <label class="form-label" for="divisa-ins">Divisa</label>
+                        <select class="form-select" id="divisa-ins" name="divisa-ins" size="5">
+
+                          <?php
+                            foreach ($divisas as $divisa) {
+                              echo '<option value="' . $divisa["id"] . '">' . $divisa["nombre"] . '</option>';
+                            }
+                          ?>
+
+                        </select>
+                      </div>                      
                     </div>
                   </div>                      
                 </div>
@@ -314,20 +302,17 @@
                         </select>
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="nombre-upd">Nombre</label>
-                        <textarea class="form-control" id="nombre-upd" name="nombre-upd" rows="3"></textarea>
-                      </div>
-                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="activo-upd" name="activo-upd" />
-                        <label class="form-check-label" for="activo-upd">
-                          <span class="d-flex align-items-center">
-                            <span class="ms-2">
-                              <input type="hidden" id="hidActivo-upd" name="hidActivo-upd" value="1" />
-                              <span id="activoTitulo">Activo</span>
-                            </span>
-                          </span>
-                        </label>
-                      </div>
+                        <label class="form-label" for="divisa-upd">País</label>
+                        <select class="form-select" id="divisa-upd" name="pais-upd" size="5">
+
+                          <?php
+                            foreach ($divisas as $divisa) {
+                              echo '<option value="' . $divisa["id"] . '">' . $divisa["nombre"] . '</option>';
+                            }
+                          ?>
+
+                        </select>
+                      </div>                      
                     </div>
                   </div>                      
                 </div>
@@ -377,39 +362,7 @@
         setTimeout(function() {
           $('#div-validation-errors').hide();
         }, 4000);
-
-        $('#activo-ins').on('click', function() {
-          if( $(this).is(':checked') ){
-            $("#activoTitulo").text("Activo");
-            $("#hidActivo-ins").val("1");
-            console.log("hidActivo: "  + $("#hidActivo").val());
-          } else {
-            $("#activoTitulo").text("Inactivo");
-            $("#hidActivo-ins").val("0");
-            console.log("hidActivo: "  + $("#hidActivo-ins").val());
-          }
-        });
-
-        $('#activo-upd').on('click', function() {
-          if( $(this).is(':checked') ){
-            $("#activoTitulo").text("Activo");
-            $("#hidActivo-upd").val("1");
-            console.log("hidActivo: "  + $("#hidActivo").val());
-          } else {
-            $("#activoTitulo").text("Inactivo");
-            $("#hidActivo-upd").val("0");
-            console.log("hidActivo: "  + $("#hidActivo-upd").val());
-          }
-        });
       });
-
-      function UpdateClick(id, pais, nombre, activo) {
-        $("#hid-id-upd").val(id);
-        $("#pais-upd").val(pais);
-        $("#nombre-upd").val(nombre);
-        $("#activo-upd").prop("checked", activo == 1 ? true : false);
-        $("#hid-activo-upd").val(activo);
-      }
 
       function DeleteClick(id) {
         Swal.fire({
@@ -430,7 +383,7 @@
 
       function DeleteItem(id) {
         $.ajax({
-          url: '<?= base_url('/estados/delete'); ?>',
+          url: '<?= base_url('/paises_divisas/delete'); ?>',
           type: 'POST',
           data: { id: id },
           dataType: 'json'

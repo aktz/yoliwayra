@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>Países</title>
+    <title>Requerimientos</title>
 
     <meta name="description" content="YoliWayra">
     <meta name="author" content="anysw">
@@ -113,7 +113,7 @@
                       <a class="link-fx" href="<?= base_url('config'); ?>">Configuraciones</a>
                     </li>
                     <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
-                      Países
+                      Requerimientos
                     </li>
                   </ol>
                 </nav>
@@ -195,10 +195,6 @@
                                 echo '<td class="text-center">' . $active . '</td>';
                                 echo '<td class="text-center">';
                                   echo '<div class="btn-group">';
-                                    echo '<button type="button" class="btn btn-sm btn-alt-secondary"' .
-                                        ' data-bs-toggle="modal" data-bs-target="#modal-list" title="Opciones" >';
-                                      echo '<i class="fa fa-fw fa-list"></i>';
-                                    echo '</button>';
                                     echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
                                           ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
                                           ' onclick="UpdateClick(' . 
@@ -234,7 +230,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="paises/insert" method="POST">
+              <form action="requerimientos/insert" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Nuevo</h3>
                   <div class="block-options">
@@ -279,7 +275,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="paises/update" method="POST">
+              <form action="requerimientos/update" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Modificación</h3>
                   <div class="block-options">
@@ -315,37 +311,6 @@
                   <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Guardar</button>
                 </div>
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- modal-list -->
-      <div class="modal" id="modal-list" tabindex="-1" role="dialog" aria-labelledby="modal-list" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
-            <div class="block block-rounded block-transparent mb-0">
-              <div class="block-header block-header-default">
-                <h3 class="block-title">Opciones</h3>
-                <div class="block-options">
-                  <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-fw fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="block-content fs-sm">
-                <div class="block-content block-content-full">
-                  <div class="row">
-                    <a class="btn btn-primary mb-2" href="<?= base_url('paises_divisas'); ?>">Divisas</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('paises_idiomas'); ?>">Idiomas</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('paises_requerimientos'); ?>">Requerimientos</a>
-                  </div>
-                </div>                      
-              </div>
-              <div class="block-content block-content-full text-end bg-body">
-                <button type="button" class="btn btn-sm btn-alt-secondary me-1" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Guardar</button>
-              </div>
             </div>
           </div>
         </div>
@@ -439,7 +404,7 @@
 
       function DeleteItem(id) {
         $.ajax({
-          url: '<?= base_url('/paises/delete'); ?>',
+          url: '<?= base_url('/requerimientos/delete'); ?>',
           type: 'POST',
           data: { id: id },
           dataType: 'json'

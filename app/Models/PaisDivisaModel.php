@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class PaisDivisaModel extends Model
 {
-  protected $table = 'ciudades_alimentacion';
+  protected $table = 'paises_divisas';
   protected $primaryKey = 'id';
   protected $allowedFields = ['pais', 'divisa'];  
 
