@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>Ciudades</title>
+    <title>Bancos de Ciudad</title>
 
     <meta name="description" content="YoliWayra">
     <meta name="author" content="anysw">
@@ -113,7 +113,10 @@
                       <a class="link-fx" href="<?= base_url('config'); ?>">Configuraciones</a>
                     </li>
                     <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
-                      Ciudades
+                      <a class="link-fx" href="<?= base_url('ciudades'); ?>">Ciudades</a>
+                    </li>
+                    <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
+                      Bancos
                     </li>
                   </ol>
                 </nav>
@@ -178,50 +181,42 @@
                     <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                       <thead>
                         <tr>
-                          <th>Nombre</th>
-                          <th>Estado</th>
-                          <th>Región</th>
-                          <th>Clima</th>
-                          <th class="text-center" style="width: 12%;">Activo</th>
+                          <th>Ciudad</th>
+                          <th>Alojamiento</th>
+                          <th>Descripción</th>
+                          <th>Notas</th>
                           <th class="text-center" style="width: 100px;"></th>
                         </tr>
                       </thead>
                       <tbody>
 
-                      <?php
-                          foreach ($array as $item) {
-                            $activo = $item["activo_ciudad"] == 1 ? "SI" : "NO";
-                            echo '<tr>';
-                              echo '<td>' . $item["nombre_ciudad"] . '</td>';
-                              echo '<td>' . $item["nombre_estado"] . '</td>';
-                              echo '<td>' . $item["nombre_region"] . '</td>';
-                              echo '<td>' . $item["nombre_clima"] . '</td>';
-                              echo '<td class="text-center">' . $activo . '</td>';
-                              echo '<td class="text-center">';
-                                echo '<div class="btn-group">';
-                                  echo '<button type="button" class="btn btn-sm btn-alt-secondary"' .
-                                      ' data-bs-toggle="modal" data-bs-target="#modal-list" title="Opciones" >';
-                                    echo '<i class="fa fa-fw fa-list"></i>';
-                                  echo '</button>';
-                                  echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
-                                        ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
-                                        ' onclick="UpdateClick(' . 
-                                            $item["id_ciudad"] . ', \'' . 
-                                            $item["id_estado"] . '\', \'' . 
-                                            $item["id_region"] . '\', \'' . 
-                                            $item["id_clima"] . '\', \'' . 
-                                            $item["nombre_ciudad"] . '\', ' . 
-                                            $item['activo_ciudad'] . ')">';
-                                    echo '<i class="fa fa-fw fa-pencil-alt"></i>';
-                                  echo '</button>';
-                                  echo '<button type="button" id="delete" onclick="DeleteClick(' . $item["id_ciudad"] . ')" class="btn btn-sm btn-alt-secondary" title="Eliminar">';
-                                    echo '<i class="fa fa-fw fa-times"></i>';
-                                  echo '</button>';
-                                echo '</div>';
-                              echo '</td>';
-                            echo '</tr>';
-                          }
-                      ?> 
+                        <?php
+                            foreach ($array as $item) {
+                              echo '<tr>';
+                                echo '<td>' . $item["nombre_ciudad"] . '</td>';
+                                echo '<td>' . $item["nombre_banco"] . '</td>';
+                                echo '<td>' . $item["descripcion"] . '</td>';
+                                echo '<td>' . $item["notas"] . '</td>';
+                                echo '<td class="text-center">';
+                                  echo '<div class="btn-group">';
+                                    echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
+                                          ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
+                                          ' onclick="UpdateClick(' . 
+                                              $item["id"] . ', ' . 
+                                              $item["id_ciudad"] . ', ' . 
+                                              $item["id_banco"] . ', \'' . 
+                                              $item["descripcion"] . '\', \'' . 
+                                              $item["notas"] . '\')">';
+                                      echo '<i class="fa fa-fw fa-pencil-alt"></i>';
+                                    echo '</button>';
+                                    echo '<button type="button" id="delete" onclick="DeleteClick(' . $item["id"] . ')" class="btn btn-sm btn-alt-secondary" title="Eliminar">';
+                                      echo '<i class="fa fa-fw fa-times"></i>';
+                                    echo '</button>';
+                                  echo '</div>';
+                                echo '</td>';
+                              echo '</tr>';
+                            }
+                        ?> 
 
                       </tbody>
                     </table>
@@ -241,7 +236,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="ciudades/insert" method="POST">
+              <form action="ciudades_bancos/insert" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Nuevo</h3>
                   <div class="block-options">
@@ -254,62 +249,37 @@
                   <div class="block-content block-content-full">
                     <div class="row">
                       <div class="mb-4">
-                          <label class="form-label" for="estado-ins">Estado</label>
-                          <select class="form-select" id="estado-ins" name="estado-ins" size="5">
+                        <label class="form-label" for="ciudad-ins">Ciudad</label>
+                        <select class="form-select" id="ciudad-ins" name="ciudad-ins" size="5">
 
-                            <?php
+                          <?php
+                            foreach ($ciudades as $ciudad) {
+                              echo '<option value="' . $ciudad["id_ciudad"] . '">' . $ciudad["nombre_ciudad"] . '</option>';
+                            }
+                          ?>
 
-                              foreach ($estados as $estado) {
-                                  echo '<option value="' . $estado["id_estado"] . '">' . $estado["nombre_estado"] . '</option>';
-                              }
-
-                            ?>
-
-                          </select>
+                        </select>
                       </div>
                       <div class="mb-4">
-                          <label class="form-label" for="region-ins">Región</label>
-                          <select class="form-select" id="region-ins" name="region-ins" size="5">
+                        <label class="form-label" for="banco-ins">Banco</label>
+                        <select class="form-select" id="banco-ins" name="banco-ins" size="5">
 
-                            <?php
+                          <?php
+                            foreach ($bancos as $banco) {
+                              echo '<option value="' . $banco["id"] . '">' . $banco["nombre"] . '</option>';
+                            }
+                          ?>
 
-                              foreach ($regiones as $region) {
-                                  echo '<option value="' . $region["id"] . '">' . $region["nombre"] . '</option>';
-                              }
-
-                            ?>
-
-                          </select>
-                      </div>
+                        </select>
+                      </div>                      
                       <div class="mb-4">
-                          <label class="form-label" for="clima-ins">Clima</label>
-                          <select class="form-select" id="clima-ins" name="clima-ins" size="5">
-
-                            <?php
-
-                              foreach ($climas as $clima) {
-                                  echo '<option value="' . $clima["id"] . '">' . $clima["nombre"] . '</option>';
-                              }
-
-                            ?>
-
-                          </select>
-                      </div>
+                        <label class="form-label" for="descripcion-ins">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion-ins" name="descripcion-ins" />
+                      </div>                      
                       <div class="mb-4">
-                        <label class="form-label" for="nombre-ins">Nombre</label>
-                        <textarea class="form-control" id="nombre-ins" name="nombre-ins" rows="3"></textarea>
-                      </div>
-                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="activo-ins" name="activo-ins" checked />
-                        <label class="form-check-label" for="activo-ins">
-                          <span class="d-flex align-items-center">
-                            <span class="ms-2">
-                            <input type="hidden" id="hidActivo-ins" name="hidActivo-ins" value="1" />
-                            <span id="activoTitulo">Activo</span>
-                            </span>
-                          </span>
-                        </label>
-                      </div>
+                        <label class="form-label" for="notas-ins">Notas</label>
+                        <textarea class="form-control" id="notas-ins" name="notas-ins" rows="3"></textarea>
+                      </div>                      
                     </div>
                   </div>                      
                 </div>
@@ -328,7 +298,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="ciudades/update" method="POST">
+              <form action="ciudades_bancos/update" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Modificación</h3>
                   <div class="block-options">
@@ -342,56 +312,37 @@
                     <div class="row">
                       <input type="hidden" id="hid-id-upd" name="hid-id-upd" />
                       <div class="mb-4">
-                          <label class="form-label" for="estado-upd">Estado</label>
-                          <select class="form-select" id="estado-upd" name="estado-upd" size="5">
+                        <label class="form-label" for="ciudad-upd">Ciudad</label>
+                        <select class="form-select" id="ciudad-upd" name="ciudad-upd" size="5">
 
-                            <?php
-                              foreach ($estados as $estado) {
-                                  echo '<option value="' . $estado["id_estado"] . '">' . $estado["nombre_estado"] . '</option>';
-                              }
-                            ?>
+                          <?php
+                            foreach ($ciudades as $ciudad) {
+                              echo '<option value="' . $ciudad["id_ciudad"] . '">' . $ciudad["nombre_ciudad"] . '</option>';
+                            }
+                          ?>
 
-                          </select>
+                        </select>
                       </div>
                       <div class="mb-4">
-                          <label class="form-label" for="region-upd">Región</label>
-                          <select class="form-select" id="region-upd" name="region-upd" size="5">
+                        <label class="form-label" for="banco-upd">Banco</label>
+                        <select class="form-select" id="banco-upd" name="banco-upd" size="5">
 
-                            <?php
-                              foreach ($regiones as $region) {
-                                  echo '<option value="' . $region["id"] . '">' . $region["nombre"] . '</option>';
-                              }
-                            ?>
+                          <?php
+                            foreach ($bancos as $banco) {
+                              echo '<option value="' . $banco["id"] . '">' . $banco["nombre"] . '</option>';
+                            }
+                          ?>
 
-                          </select>
-                      </div>
+                        </select>
+                      </div> 
                       <div class="mb-4">
-                          <label class="form-label" for="clima-upd">Clima</label>
-                          <select class="form-select" id="clima-upd" name="clima-upd" size="5">
-
-                            <?php
-                              foreach ($climas as $clima) {
-                                  echo '<option value="' . $clima["id"] . '">' . $clima["nombre"] . '</option>';
-                              }
-                            ?>
-
-                          </select>
-                      </div>
+                        <label class="form-label" for="descripcion-upd">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion-upd" name="descripcion-upd" />
+                      </div>                      
                       <div class="mb-4">
-                        <label class="form-label" for="nombre-upd">Nombre</label>
-                        <textarea class="form-control" id="nombre-upd" name="nombre-upd" rows="3"></textarea>
-                      </div>
-                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="activo-upd" name="activo-upd" />
-                        <label class="form-check-label" for="activo-upd">
-                          <span class="d-flex align-items-center">
-                            <span class="ms-2">
-                              <input type="hidden" id="hidActivo-upd" name="hidActivo-upd" value="1" />
-                              <span id="activoTitulo">Activo</span>
-                            </span>
-                          </span>
-                        </label>
-                      </div>
+                        <label class="form-label" for="notas-upd">Notas</label>
+                        <textarea class="form-control" id="notas-upd" name="notas-upd" rows="3"></textarea>
+                      </div>                      
                     </div>
                   </div>                      
                 </div>
@@ -400,39 +351,6 @@
                   <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Guardar</button>
                 </div>
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal" id="modal-list" tabindex="-1" role="dialog" aria-labelledby="modal-list" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
-            <div class="block block-rounded block-transparent mb-0">
-              <div class="block-header block-header-default">
-                <h3 class="block-title">Opciones</h3>
-                <div class="block-options">
-                  <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-fw fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="block-content fs-sm">
-                <div class="block-content block-content-full">
-                  <div class="row">
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_alimentaciones'); ?>">Alimentación</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_alojamientos'); ?>">Alojamientos</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_bancos'); ?>">Bancos</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_embajadas'); ?>">Embajadas</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_terminales'); ?>">Terminales</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_transportes'); ?>">Transportes</a>
-                  </div>
-                </div>                      
-              </div>
-              <div class="block-content block-content-full text-end bg-body">
-                <button type="button" class="btn btn-sm btn-alt-secondary me-1" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Guardar</button>
-              </div>
             </div>
           </div>
         </div>
@@ -474,40 +392,14 @@
         setTimeout(function() {
           $('#div-validation-errors').hide();
         }, 4000);
-
-        $('#activo-ins').on('click', function() {
-          if( $(this).is(':checked') ){
-            $("#activoTitulo").text("Activo");
-            $("#hidActivo-ins").val("1");
-            console.log("hidActivo: "  + $("#hidActivo").val());
-          } else {
-            $("#activoTitulo").text("Inactivo");
-            $("#hidActivo-ins").val("0");
-            console.log("hidActivo: "  + $("#hidActivo-ins").val());
-          }
-        });
-
-        $('#activo-upd').on('click', function() {
-          if( $(this).is(':checked') ){
-            $("#activoTitulo").text("Activo");
-            $("#hidActivo-upd").val("1");
-            console.log("hidActivo: "  + $("#hidActivo").val());
-          } else {
-            $("#activoTitulo").text("Inactivo");
-            $("#hidActivo-upd").val("0");
-            console.log("hidActivo: "  + $("#hidActivo-upd").val());
-          }
-        });
       });
 
-      function UpdateClick(id, estado, region, clima, nombre, activo) {
+      function UpdateClick(id, ciudad, banco, descripcion, notas) {
         $("#hid-id-upd").val(id);
-        $("#estado-upd").val(estado);
-        $("#region-upd").val(region);
-        $("#clima-upd").val(clima);
-        $("#nombre-upd").val(nombre);
-        $("#activo-upd").prop("checked", activo == 1 ? true : false);
-        $("#hid-activo-upd").val(activo);
+        $("#ciudad-upd").val(ciudad);
+        $("#banco-upd").val(banco);
+        $("#descripcion-upd").val(descripcion);
+        $("#notas-upd").val(notas);
       }
 
       function DeleteClick(id) {
@@ -529,7 +421,7 @@
 
       function DeleteItem(id) {
         $.ajax({
-          url: '<?= base_url('/ciudades/delete'); ?>',
+          url: '<?= base_url('/ciudades_bancos/delete'); ?>',
           type: 'POST',
           data: { id: id },
           dataType: 'json'

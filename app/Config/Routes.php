@@ -43,10 +43,20 @@ $routes->post('/ciudades/insert', 'Ciudad::insert');
 $routes->post('/ciudades/update', 'Ciudad::update');
 $routes->post('/ciudades/delete', 'Ciudad::delete');
 
-$routes->get('/ciudades_alimentacion', 'CiudadAlimentacion::index');
-$routes->post('/ciudades_alimentacion/insert', 'CiudadAlimentacion::insert');
-$routes->post('/ciudades_alimentacion/update', 'CiudadAlimentacion::update');
-$routes->post('/ciudades_alimentacion/delete', 'CiudadAlimentacion::delete');
+$routes->get('/ciudades_alimentaciones', 'CiudadAlimentacion::index');
+$routes->post('/ciudades_alimentaciones/insert', 'CiudadAlimentacion::insert');
+$routes->post('/ciudades_alimentaciones/update', 'CiudadAlimentacion::update');
+$routes->post('/ciudades_alimentaciones/delete', 'CiudadAlimentacion::delete');
+
+$routes->get('/ciudades_alojamientos', 'CiudadAlojamiento::index');
+$routes->post('/ciudades_alojamientos/insert', 'CiudadAlojamiento::insert');
+$routes->post('/ciudades_alojamientos/update', 'CiudadAlojamiento::update');
+$routes->post('/ciudades_alojamientos/delete', 'CiudadAlojamiento::delete');
+
+$routes->get('/ciudades_bancos', 'CiudadBanco::index');
+$routes->post('/ciudades_bancos/insert', 'CiudadBanco::insert');
+$routes->post('/ciudades_bancos/update', 'CiudadBanco::update');
+$routes->post('/ciudades_bancos/delete', 'CiudadBanco::delete');
 
 $routes->get('/climas', 'Clima::index');
 $routes->post('/climas/insert', 'Clima::insert');

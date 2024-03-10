@@ -320,7 +320,6 @@
         </div>
       </div>
 
-      <!-- modal-list -->
       <div class="modal" id="modal-list" tabindex="-1" role="dialog" aria-labelledby="modal-list" aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
