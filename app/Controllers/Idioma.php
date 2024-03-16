@@ -26,7 +26,7 @@ class Idioma extends BaseController
   {
     $codigo = $this->request->getPost("codigo-ins");
     $nombre = $this->request->getPost("nombre-ins");
-    $activo = $this->request->getPost("hidActivo-ins");
+    $activo = $this->request->getPost("hid-activo-ins");
 
     $inactivo = $this->idioma->getIdiomaCodigoNombre($codigo, $nombre);
 
@@ -68,7 +68,7 @@ class Idioma extends BaseController
     $id = $this->request->getPost("hid-id-upd");
     $codigo = $this->request->getPost("codigo-upd");
     $nombre = $this->request->getPost("nombre-upd");
-    $activo = $this->request->getPost("hidActivo-upd");
+    $activo = $this->request->getPost("hid-activo-upd");
 
     $data = [
       "codigo"=>$codigo,

@@ -27,7 +27,7 @@ class Estado extends BaseController
   {
     $pais = $this->request->getPost("pais-ins");
     $nombre = $this->request->getPost("nombre-ins");
-    $activo = $this->request->getPost("hidActivo-ins");
+    $activo = $this->request->getPost("hid-activo-ins");
 
     $inactivo = $this->estado->getEstadoNombre($pais, $nombre);
 
@@ -69,7 +69,7 @@ class Estado extends BaseController
     $id = $this->request->getPost("hid-id-upd");
     $pais = $this->request->getPost("pais-upd");
     $nombre = $this->request->getPost("nombre-upd");
-    $activo = $this->request->getPost("hidActivo-upd");
+    $activo = $this->request->getPost("hid-activo-upd");
 
     $data = [
       "pais"=>$pais,

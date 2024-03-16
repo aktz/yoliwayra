@@ -25,8 +25,8 @@ class Embajada extends BaseController
   public function insert()  
   {
     $nombre = $this->request->getPost("nombre-ins");
-    $consulado = $this->request->getPost("hidConsulado-ins");
-    $activo = $this->request->getPost("hidActivo-ins");
+    $consulado = $this->request->getPost("hid-consulado-ins");
+    $activo = $this->request->getPost("hid-activo-ins");
 
     $inactivo = $this->embajada->getEmbajadaNombre($nombre);
 
@@ -67,8 +67,8 @@ class Embajada extends BaseController
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
     $nombre = $this->request->getPost("nombre-upd");
-    $consulado = $this->request->getPost("hidConsulado-upd");
-    $activo = $this->request->getPost("hidActivo-upd");
+    $consulado = $this->request->getPost("hid-consulado-upd");
+    $activo = $this->request->getPost("hid-activo-upd");
 
     $data = [
       "nombre"=>$nombre,

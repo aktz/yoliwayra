@@ -25,7 +25,7 @@ class Autoridad extends BaseController
   public function insert()
   {
     $nombre = $this->request->getPost("nombre-ins");
-    $activo = $this->request->getPost("hidActivo-ins");
+    $activo = $this->request->getPost("hid-activo-ins");
 
     $inactivo = $this->autoridad->getAutoridadNombre($nombre);
 
@@ -67,7 +67,7 @@ class Autoridad extends BaseController
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
     $nombre = $this->request->getPost("nombre-upd");
-    $activo = $this->request->getPost("hidActivo-upd");
+    $activo = $this->request->getPost("hid-activo-upd");
 
     $data = [
       "nombre"=>$nombre,

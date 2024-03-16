@@ -263,7 +263,7 @@
                         <label class="form-check-label" for="oficina-ins">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hidOficina-ins" name="hidOficina-ins" value="1" />
+                              <input type="hidden" id="hid-oficina-ins" name="hid-oficina-ins" value="1" />
                               <span id="oficinaTitulo">Oficina</span>
                             </span>
                           </span>
@@ -274,7 +274,7 @@
                         <label class="form-check-label" for="cajero-ins">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hidCajero-ins" name="hidCajero-ins" value="1" />
+                              <input type="hidden" id="hid-cajero-ins" name="hid-cajero-ins" value="1" />
                               <span id="cajeroTitulo">Cajero</span>
                             </span>
                           </span>
@@ -285,7 +285,7 @@
                         <label class="form-check-label" for="corresponsal-ins">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hidCorresponsal-ins" name="hidCorresponsal-ins" value="1" />
+                              <input type="hidden" id="hid-corresponsal-ins" name="hid-corresponsal-ins" value="1" />
                               <span id="corresponsalTitulo">Corresponsal</span>
                             </span>
                           </span>
@@ -296,7 +296,7 @@
                         <label class="form-check-label" for="activo-ins">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hidActivo-ins" name="hidActivo-ins" value="1" />
+                              <input type="hidden" id="hid-activo-ins" name="hid-activo-ins" value="1" />
                               <span id="activoTitulo">Activo</span>
                             </span>
                           </span>
@@ -342,7 +342,7 @@
                         <label class="form-check-label" for="oficina-upd">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hidOficina-upd" name="hidOficina-upd" value="1" />
+                              <input type="hidden" id="hid-oficina-upd" name="hid-oficina-upd" value="1" />
                               <span id="oficinaTitulo">Oficina</span>
                             </span>
                           </span>
@@ -353,7 +353,7 @@
                         <label class="form-check-label" for="cajero-upd">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hidCajero-upd" name="hidCajero-upd" value="1" />
+                              <input type="hidden" id="hid-cajero-upd" name="hid-cajero-upd" value="1" />
                               <span id="cajeroTitulo">Cajero</span>
                             </span>
                           </span>
@@ -364,7 +364,7 @@
                         <label class="form-check-label" for="corresponsal-upd">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hidCorresponsal-upd" name="hidCorresponsal-upd" value="1" />
+                              <input type="hidden" id="hid-corresponsal-upd" name="hid-corresponsal-upd" value="1" />
                               <span id="corresponsalTitulo">Corresponsal</span>
                             </span>
                           </span>
@@ -375,7 +375,7 @@
                         <label class="form-check-label" for="activo-upd">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hidActivo-upd" name="hidActivo-upd" value="1" />
+                              <input type="hidden" id="hid-activo-upd" name="hid-activo-upd" value="1" />
                               <span id="activoTitulo">Activo</span>
                             </span>
                           </span>
@@ -434,80 +434,80 @@
         $('#oficina-ins').on('click', function() {
           if( $(this).is(':checked') ){
             $("#oficinaTitulo").text("Activo");
-            $("#hidOficina-ins").val("1");
+            $("#hid-oficina-ins").val("1");
           } else {
             $("#oficinaTitulo").text("Inactivo");
-            $("#hidOficina-ins").val("0");
+            $("#hid-oficina-ins").val("0");
           }
         });
         
         $('#oficina-upd').on('click', function() {
           if( $(this).is(':checked') ){
             $("#oficinaTitulo").text("Activo");
-            $("#hidOficina-upd").val("1");
+            $("#hid-oficina-upd").val("1");
           } else {
             $("#oficinaTitulo").text("Inactivo");
-            $("#hidOficina-upd").val("0");
+            $("#hid-oficina-upd").val("0");
           }
         });
 
         $('#cajero-ins').on('click', function() {
           if( $(this).is(':checked') ){
             $("#cajeroTitulo").text("Activo");
-            $("#hidCajero-ins").val("1");
+            $("#hid-cajero-ins").val("1");
           } else {
             $("#cajeroTitulo").text("Inactivo");
-            $("#hidCajero-ins").val("0");
+            $("#hid-cajero-ins").val("0");
           }
         });
         
         $('#cajero-upd').on('click', function() {
           if( $(this).is(':checked') ){
             $("#cajeroTitulo").text("Activo");
-            $("#hidCajero-upd").val("1");
+            $("#hid-cajero-upd").val("1");
           } else {
             $("#cajeroTitulo").text("Inactivo");
-            $("#hidCajero-upd").val("0");
+            $("#hid-cajero-upd").val("0");
           }
         });
 
         $('#corresponsal-ins').on('click', function() {
           if( $(this).is(':checked') ){
             $("#corresponsalTitulo").text("Activo");
-            $("#hidCorresponsal-ins").val("1");
+            $("#hid-corresponsal-ins").val("1");
           } else {
             $("#corresponsalTitulo").text("Inactivo");
-            $("#hidCorresponsal-ins").val("0");
+            $("#hid-corresponsal-ins").val("0");
           }
         });
         
         $('#corresponsal-upd').on('click', function() {
           if( $(this).is(':checked') ){
             $("#corresponsalTitulo").text("Activo");
-            $("#hidCorresponsal-upd").val("1");
+            $("#hid-corresponsal-upd").val("1");
           } else {
             $("#corresponsalTitulo").text("Inactivo");
-            $("#hidCorresponsal-upd").val("0");
+            $("#hid-corresponsal-upd").val("0");
           }
         });
 
         $('#activo-ins').on('click', function() {
           if( $(this).is(':checked') ){
             $("#activoTitulo").text("Activo");
-            $("#hidActivo-ins").val("1");
+            $("#hid-activo-ins").val("1");
           } else {
             $("#activoTitulo").text("Inactivo");
-            $("#hidActivo-ins").val("0");
+            $("#hid-activo-ins").val("0");
           }
         });
         
         $('#activo-upd').on('click', function() {
           if( $(this).is(':checked') ){
             $("#activoTitulo").text("Activo");
-            $("#hidActivo-upd").val("1");
+            $("#hid-activo-upd").val("1");
           } else {
             $("#activoTitulo").text("Inactivo");
-            $("#hidActivo-upd").val("0");
+            $("#hid-activo-upd").val("0");
           }
         });
       });

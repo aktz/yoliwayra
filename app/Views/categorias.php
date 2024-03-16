@@ -251,7 +251,7 @@
                         <label class="form-check-label" for="activo-ins">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hidActivo-ins" name="hidActivo-ins" value="1" />
+                              <input type="hidden" id="hid-activo-ins" name="hid-activo-ins" value="1" />
                               <span id="activoTitulo">Activo</span>
                             </span>
                           </span>
@@ -297,7 +297,7 @@
                         <label class="form-check-label" for="activo-upd">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hidActivo-upd" name="hidActivo-upd" value="1" />
+                              <input type="hidden" id="hid-activo-upd" name="hid-activo-upd" value="1" />
                               <span id="activoTitulo">Activo</span>
                             </span>
                           </span>
@@ -356,24 +356,24 @@
         $('#activo-ins').on('click', function() {
           if( $(this).is(':checked') ){
             $("#activoTitulo").text("Activo");
-            $("#hidActivo-ins").val("1");
-            console.log("hidActivo: "  + $("#hidActivo-ins").val());
+            $("#hid-activo-ins").val("1");
+            console.log("hid-activo: "  + $("#hid-activo-ins").val());
           } else {
             $("#activoTitulo").text("Inactivo");
-            $("#hidActivo-ins").val("0");
-            console.log("hidActivo: "  + $("#hidActivo-ins").val());
+            $("#hid-activo-ins").val("0");
+            console.log("hid-activo: "  + $("#hid-activo-ins").val());
           }
         });
         
         $('#activo-upd').on('click', function() {
           if( $(this).is(':checked') ){
             $("#activoTitulo").text("Activo");
-            $("#hidActivo-upd").val("1");
-            console.log("hidActivo: "  + $("#hidActivo-upd").val());
+            $("#hid-activo-upd").val("1");
+            console.log("hid-activo: "  + $("#hid-activo-upd").val());
           } else {
             $("#activoTitulo").text("Inactivo");
-            $("#hidActivo-upd").val("0");
-            console.log("hidActivo: "  + $("#hidActivo-upd").val());
+            $("#hid-activo-upd").val("0");
+            console.log("hid-activo: "  + $("#hid-activo-upd").val());
           }
         });
       });

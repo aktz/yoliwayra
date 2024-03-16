@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>Embajadas</title>
+    <title>Terminales</title>
 
     <meta name="description" content="YoliWayra">
     <meta name="author" content="anysw">
@@ -113,7 +113,7 @@
                       <a class="link-fx" href="<?= base_url('config'); ?>">Configuraciones</a>
                     </li>
                     <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
-                      Embajadas
+                      Terminales
                     </li>
                   </ol>
                 </nav>
@@ -166,6 +166,7 @@
                 echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
               echo '</div>';
             }
+            
 
           ?> 
           
@@ -179,7 +180,6 @@
                       <thead>
                         <tr>
                           <th>Nombre</th>
-                          <th class="text-center" style="width: 15%;">Consulado</th>
                           <th class="text-center" style="width: 12%;">Activo</th>
                           <th class="text-center" style="width: 100px;"></th>
                         </tr>
@@ -188,12 +188,10 @@
 
                         <?php
                             foreach ($array as $item) {
-                              $consulado = $item["consulado"] == 1 ? "SI" : "NO";
                               $active = $item["activo"] == 1 ? "SI" : "NO";
                               $name = $item["nombre"];
                               echo '<tr>';
                                 echo '<td>' . $item["nombre"] . '</td>';
-                                echo '<td class="text-center">' . $consulado . '</td>';
                                 echo '<td class="text-center">' . $active . '</td>';
                                 echo '<td class="text-center">';
                                   echo '<div class="btn-group">';
@@ -201,9 +199,8 @@
                                           ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
                                           ' onclick="UpdateClick(' . 
                                               $item["id"] . ', \'' . 
-                                              $item["nombre"] . '\', \'' . 
-                                              $item["consulado"] . '\', \'' .
-                                              $item["activo"] . '\')">';
+                                              $item["nombre"] . '\', ' . 
+                                              $item['activo'] . ')">';
                                       echo '<i class="fa fa-fw fa-pencil-alt"></i>';
                                     echo '</button>';
                                     echo '<button type="button" id="delete" onclick="DeleteClick(' . $item["id"] . ')" class="btn btn-sm btn-alt-secondary" title="Eliminar">';
@@ -233,7 +230,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="embajadas/insert" method="POST">
+              <form action="terminales/insert" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Nuevo</h3>
                   <div class="block-options">
@@ -248,17 +245,6 @@
                       <div class="mb-4">
                         <label class="form-label" for="nombre-ins">Nombre</label>
                         <textarea class="form-control" id="nombre-ins" name="nombre-ins" rows="3"></textarea>
-                      </div>
-                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="consulado-ins" name="consulado-ins" checked />
-                        <label class="form-check-label" for="consulado-ins">
-                          <span class="d-flex align-items-center">
-                            <span class="ms-2">
-                              <input type="hidden" id="hidConsulado-ins" name="hidConsulado-ins" value="1" />
-                              <span id="consuladoTitulo">Consulado</span>
-                            </span>
-                          </span>
-                        </label>
                       </div>
                       <div class="form-check form-block mb-4" style="padding: 0px 13px">
                         <input class="form-check-input" type="checkbox" value="" id="activo-ins" name="activo-ins" checked />
@@ -289,7 +275,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="embajadas/update" method="POST">
+              <form action="terminales/update" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Modificación</h3>
                   <div class="block-options">
@@ -305,17 +291,6 @@
                       <div class="mb-4">
                         <label class="form-label" for="nombre-upd">Nombre</label>
                         <textarea class="form-control" id="nombre-upd" name="nombre-upd" rows="3"></textarea>
-                      </div>
-                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="consulado-upd" name="consulado-upd" />
-                        <label class="form-check-label" for="consulado-upd">
-                          <span class="d-flex align-items-center">
-                            <span class="ms-2">
-                              <input type="hidden" id="hid-consulado-upd" name="hid-consulado-upd" value="1" />
-                              <span id="consuladoTitulo">Consulado</span>
-                            </span>
-                          </span>
-                        </label>
                       </div>
                       <div class="form-check form-block mb-4" style="padding: 0px 13px">
                         <input class="form-check-input" type="checkbox" value="" id="activo-upd" name="activo-upd" />
@@ -364,68 +339,50 @@
 
         setTimeout(function() {
           $('#div-insert-fail').hide();
-        }, 4000);
+        }, 5000);
 
         setTimeout(function() {
           $('#div-update-fail').hide();
-        }, 4000);
+        }, 5000);
         
         setTimeout(function() {
           $('#div-upsert-success').hide();
         }, 2000);
-
+        
         setTimeout(function() {
           $('#div-validation-errors').hide();
-        }, 4000);
+        }, 5000);
 
-        $('#consulado-ins').on('click', function() {
-          if( $(this).is(':checked') ){
-            $("#consuladoTitulo").text("Activo");
-            $("#hid-consulado-ins").val("1");
-          } else {
-            $("#consuladoTitulo").text("Inactivo");
-            $("#hid-consulado-ins").val("0");
-          }
-        });
-
-        $('#consulado-upd').on('click', function() {
-          if( $(this).is(':checked') ){
-            $("#consuladoTitulo").text("Activo");
-            $("#hid-consulado-upd").val("1");
-          } else {
-            $("#consuladoTitulo").text("Inactivo");
-            $("#hid-consulado-upd").val("0");
-          }
-        });
-        
         $('#activo-ins').on('click', function() {
           if( $(this).is(':checked') ){
             $("#activoTitulo").text("Activo");
             $("#hid-activo-ins").val("1");
+            console.log("hid-activo: "  + $("#hid-activo-ins").val());
           } else {
             $("#activoTitulo").text("Inactivo");
             $("#hid-activo-ins").val("0");
+            console.log("hid-activo: "  + $("#hid-activo-ins").val());
           }
         });
-
+        
         $('#activo-upd').on('click', function() {
           if( $(this).is(':checked') ){
             $("#activoTitulo").text("Activo");
             $("#hid-activo-upd").val("1");
+            console.log("hid-activo: "  + $("#hid-activo-upd").val());
           } else {
             $("#activoTitulo").text("Inactivo");
             $("#hid-activo-upd").val("0");
+            console.log("hid-activo: "  + $("#hid-activo-upd").val());
           }
         });
       });
 
-      function UpdateClick(id, nombre, consulado, activo) {
+      function UpdateClick(id, name, active) {
         $("#hid-id-upd").val(id);
-        $("#nombre-upd").val(nombre);
-        $("#consulado-upd").prop("checked", consulado == 1 ? true : false);
-        $("#hid-consulado-upd").val(consulado);
-        $("#activo-upd").prop("checked", activo == 1 ? true : false);
-        $("#hid-activo-upd").val(activo);
+        $("#nombre-upd").val(name);
+        $("#activo-upd").prop("checked", active == 1 ? true : false);
+        $("#hid-activo-upd").val(active);
       }
 
       function DeleteClick(id) {
@@ -447,7 +404,7 @@
 
       function DeleteItem(id) {
         $.ajax({
-          url: '<?= base_url('/embajadas/delete'); ?>',
+          url: '<?= base_url('/terminales/delete'); ?>',
           type: 'POST',
           data: { id: id },
           dataType: 'json'

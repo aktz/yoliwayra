@@ -30,7 +30,7 @@ class Perfil extends BaseController
     $actualizar = $this->request->getPost("hidActualizar-ins");
     $eliminar = $this->request->getPost("hidEliminar-ins");
     $aprobar = $this->request->getPost("hidAprobar-ins");
-    $activo = $this->request->getPost("hidActivo-ins");
+    $activo = $this->request->getPost("hid-activo-ins");
 
     $inactivo = $this->perfil->getPerfilDescripcion($descripcion);
 
@@ -83,7 +83,7 @@ class Perfil extends BaseController
     $actualizar = $this->request->getPost("hidActualizar-upd");
     $eliminar = $this->request->getPost("hidEliminar-upd");
     $aprobar = $this->request->getPost("hidAprobar-upd");
-    $activo = $this->request->getPost("hidActivo-upd");
+    $activo = $this->request->getPost("hid-activo-upd");
 
     $data = [
         "descripcion"=>$descripcion,

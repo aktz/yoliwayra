@@ -2,11 +2,11 @@
 
 namespace App\Controllers;
 
-class Alojamiento extends BaseController
+class Terminal extends BaseController
 {
   public function index(): string
   {
-    $data["array"] = $this->alojamiento->getAlojamientosActivos();
+    $data["array"] = $this->terminal->getTerminalesActivos();
     if ($this->session->getFlashdata("insert_fail")) {
       $data["insert_fail"] = "error";
     }
@@ -19,7 +19,7 @@ class Alojamiento extends BaseController
     if ($this->session->getFlashdata("validation_error")) {
       $data["validation_error"] = $this->session->getFlashdata("validation_error");
     }
-    return view('alojamientos', $data);
+    return view('terminales', $data);
   }
 
   public function insert()
@@ -27,7 +27,7 @@ class Alojamiento extends BaseController
     $nombre = $this->request->getPost("nombre-ins");
     $activo = $this->request->getPost("hid-activo-ins");
 
-    $inactivo = $this->alojamiento->getAlojamientoNombre($nombre);
+    $inactivo = $this->terminal->getTerminalNombre($nombre);
 
     //Hay inactivo igual, actualiza estado
     if ($inactivo) {
@@ -37,10 +37,10 @@ class Alojamiento extends BaseController
         "activo"=>$activo
       ];     
 
-      if (!$this->validation->run($dataInactivo, 'alojamiento')) {
+      if (!$this->validation->run($dataInactivo, 'terminal')) {
         $this->session->setFlashdata("validation_error", $this->validation->getErrors());
       } else {
-        $this->alojamiento->update($inactivo["id"], $dataInactivo);
+        $this->terminal->update($inactivo["id"], $dataInactivo);
         $this->session->setFlashdata("upsert_success", "Success"); 
       }
 
@@ -52,15 +52,15 @@ class Alojamiento extends BaseController
         "activo"=>$activo
       ];
 
-      if (!$this->validation->run($data, 'alojamiento')) {
+      if (!$this->validation->run($data, 'terminal')) {
         $this->session->setFlashdata("validation_error", $this->validation->getErrors());
       } else {
-        $this->alojamiento->insert($data);
+        $this->terminal->insert($data);
         $this->session->setFlashdata("upsert_success", "Success"); 
       }
     }   
 
-    return redirect()->to(base_url('alojamientos'));
+    return redirect()->to(base_url('terminales'));
 
   }
 
@@ -74,19 +74,19 @@ class Alojamiento extends BaseController
       "activo"=>$activo
     ];
 
-    if (!$this->validation->run($data, 'alojamiento')) {
+    if (!$this->validation->run($data, 'terminal')) {
       $this->session->setFlashdata("validation_error", $this->validation->getErrors());
     } else {
-      $this->alojamiento->update($id, $data);
+      $this->terminal->update($id, $data);
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
 
-    return redirect()->to(base_url('alojamientos'));    
+    return redirect()->to(base_url('terminales'));    
   }
 
   public function delete() {
     $id = $this->request->getPost("id");
-    $deleted = $this->alojamiento->delete($id);
+    $deleted = $this->terminal->delete($id);
 
     if ($deleted <= 0) {
       $this->session->setFlashdata("delete_fail", "Delete");  
@@ -94,6 +94,6 @@ class Alojamiento extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
     
-    return redirect()->to(base_url('alojamientos')); 
+    return redirect()->to(base_url('terminales')); 
   }
 }

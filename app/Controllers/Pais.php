@@ -26,7 +26,7 @@ class Pais extends BaseController
   {
     //traer campos de la vista
     $nombre = $this->request->getPost("nombre-ins");
-    $activo = $this->request->getPost("hidActivo-ins");
+    $activo = $this->request->getPost("hid-activo-ins");
 
     $inactivo = $this->pais->getPaisNombre($nombre);
 
@@ -67,7 +67,7 @@ class Pais extends BaseController
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
     $nombre = $this->request->getPost("nombre-upd");
-    $activo = $this->request->getPost("hidActivo-upd");
+    $activo = $this->request->getPost("hid-activo-upd");
 
     $data = [
       "nombre"=>$nombre,

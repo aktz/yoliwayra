@@ -20,6 +20,9 @@ use App\Models\CiudadModel;
 use App\Models\CiudadAlimentacionModel;
 use App\Models\CiudadAlojamientoModel;
 use App\Models\CiudadBancoModel;
+use App\Models\CiudadEmbajadaModel;
+use App\Models\CiudadTerminalModel;
+use App\Models\CiudadTransporteModel;
 use App\Models\ClimaModel;
 use App\Models\DivisaModel;
 use App\Models\EmbajadaModel;
@@ -33,6 +36,8 @@ use App\Models\PaisModel;
 use App\Models\PerfilModel;
 use App\Models\RegionModel;
 use App\Models\RequerimientoModel;
+use App\Models\TerminalModel;
+use App\Models\TransporteModel;
 
 /**
  * Class BaseController
@@ -90,6 +95,9 @@ abstract class BaseController extends Controller
         $this->ciudad_alimentacion = new CiudadAlimentacionModel();
         $this->ciudad_alojamiento = new CiudadAlojamientoModel();
         $this->ciudad_banco = new CiudadBancoModel();
+        $this->ciudad_embajada = new CiudadEmbajadaModel();
+        $this->ciudad_terminal = new CiudadTerminalModel();
+        $this->ciudad_transporte = new CiudadTransporteModel();
         $this->clima = new ClimaModel();
         $this->divisa = new DivisaModel();
         $this->embajada = new EmbajadaModel();
@@ -103,6 +111,8 @@ abstract class BaseController extends Controller
         $this->perfil = new PerfilModel();
         $this->region = new RegionModel();
         $this->requerimiento = new RequerimientoModel();
+        $this->terminal = new TerminalModel();
+        $this->transporte = new TransporteModel();
 
         $this->session = \Config\Services::session();
         $this->request = \Config\Services::request();

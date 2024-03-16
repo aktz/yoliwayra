@@ -25,10 +25,10 @@ class Banco extends BaseController
   public function insert()
   {
     $nombre = $this->request->getPost("nombre-ins");
-    $oficina = $this->request->getPost("hidOficina-ins");
-    $cajero = $this->request->getPost("hidCajero-ins");
-    $corresponsal = $this->request->getPost("hidCorresponsal-ins");
-    $activo = $this->request->getPost("hidActivo-ins");
+    $oficina = $this->request->getPost("hid-oficina-ins");
+    $cajero = $this->request->getPost("hid-cajero-ins");
+    $corresponsal = $this->request->getPost("hid-corresponsal-ins");
+    $activo = $this->request->getPost("hid-activo-ins");
 
     $inactivo = $this->banco->getBancoNombre($nombre);
 
@@ -76,10 +76,10 @@ class Banco extends BaseController
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
     $nombre = $this->request->getPost("nombre-upd");
-    $oficina = $this->request->getPost("hidOficina-upd");
-    $cajero = $this->request->getPost("hidCajero-upd");
-    $corresponsal = $this->request->getPost("hidCorresponsal-upd");
-    $activo = $this->request->getPost("hidActivo-upd");
+    $oficina = $this->request->getPost("hid-oficina-upd");
+    $cajero = $this->request->getPost("hid-cajero-upd");
+    $corresponsal = $this->request->getPost("hid-corresponsal-upd");
+    $activo = $this->request->getPost("hid-activo-upd");
 
     $data = [
       "nombre"=>$nombre,

@@ -58,6 +58,21 @@ $routes->post('/ciudades_bancos/insert', 'CiudadBanco::insert');
 $routes->post('/ciudades_bancos/update', 'CiudadBanco::update');
 $routes->post('/ciudades_bancos/delete', 'CiudadBanco::delete');
 
+$routes->get('/ciudades_embajadas', 'CiudadEmbajada::index');
+$routes->post('/ciudades_embajadas/insert', 'CiudadEmbajada::insert');
+$routes->post('/ciudades_embajadas/update', 'CiudadEmbajada::update');
+$routes->post('/ciudades_embajadas/delete', 'CiudadEmbajada::delete');
+
+$routes->get('/ciudades_terminales', 'CiudadTerminal::index');
+$routes->post('/ciudades_terminales/insert', 'CiudadTerminal::insert');
+$routes->post('/ciudades_terminales/update', 'CiudadTerminal::update');
+$routes->post('/ciudades_terminales/delete', 'CiudadTerminal::delete');
+
+$routes->get('/ciudades_transportes', 'CiudadTransporte::index');
+$routes->post('/ciudades_transportes/insert', 'CiudadTransporte::insert');
+$routes->post('/ciudades_transportes/update', 'CiudadTransporte::update');
+$routes->post('/ciudades_transportes/delete', 'CiudadTransporte::delete');
+
 $routes->get('/climas', 'Clima::index');
 $routes->post('/climas/insert', 'Clima::insert');
 $routes->post('/climas/update', 'Clima::update');
@@ -122,3 +137,13 @@ $routes->get('/requerimientos', 'Requerimiento::index');
 $routes->post('/requerimientos/insert', 'Requerimiento::insert');
 $routes->post('/requerimientos/update', 'Requerimiento::update');
 $routes->post('/requerimientos/delete', 'Requerimiento::delete');
+
+$routes->get('/terminales', 'Terminal::index');
+$routes->post('/terminales/insert', 'Terminal::insert');
+$routes->post('/terminales/update', 'Terminal::update');
+$routes->post('/terminales/delete', 'Terminal::delete');
+
+$routes->get('/transportes', 'Transporte::index');
+$routes->post('/transportes/insert', 'Transporte::insert');
+$routes->post('/transportes/update', 'Transporte::update');
+$routes->post('/transportes/delete', 'Transporte::delete');

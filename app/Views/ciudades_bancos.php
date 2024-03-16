@@ -182,7 +182,7 @@
                       <thead>
                         <tr>
                           <th>Ciudad</th>
-                          <th>Alojamiento</th>
+                          <th>Banco</th>
                           <th>Descripción</th>
                           <th>Notas</th>
                           <th class="text-center" style="width: 100px;"></th>

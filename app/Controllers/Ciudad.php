@@ -31,7 +31,7 @@ class Ciudad extends BaseController
     $region = $this->request->getPost("region-ins");
     $clima = $this->request->getPost("clima-ins");
     $nombre = $this->request->getPost("nombre-ins");
-    $activo = $this->request->getPost("hidActivo-ins");
+    $activo = $this->request->getPost("hid-activo-ins");
 
     $inactivo = $this->ciudad->getCiudadNombre($nombre);
 
@@ -79,7 +79,7 @@ class Ciudad extends BaseController
     $region = $this->request->getPost("region-upd");
     $clima = $this->request->getPost("clima-upd");
     $nombre = $this->request->getPost("nombre-upd");
-    $activo = $this->request->getPost("hidActivo-upd");
+    $activo = $this->request->getPost("hid-activo-upd");
 
     $data = [
       "estado"=>$estado,

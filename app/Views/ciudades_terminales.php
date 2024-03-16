@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>Embajadas</title>
+    <title>Terminales de Ciudad</title>
 
     <meta name="description" content="YoliWayra">
     <meta name="author" content="anysw">
@@ -113,7 +113,10 @@
                       <a class="link-fx" href="<?= base_url('config'); ?>">Configuraciones</a>
                     </li>
                     <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
-                      Embajadas
+                      <a class="link-fx" href="<?= base_url('ciudades'); ?>">Ciudades</a>
+                    </li>
+                    <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
+                      Terminales
                     </li>
                   </ol>
                 </nav>
@@ -178,9 +181,10 @@
                     <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                       <thead>
                         <tr>
-                          <th>Nombre</th>
-                          <th class="text-center" style="width: 15%;">Consulado</th>
-                          <th class="text-center" style="width: 12%;">Activo</th>
+                          <th>Ciudad</th>
+                          <th>Terminal</th>
+                          <th>Descripción</th>
+                          <th>Notas</th>
                           <th class="text-center" style="width: 100px;"></th>
                         </tr>
                       </thead>
@@ -188,22 +192,21 @@
 
                         <?php
                             foreach ($array as $item) {
-                              $consulado = $item["consulado"] == 1 ? "SI" : "NO";
-                              $active = $item["activo"] == 1 ? "SI" : "NO";
-                              $name = $item["nombre"];
                               echo '<tr>';
-                                echo '<td>' . $item["nombre"] . '</td>';
-                                echo '<td class="text-center">' . $consulado . '</td>';
-                                echo '<td class="text-center">' . $active . '</td>';
+                                echo '<td>' . $item["nombre_ciudad"] . '</td>';
+                                echo '<td>' . $item["nombre_terminal"] . '</td>';
+                                echo '<td>' . $item["descripcion"] . '</td>';
+                                echo '<td>' . $item["notas"] . '</td>';
                                 echo '<td class="text-center">';
                                   echo '<div class="btn-group">';
                                     echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
                                           ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
                                           ' onclick="UpdateClick(' . 
-                                              $item["id"] . ', \'' . 
-                                              $item["nombre"] . '\', \'' . 
-                                              $item["consulado"] . '\', \'' .
-                                              $item["activo"] . '\')">';
+                                              $item["id"] . ', ' . 
+                                              $item["id_ciudad"] . ', ' . 
+                                              $item["id_terminal"] . ', \'' . 
+                                              $item["descripcion"] . '\', \'' . 
+                                              $item["notas"] . '\')">';
                                       echo '<i class="fa fa-fw fa-pencil-alt"></i>';
                                     echo '</button>';
                                     echo '<button type="button" id="delete" onclick="DeleteClick(' . $item["id"] . ')" class="btn btn-sm btn-alt-secondary" title="Eliminar">';
@@ -233,7 +236,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="embajadas/insert" method="POST">
+              <form action="ciudades_terminales/insert" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Nuevo</h3>
                   <div class="block-options">
@@ -246,31 +249,37 @@
                   <div class="block-content block-content-full">
                     <div class="row">
                       <div class="mb-4">
-                        <label class="form-label" for="nombre-ins">Nombre</label>
-                        <textarea class="form-control" id="nombre-ins" name="nombre-ins" rows="3"></textarea>
+                        <label class="form-label" for="ciudad-ins">Ciudad</label>
+                        <select class="form-select" id="ciudad-ins" name="ciudad-ins" size="5">
+
+                          <?php
+                            foreach ($ciudades as $ciudad) {
+                              echo '<option value="' . $ciudad["id_ciudad"] . '">' . $ciudad["nombre_ciudad"] . '</option>';
+                            }
+                          ?>
+
+                        </select>
                       </div>
-                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="consulado-ins" name="consulado-ins" checked />
-                        <label class="form-check-label" for="consulado-ins">
-                          <span class="d-flex align-items-center">
-                            <span class="ms-2">
-                              <input type="hidden" id="hidConsulado-ins" name="hidConsulado-ins" value="1" />
-                              <span id="consuladoTitulo">Consulado</span>
-                            </span>
-                          </span>
-                        </label>
-                      </div>
-                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="activo-ins" name="activo-ins" checked />
-                        <label class="form-check-label" for="activo-ins">
-                          <span class="d-flex align-items-center">
-                            <span class="ms-2">
-                              <input type="hidden" id="hid-activo-ins" name="hid-activo-ins" value="1" />
-                              <span id="activoTitulo">Activo</span>
-                            </span>
-                          </span>
-                        </label>
-                      </div>
+                      <div class="mb-4">
+                        <label class="form-label" for="terminal-ins">Terminal</label>
+                        <select class="form-select" id="terminal-ins" name="terminal-ins" size="5">
+
+                          <?php
+                            foreach ($terminales as $terminal) {
+                              echo '<option value="' . $terminal["id"] . '">' . $terminal["nombre"] . '</option>';
+                            }
+                          ?>
+
+                        </select>
+                      </div>                      
+                      <div class="mb-4">
+                        <label class="form-label" for="descripcion-ins">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion-ins" name="descripcion-ins" />
+                      </div>                      
+                      <div class="mb-4">
+                        <label class="form-label" for="notas-ins">Notas</label>
+                        <textarea class="form-control" id="notas-ins" name="notas-ins" rows="3"></textarea>
+                      </div>                      
                     </div>
                   </div>                      
                 </div>
@@ -289,7 +298,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="embajadas/update" method="POST">
+              <form action="ciudades_terminales/update" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Modificación</h3>
                   <div class="block-options">
@@ -303,31 +312,37 @@
                     <div class="row">
                       <input type="hidden" id="hid-id-upd" name="hid-id-upd" />
                       <div class="mb-4">
-                        <label class="form-label" for="nombre-upd">Nombre</label>
-                        <textarea class="form-control" id="nombre-upd" name="nombre-upd" rows="3"></textarea>
+                        <label class="form-label" for="ciudad-upd">Ciudad</label>
+                        <select class="form-select" id="ciudad-upd" name="ciudad-upd" size="5">
+
+                          <?php
+                            foreach ($ciudades as $ciudad) {
+                              echo '<option value="' . $ciudad["id_ciudad"] . '">' . $ciudad["nombre_ciudad"] . '</option>';
+                            }
+                          ?>
+
+                        </select>
                       </div>
-                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="consulado-upd" name="consulado-upd" />
-                        <label class="form-check-label" for="consulado-upd">
-                          <span class="d-flex align-items-center">
-                            <span class="ms-2">
-                              <input type="hidden" id="hid-consulado-upd" name="hid-consulado-upd" value="1" />
-                              <span id="consuladoTitulo">Consulado</span>
-                            </span>
-                          </span>
-                        </label>
-                      </div>
-                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="activo-upd" name="activo-upd" />
-                        <label class="form-check-label" for="activo-upd">
-                          <span class="d-flex align-items-center">
-                            <span class="ms-2">
-                              <input type="hidden" id="hid-activo-upd" name="hid-activo-upd" value="1" />
-                              <span id="activoTitulo">Activo</span>
-                            </span>
-                          </span>
-                        </label>
-                      </div>
+                      <div class="mb-4">
+                        <label class="form-label" for="terminal-upd">Terminal</label>
+                        <select class="form-select" id="terminal-upd" name="terminal-upd" size="5">
+
+                          <?php
+                            foreach ($terminales as $terminal) {
+                              echo '<option value="' . $terminal["id"] . '">' . $terminal["nombre"] . '</option>';
+                            }
+                          ?>
+
+                        </select>
+                      </div> 
+                      <div class="mb-4">
+                        <label class="form-label" for="descripcion-upd">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion-upd" name="descripcion-upd" />
+                      </div>                      
+                      <div class="mb-4">
+                        <label class="form-label" for="notas-upd">Notas</label>
+                        <textarea class="form-control" id="notas-upd" name="notas-upd" rows="3"></textarea>
+                      </div>                      
                     </div>
                   </div>                      
                 </div>
@@ -377,55 +392,14 @@
         setTimeout(function() {
           $('#div-validation-errors').hide();
         }, 4000);
-
-        $('#consulado-ins').on('click', function() {
-          if( $(this).is(':checked') ){
-            $("#consuladoTitulo").text("Activo");
-            $("#hid-consulado-ins").val("1");
-          } else {
-            $("#consuladoTitulo").text("Inactivo");
-            $("#hid-consulado-ins").val("0");
-          }
-        });
-
-        $('#consulado-upd').on('click', function() {
-          if( $(this).is(':checked') ){
-            $("#consuladoTitulo").text("Activo");
-            $("#hid-consulado-upd").val("1");
-          } else {
-            $("#consuladoTitulo").text("Inactivo");
-            $("#hid-consulado-upd").val("0");
-          }
-        });
-        
-        $('#activo-ins').on('click', function() {
-          if( $(this).is(':checked') ){
-            $("#activoTitulo").text("Activo");
-            $("#hid-activo-ins").val("1");
-          } else {
-            $("#activoTitulo").text("Inactivo");
-            $("#hid-activo-ins").val("0");
-          }
-        });
-
-        $('#activo-upd').on('click', function() {
-          if( $(this).is(':checked') ){
-            $("#activoTitulo").text("Activo");
-            $("#hid-activo-upd").val("1");
-          } else {
-            $("#activoTitulo").text("Inactivo");
-            $("#hid-activo-upd").val("0");
-          }
-        });
       });
 
-      function UpdateClick(id, nombre, consulado, activo) {
+      function UpdateClick(id, ciudad, terminal, descripcion, notas) {
         $("#hid-id-upd").val(id);
-        $("#nombre-upd").val(nombre);
-        $("#consulado-upd").prop("checked", consulado == 1 ? true : false);
-        $("#hid-consulado-upd").val(consulado);
-        $("#activo-upd").prop("checked", activo == 1 ? true : false);
-        $("#hid-activo-upd").val(activo);
+        $("#ciudad-upd").val(ciudad);
+        $("#terminal-upd").val(terminal);
+        $("#descripcion-upd").val(descripcion);
+        $("#notas-upd").val(notas);
       }
 
       function DeleteClick(id) {
@@ -447,7 +421,7 @@
 
       function DeleteItem(id) {
         $.ajax({
-          url: '<?= base_url('/embajadas/delete'); ?>',
+          url: '<?= base_url('/ciudades_terminales/delete'); ?>',
           type: 'POST',
           data: { id: id },
           dataType: 'json'

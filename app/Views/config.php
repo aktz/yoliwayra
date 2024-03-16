@@ -246,21 +246,21 @@
                 </a>
                 </div>
                 <div class="col-6 col-md-3 col-xxl-2">
-                <a class="block block-rounded text-center bg-smooth" href="javascript:void(0)">
+                <a class="block block-rounded text-center bg-smooth" href="<?= base_url('terminales'); ?>">
                     <div class="d-flex justify-content-center align-items-center">
                     <div class="fs-sm fw-semibold my-3 text-uppercase text-white">Terminales</div>
                     </div>
                 </a>
                 </div>
                 <div class="col-6 col-md-3 col-xxl-2">
-                <a class="block block-rounded text-center bg-smooth" href="javascript:void(0)">
+                <a class="block block-rounded text-center bg-smooth" href="<?= base_url('transportes'); ?>">
                     <div class="d-flex justify-content-center align-items-center">
                     <div class="fs-sm fw-semibold my-3 text-uppercase text-white">Transportes</div>
                     </div>
                 </a>
                 </div>
                 <div class="col-6 col-md-3 col-xxl-2">
-                <a class="block block-rounded text-center bg-secondary" href="javascript:void(0)">
+                <a class="block block-rounded text-center bg-secondary" href="<?= base_url('usuarios'); ?>">
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="fs-sm fw-semibold my-3 text-uppercase text-white">Usuarios</div>
                     </div>
