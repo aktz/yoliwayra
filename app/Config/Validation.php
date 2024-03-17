@@ -631,6 +631,145 @@ class Validation extends BaseConfig
         ]
     ];
 
+    public $lugar = [
+        'nombre' => [
+            'rules' => 'required|string|min_length[4]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
+            'errors' => [
+                'required' => 'El campo Nombre es obligatorio.',
+                'string' => 'El campo Nombre debe ser un texto.',
+                'min_length' => 'El campo Nombre debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Nombre debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Nombre debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'ciudad' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Ciudad es obligatorio.',
+                'integer' => 'El campo Ciudad debe ser un número entero.',
+                'min_length' => 'El campo Ciudad debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Ciudad debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'region' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Region es obligatorio.',
+                'integer' => 'El campo Region debe ser un número entero.',
+                'min_length' => 'El campo Region debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Region debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'clima' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Clima es obligatorio.',
+                'integer' => 'El campo Clima debe ser un número entero.',
+                'min_length' => 'El campo Clima debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Clima debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'postal' => [
+            'rules' => 'string|min_length[5]|max_length[10]|regex_match[/^[0-9]+$/]',
+            'errors' => [
+                'string' => 'El campo Código Postal debe ser un texto.',
+                'min_length' => 'El campo Código Postal debe tener al menos 5 caracteres.',
+                'max_length' => 'El campo Código Postal debe tener como máximo 10 caracteres.',
+                'regex_match' => 'El campo Código Postal debe contener sólo caracteres numéricos',
+            ]
+        ],
+        'titulo' => [
+            'rules' => 'required|string|min_length[5]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
+            'errors' => [
+                'required' => 'El campo Título es obligatorio.',
+                'string' => 'El campo Título debe ser un texto.',
+                'min_length' => 'El campo Título debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Título debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Título debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'subtitulo' => [
+            'rules' => 'required|string|min_length[5]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
+            'errors' => [
+                'required' => 'El campo Subtítulo es obligatorio.',
+                'string' => 'El campo Subtítulo debe ser un texto.',
+                'min_length' => 'El campo Subtítulo debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Subtítulo debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Subtítulo debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'descripcion' => [
+            'rules' => 'required|string|min_length[5]|max_length[3000]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
+            'errors' => [
+                'required' => 'El campo Descripción es obligatorio.',
+                'string' => 'El campo Descripción debe ser un texto.',
+                'min_length' => 'El campo Descripción debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Descripción debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Descripción debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'notas' => [
+            'rules' => 'required|string|min_length[5]|max_length[3000]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
+            'errors' => [
+                'required' => 'El campo Notas es obligatorio.',
+                'string' => 'El campo Notas debe ser un texto.',
+                'min_length' => 'El campo Notas debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Notas debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Notas debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'valor' => [
+            'rules' => 'required|string|min_length[3]|max_length[30]|regex_match[/^[0-9.,]+$/]',
+            'errors' => [
+                'required' => 'El campo Valor es obligatorio.',
+                'string' => 'El campo Valor debe ser un texto.',
+                'min_length' => 'El campo Valor debe tener al menos 3 caracteres.',
+                'max_length' => 'El campo Valor debe tener como máximo 30 caracteres.',
+                'regex_match' => 'El campo Valor debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'ancestral' => [
+            'rules' => 'required|integer|exact_length[1]',
+            'errors' => [
+                'required' => 'El campo Ancestral es obligatorio.',
+                'integer' => 'El campo Ancestral debe ser un número entero.',
+                'exact_length' => 'El campo Ancestral debe tener una longitud exacta de 1.'
+            ]
+        ],
+        'extremo' => [
+            'rules' => 'required|integer|exact_length[1]',
+            'errors' => [
+                'required' => 'El campo Extremo es obligatorio.',
+                'integer' => 'El campo Extremo debe ser un número entero.',
+                'exact_length' => 'El campo Extremo debe tener una longitud exacta de 1.'
+            ]
+        ],
+        'avistamiento' => [
+            'rules' => 'required|integer|exact_length[1]',
+            'errors' => [
+                'required' => 'El campo Avistamiento es obligatorio.',
+                'integer' => 'El campo Avistamiento debe ser un número entero.',
+                'exact_length' => 'El campo Avistamiento debe tener una longitud exacta de 1.'
+            ]
+        ],
+        'deportivo' => [
+            'rules' => 'required|integer|exact_length[1]',
+            'errors' => [
+                'required' => 'El campo Deportivo es obligatorio.',
+                'integer' => 'El campo Deportivo debe ser un número entero.',
+                'exact_length' => 'El campo Deportivo debe tener una longitud exacta de 1.'
+            ]
+        ],
+        'activo' => [
+            'rules' => 'required|integer|exact_length[1]',
+            'errors' => [
+                'required' => 'El campo Activo es obligatorio.',
+                'integer' => 'El campo Activo debe ser un número entero.',
+                'exact_length' => 'El campo Activo debe tener una longitud exacta de 1.'
+            ]
+        ]
+    ];
+
     public $pais = [
         'nombre' => [
             'rules' => 'required|string|min_length[4]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',

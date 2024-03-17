@@ -29,6 +29,7 @@ use App\Models\EmbajadaModel;
 use App\Models\EstadoModel;
 use App\Models\IdiomaModel;
 use App\Models\IndumentariaModel;
+use App\Models\LugarModel;
 use App\Models\PaisDivisaModel;
 use App\Models\PaisIdiomaModel;
 use App\Models\PaisRequerimientoModel;
@@ -104,6 +105,7 @@ abstract class BaseController extends Controller
         $this->estado = new EstadoModel();
         $this->idioma = new IdiomaModel();
         $this->indumentaria = new IndumentariaModel();
+        $this->lugar = new LugarModel();
         $this->pais_divisa = new PaisDivisaModel();
         $this->pais_idioma = new PaisIdiomaModel();
         $this->pais_requerimiento = new PaisRequerimientoModel();

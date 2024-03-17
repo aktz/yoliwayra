@@ -98,6 +98,11 @@ $routes->post('/indumentarias/insert', 'Indumentaria::insert');
 $routes->post('/indumentarias/update', 'Indumentaria::update');
 $routes->post('/indumentarias/delete', 'Indumentaria::delete');
 
+$routes->get('/lugares', 'Lugar::index');
+$routes->post('/lugares/insert', 'Lugar::insert');
+$routes->post('/lugares/update', 'Lugar::update');
+$routes->post('/lugares/delete', 'Lugar::delete');
+
 $routes->get('/paises', 'Pais::index');
 $routes->post('/paises/insert', 'Pais::insert');
 $routes->post('/paises/update', 'Pais::update');
