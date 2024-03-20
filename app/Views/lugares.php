@@ -179,21 +179,8 @@
                     <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                       <thead>
                         <tr>
-                          <th>Nombre</th>
                           <th>Ciudad</th>
-                          <th>Región</th>
-                          <th>Clima</th>
-                          <th>C. Postal</th>
-                          <th>Título</th>
-                          <th>Subtítulo</th>
-                          <th>Descripción</th>
-                          <th>Notas</th>
-                          <th>Valor</th>
-                          <th class="text-center" style="width: 12%;">Ancestral</th>
-                          <th class="text-center" style="width: 12%;">Extremo</th>
-                          <th class="text-center" style="width: 12%;">Avistamiento</th>
-                          <th class="text-center" style="width: 12%;">Deportivo</th>
-                          <th class="text-center" style="width: 12%;">Activo</th>
+                          <th>Nombre</th>
                           <th class="text-center" style="width: 100px;"></th>
                         </tr>
                       </thead>
@@ -201,27 +188,10 @@
 
                         <?php
                             foreach ($array as $item) {
-                              $ancestral = $item["ancestral"] == 1 ? "SI" : "NO";
-                              $extremo = $item["extremo"] == 1 ? "SI" : "NO";
-                              $avistamiento = $item["avistamiento"] == 1 ? "SI" : "NO";
-                              $deportivo = $item["deportivo"] == 1 ? "SI" : "NO";
-                              $active = $item["activo"] == 1 ? "SI" : "NO";
                               echo '<tr>';
+                                echo '<td>' . $item["nombre_ciudad"] . '</td>';
                                 echo '<td>' . $item["nombre"] . '</td>';
-                                echo '<td>' . $item["ciudad"] . '</td>';
-                                echo '<td>' . $item["region"] . '</td>';
-                                echo '<td>' . $item["clima"] . '</td>';
-                                echo '<td>' . $item["postal"] . '</td>';
-                                echo '<td>' . $item["titulo"] . '</td>';
-                                echo '<td>' . $item["subtitulo"] . '</td>';
-                                echo '<td>' . $item["descripcion"] . '</td>';
-                                echo '<td>' . $item["notas"] . '</td>';
-                                echo '<td>' . $item["valor"] . '</td>';
-                                echo '<td class="text-center">' . $ancestral . '</td>';
-                                echo '<td class="text-center">' . $extremo . '</td>';
-                                echo '<td class="text-center">' . $avistamiento . '</td>';
-                                echo '<td class="text-center">' . $deportivo . '</td>';
-                                echo '<td class="text-center">' . $active . '</td>';
+                                
                                 echo '<td class="text-center">';
                                   echo '<div class="btn-group">';
                                     echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
@@ -229,9 +199,9 @@
                                           ' onclick="UpdateClick(' . 
                                               $item["id"] . ', \'' . 
                                               $item["nombre"] . '\', ' . 
-                                              $item["ciudad"] . ', ' . 
-                                              $item["region"] . ', ' . 
-                                              $item["clima"] . ', \'' . 
+                                              $item["id_ciudad"] . ', ' . 
+                                              $item["id_region"] . ', ' . 
+                                              $item["id_clima"] . ', \'' . 
                                               $item["postal"] . '\', \'' . 
                                               $item["titulo"] . '\', \'' . 
                                               $item["subtitulo"] . '\', \'' . 
@@ -327,32 +297,32 @@
                         <input type="text" class="form-control" id="postal-ins" name="postal-ins" />
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="postal-ins">Título</label>
-                        <input type="text" class="form-control" id="postal-ins" name="postal-ins" />
+                        <label class="form-label" for="titulo-ins">Título</label>
+                        <input type="text" class="form-control" id="titulo-ins" name="titulo-ins" />
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="postal-ins">Subtítulo</label>
-                        <input type="text" class="form-control" id="postal-ins" name="postal-ins" />
+                        <label class="form-label" for="subtitulo-ins">Subtítulo</label>
+                        <input type="text" class="form-control" id="subtitulo-ins" name="subtitulo-ins" />
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="postal-ins">Descripción</label>
-                        <input type="text" class="form-control" id="postal-ins" name="postal-ins" />
+                        <label class="form-label" for="descripcion-ins">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion-ins" name="descripcion-ins" />
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="postal-ins">Notas</label>
-                        <input type="text" class="form-control" id="postal-ins" name="postal-ins" />
+                        <label class="form-label" for="notas-ins">Notas</label>
+                        <input type="text" class="form-control" id="notas-ins" name="notas-ins" />
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="valor-ins">Valor</label>
-                        <input type="text" class="form-control" id="valor-ins" name="valor-ins" />
+                        <input type="text" class="form-control" id="valor-ins" name="valor-ins" value="0" />
                       </div>
 
                       <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="ancestral-ins" name="ancestral-ins" checked />
+                        <input class="form-check-input" type="checkbox" value="" id="ancestral-ins" name="ancestral-ins" />
                         <label class="form-check-label" for="ancestral-ins">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hid-ancestral-ins" name="hid-ancestral-ins" value="1" />
+                              <input type="hidden" id="hid-ancestral-ins" name="hid-ancestral-ins" value="0" />
                               <span id="ancestralTitulo">Ancestral</span>
                             </span>
                           </span>
@@ -360,11 +330,11 @@
                       </div>
 
                       <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="extremo-ins" name="extremo-ins" checked />
+                        <input class="form-check-input" type="checkbox" value="" id="extremo-ins" name="extremo-ins" />
                         <label class="form-check-label" for="extremo-ins">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hid-extremo-ins" name="hid-extremo-ins" value="1" />
+                              <input type="hidden" id="hid-extremo-ins" name="hid-extremo-ins" value="0" />
                               <span id="extremoTitulo">Extremo</span>
                             </span>
                           </span>
@@ -372,11 +342,11 @@
                       </div>
 
                       <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="avistamiento-ins" name="avistamiento-ins" checked />
+                        <input class="form-check-input" type="checkbox" value="" id="avistamiento-ins" name="avistamiento-ins" />
                         <label class="form-check-label" for="avistamiento-ins">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hid-avistamiento-ins" name="hid-avistamiento-ins" value="1" />
+                              <input type="hidden" id="hid-avistamiento-ins" name="hid-avistamiento-ins" value="0" />
                               <span id="avistamientoTitulo">Avistamiento</span>
                             </span>
                           </span>
@@ -384,12 +354,12 @@
                       </div>
 
                       <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="deportivo-ins" name="deportivo-ins" checked />
+                        <input class="form-check-input" type="checkbox" value="" id="deportivo-ins" name="deportivo-ins" />
                         <label class="form-check-label" for="deportivo-ins">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
-                              <input type="hidden" id="hid-deportivo-ins" name="hid-deportivo-ins" value="1" />
-                              <span id="deportivoTitulo">Activo</span>
+                              <input type="hidden" id="hid-deportivo-ins" name="hid-deportivo-ins" value="0" />
+                              <span id="deportivoTitulo">Deportivo</span>
                             </span>
                           </span>
                         </label>
@@ -481,20 +451,20 @@
                         <input type="text" class="form-control" id="postal-upd" name="postal-upd" />
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="postal-upd">Título</label>
-                        <input type="text" class="form-control" id="postal-upd" name="postal-upd" />
+                        <label class="form-label" for="titulo-upd">Título</label>
+                        <input type="text" class="form-control" id="titulo-upd" name="titulo-upd" />
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="postal-upd">Subtítulo</label>
-                        <input type="text" class="form-control" id="postal-upd" name="postal-upd" />
+                        <label class="form-label" for="subtitulo-upd">Subtítulo</label>
+                        <input type="text" class="form-control" id="subtitulo-upd" name="subtitulo-upd" />
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="postal-upd">Descripción</label>
-                        <input type="text" class="form-control" id="postal-upd" name="postal-upd" />
+                        <label class="form-label" for="descripcion-upd">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion-upd" name="descripcion-upd" />
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="postal-upd">Notas</label>
-                        <input type="text" class="form-control" id="postal-upd" name="postal-upd" />
+                        <label class="form-label" for="notas-upd">Notas</label>
+                        <input type="text" class="form-control" id="notas-upd" name="notas-upd" />
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="valor-upd">Valor</label>
@@ -502,7 +472,7 @@
                       </div>
 
                       <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="ancestral-upd" name="ancestral-upd" checked />
+                        <input class="form-check-input" type="checkbox" value="" id="ancestral-upd" name="ancestral-upd" />
                         <label class="form-check-label" for="ancestral-upd">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
@@ -514,7 +484,7 @@
                       </div>
 
                       <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="extremo-upd" name="extremo-upd" checked />
+                        <input class="form-check-input" type="checkbox" value="" id="extremo-upd" name="extremo-upd" />
                         <label class="form-check-label" for="extremo-upd">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
@@ -526,7 +496,7 @@
                       </div>
 
                       <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="avistamiento-upd" name="avistamiento-upd" checked />
+                        <input class="form-check-input" type="checkbox" value="" id="avistamiento-upd" name="avistamiento-upd" />
                         <label class="form-check-label" for="avistamiento-upd">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
@@ -538,19 +508,19 @@
                       </div>
 
                       <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="deportivo-upd" name="deportivo-upd" checked />
+                        <input class="form-check-input" type="checkbox" value="" id="deportivo-upd" name="deportivo-upd" />
                         <label class="form-check-label" for="deportivo-upd">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
                               <input type="hidden" id="hid-deportivo-upd" name="hid-deportivo-upd" value="1" />
-                              <span id="deportivoTitulo">Activo</span>
+                              <span id="deportivoTitulo">Deportivo</span>
                             </span>
                           </span>
                         </label>
                       </div>
 
                       <div class="form-check form-block mb-4" style="padding: 0px 13px">
-                        <input class="form-check-input" type="checkbox" value="" id="activo-upd" name="activo-upd" checked />
+                        <input class="form-check-input" type="checkbox" value="" id="activo-upd" name="activo-upd" />
                         <label class="form-check-label" for="activo-upd">
                           <span class="d-flex align-items-center">
                             <span class="ms-2">
@@ -612,80 +582,64 @@
 
         $('#ancestral-ins').on('click', function() {
           if( $(this).is(':checked') ){
-            $("#ancestralTitulo").text("Activo");
             $("#hid-ancestral-ins").val("1");
           } else {
-            $("#ancestralTitulo").text("Inactivo");
             $("#hid-ancestral-ins").val("0");
           }
         });
         
         $('#ancestral-upd').on('click', function() {
           if( $(this).is(':checked') ){
-            $("#ancestralTitulo").text("Activo");
             $("#hid-ancestral-upd").val("1");
           } else {
-            $("#ancestralTitulo").text("Inactivo");
             $("#hid-ancestral-upd").val("0");
           }
         });
 
         $('#extremo-ins').on('click', function() {
           if( $(this).is(':checked') ){
-            $("#extremoTitulo").text("Activo");
             $("#hid-extremo-ins").val("1");
           } else {
-            $("#extremoTitulo").text("Inactivo");
             $("#hid-extremo-ins").val("0");
           }
         });
         
         $('#extremo-upd').on('click', function() {
           if( $(this).is(':checked') ){
-            $("#extremoTitulo").text("Activo");
             $("#hid-extremo-upd").val("1");
           } else {
-            $("#extremoTitulo").text("Inactivo");
             $("#hid-extremo-upd").val("0");
           }
         });
 
         $('#avistamiento-ins').on('click', function() {
           if( $(this).is(':checked') ){
-            $("#avistamientoTitulo").text("Activo");
             $("#hid-avistamiento-ins").val("1");
           } else {
-            $("#avistamientoTitulo").text("Inactivo");
             $("#hid-avistamiento-ins").val("0");
           }
         });
         
         $('#avistamiento-upd').on('click', function() {
           if( $(this).is(':checked') ){
-            $("#avistamientoTitulo").text("Activo");
             $("#hid-avistamiento-upd").val("1");
           } else {
-            $("#avistamientoTitulo").text("Inactivo");
             $("#hid-avistamiento-upd").val("0");
           }
         });
 
         $('#deportivo-ins').on('click', function() {
           if( $(this).is(':checked') ){
-            $("#deportivoTitulo").text("Activo");
             $("#hid-deportivo-ins").val("1");
           } else {
-            $("#deportivoTitulo").text("Inactivo");
             $("#hid-deportivo-ins").val("0");
           }
         });
         
         $('#deportivo-upd').on('click', function() {
           if( $(this).is(':checked') ){
-            $("#deportivoTitulo").text("Activo");
             $("#hid-deportivo-upd").val("1");
           } else {
-            $("#deportivoTitulo").text("Inactivo");
             $("#hid-deportivo-upd").val("0");
           }
         });
@@ -715,7 +669,10 @@
         });
       });
 
-      function UpdateClick(id, nombre, activo) {
+      function UpdateClick(id, nombre, ciudad, region, clima, postal, titulo, subtitulo, 
+                            descripcion, notas, valor, ancestral, extremo, avistamiento, 
+                            deportivo, activo) {
+        console.log("ancestral: " + ancestral + ", extremo: " + extremo + ", avistamiento: " + avistamiento + ", deportivo: " + deportivo);
         $("#hid-id-upd").val(id);
         $("#nombre-upd").val(nombre);
         $("#ciudad-upd").val(ciudad);

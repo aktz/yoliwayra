@@ -719,11 +719,11 @@ class Validation extends BaseConfig
             ]
         ],
         'valor' => [
-            'rules' => 'required|string|min_length[3]|max_length[30]|regex_match[/^[0-9.,]+$/]',
+            'rules' => 'required|string|min_length[1]|max_length[15]|regex_match[/^[0-9.,]+$/]',
             'errors' => [
                 'required' => 'El campo Valor es obligatorio.',
                 'string' => 'El campo Valor debe ser un texto.',
-                'min_length' => 'El campo Valor debe tener al menos 3 caracteres.',
+                'min_length' => 'El campo Valor debe tener al menos 1 caracteres.',
                 'max_length' => 'El campo Valor debe tener como máximo 30 caracteres.',
                 'regex_match' => 'El campo Valor debe contener sólo caracteres alfanuméricos',
             ]

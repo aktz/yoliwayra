@@ -7,7 +7,7 @@ class Lugar extends BaseController
   public function index(): string
   {
     $data["array"] = $this->lugar->getLugaresActivos();
-    
+    $data["ciudades"] = $this->ciudad->getCiudadesActivas();
 
     if ($this->session->getFlashdata("insert_fail")) {
       $data["insert_fail"] = "error";
