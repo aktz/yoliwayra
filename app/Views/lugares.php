@@ -689,6 +689,10 @@
         $("#avistamiento-upd").prop("checked", avistamiento == 1 ? true : false);
         $("#deportivo-upd").prop("checked", deportivo == 1 ? true : false);
         $("#activo-upd").prop("checked", activo == 1 ? true : false);
+        $("#hid-ancestral-upd").val(ancestral);
+        $("#hid-extremo-upd").val(extremo);
+        $("#hid-avistamiento-upd").val(avistamiento);
+        $("#hid-deportivo-upd").val(deportivo);
         $("#hid-activo-upd").val(activo);
       }
 

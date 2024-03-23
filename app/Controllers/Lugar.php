@@ -108,6 +108,19 @@ class Lugar extends BaseController
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
     $nombre = $this->request->getPost("nombre-upd");
+    $ciudad = $this->request->getPost("ciudad-upd");
+    $region = $this->request->getPost("region-upd");
+    $clima = $this->request->getPost("clima-upd");
+    $postal = $this->request->getPost("postal-upd");
+    $titulo = $this->request->getPost("titulo-upd");
+    $subtitulo = $this->request->getPost("subtitulo-upd");
+    $descripcion = $this->request->getPost("descripcion-upd");
+    $notas = $this->request->getPost("notas-upd");
+    $ancestral = $this->request->getPost("hid-ancestral-upd");
+    $extremo = $this->request->getPost("hid-extremo-upd");
+    $avistamiento = $this->request->getPost("hid-avistamiento-upd");
+    $deportivo = $this->request->getPost("hid-deportivo-upd");
+    $valor = $this->request->getPost("valor-upd");
     $activo = $this->request->getPost("hid-activo-upd");
 
     $data = [
