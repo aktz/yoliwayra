@@ -30,6 +30,7 @@ use App\Models\EstadoModel;
 use App\Models\IdiomaModel;
 use App\Models\IndumentariaModel;
 use App\Models\LugarModel;
+use App\Models\LugarAccesoModel;
 use App\Models\PaisDivisaModel;
 use App\Models\PaisIdiomaModel;
 use App\Models\PaisRequerimientoModel;

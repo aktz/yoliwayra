@@ -770,6 +770,27 @@ class Validation extends BaseConfig
         ]
     ];
 
+    public $lugar_acceso = [
+        'lugar' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Lugar es obligatorio.',
+                'integer' => 'El campo Lugar debe ser un número entero.',
+                'min_length' => 'El campo Lugar debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Lugar debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'acceso' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Acceso es obligatorio.',
+                'integer' => 'El campo Acceso debe ser un número entero.',
+                'min_length' => 'El campo Acceso debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Acceso debe tener una longitud máxima de 3.'
+            ]
+        ]
+    ];
+
     public $pais = [
         'nombre' => [
             'rules' => 'required|string|min_length[4]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',

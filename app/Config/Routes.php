@@ -103,6 +103,11 @@ $routes->post('/lugares/insert', 'Lugar::insert');
 $routes->post('/lugares/update', 'Lugar::update');
 $routes->post('/lugares/delete', 'Lugar::delete');
 
+$routes->get('/lugares_accesos/(:num)', 'LugarAcceso::index/$1');
+$routes->post('/lugares_accesos/insert', 'LugarAcceso::insert');
+$routes->post('/lugares_accesos/update', 'LugarAcceso::update');
+$routes->post('/lugares_accesos/delete', 'LugarAcceso::delete');
+
 $routes->get('/paises', 'Pais::index');
 $routes->post('/paises/insert', 'Pais::insert');
 $routes->post('/paises/update', 'Pais::update');
