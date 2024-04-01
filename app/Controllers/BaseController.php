@@ -107,6 +107,7 @@ abstract class BaseController extends Controller
         $this->idioma = new IdiomaModel();
         $this->indumentaria = new IndumentariaModel();
         $this->lugar = new LugarModel();
+        $this->lugar_acceso = new LugarAccesoModel();
         $this->pais_divisa = new PaisDivisaModel();
         $this->pais_idioma = new PaisIdiomaModel();
         $this->pais_requerimiento = new PaisRequerimientoModel();

@@ -4,11 +4,12 @@ namespace App\Controllers;
 
 class LugarAcceso extends BaseController
 {
-  public function index(): string
+  public function index($id)
   {
     $data["accesos"] = $this->acceso->getAccesosActivos();
-    $data["lugares"] = $this->lugar->getLugaresActivos();
-    $data["array"] = $this->lugar_acceso->getLugarAccesosActivos();
+    $data["lugar"] = $this->lugar->getLugarActivo($id);
+    $data["array"] = $this->lugar_acceso->getLugarAccesosActivos($id);
+
     if ($this->session->getFlashdata("insert_fail")) {
       $data["insert_fail"] = "error";
     }
@@ -48,7 +49,7 @@ class LugarAcceso extends BaseController
       }
     }   
 
-    return redirect()->to(base_url('lugares_accesos'));
+    return redirect()->to(base_url('lugares_accesos' . '/' . $lugar));
   }
 
   public function update() {
