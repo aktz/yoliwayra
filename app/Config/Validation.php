@@ -790,6 +790,47 @@ class Validation extends BaseConfig
             ]
         ]
     ];
+    
+    public $lugar_alimentacion = [
+        'lugar' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Lugar es obligatorio.',
+                'integer' => 'El campo Lugar debe ser un número entero.',
+                'min_length' => 'El campo Lugar debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Lugar debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'alimentacion' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Alimentación es obligatorio.',
+                'integer' => 'El campo Alimentación debe ser un número entero.',
+                'min_length' => 'El campo Alimentación debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Alimentación debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'descripcion' => [
+            'rules' => 'required|string|min_length[5]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
+            'errors' => [
+                'required' => 'El campo Descripción es obligatorio.',
+                'string' => 'El campo Descripción debe ser un texto.',
+                'min_length' => 'El campo Descripción debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Descripción debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Descripción debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'notas' => [
+            'rules' => 'required|string|min_length[5]|max_length[3000]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
+            'errors' => [
+                'required' => 'El campo Notas es obligatorio.',
+                'string' => 'El campo Notas debe ser un texto.',
+                'min_length' => 'El campo Notas debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Notas debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Notas debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+    ];
 
     public $pais = [
         'nombre' => [

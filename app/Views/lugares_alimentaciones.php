@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>Accesos del Lugar</title>
+    <title>Alimentaciones del Lugar</title>
 
     <meta name="description" content="YoliWayra">
     <meta name="author" content="anysw">
@@ -116,7 +116,7 @@
                       <a class="link-fx" href="<?= base_url('lugares'); ?>">Lugares</a>
                     </li>
                     <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
-                      Accesos
+                      Alimentaciones
                     </li>
                   </ol>
                 </nav>
@@ -182,7 +182,9 @@
                       <thead>
                         <tr>
                           <th>Lugar</th>
-                          <th>Acceso</th>
+                          <th>Alimentación</th>
+                          <th>Descripción</th>
+                          <th>Notas</th>
                           <th class="text-center" style="width: 100px;"></th>
                         </tr>
                       </thead>
@@ -192,9 +194,21 @@
                             foreach ($array as $item) {
                               echo '<tr>';
                                 echo '<td>' . $item["nombre_lugar"] . '</td>';
-                                echo '<td>' . $item["nombre_acceso"] . '</td>';
+                                echo '<td>' . $item["nombre_alimentacion"] . '</td>';                                
+                                echo '<td>' . $item["descripcion"] . '</td>';
+                                echo '<td>' . $item["notas"] . '</td>';
                                 echo '<td class="text-center">';
                                   echo '<div class="btn-group">';
+                                    echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
+                                          ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
+                                          ' onclick="UpdateClick(' . 
+                                              $item["id"] . ', ' . 
+                                              $item["id_lugar"] . ', ' . 
+                                              $item["id_alimentacion"] . ', \'' . 
+                                              $item["descripcion"] . '\', \'' . 
+                                              $item["notas"] . '\')">';
+                                      echo '<i class="fa fa-fw fa-pencil-alt"></i>';
+                                    echo '</button>';
                                     echo '<button type="button" id="delete" onclick="DeleteClick(' . $item["id"] . ')" class="btn btn-sm btn-alt-secondary" title="Eliminar">';
                                       echo '<i class="fa fa-fw fa-times"></i>';
                                     echo '</button>';
@@ -222,7 +236,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="<?= base_url("/lugares_accesos/insert"); ?>" method="POST">
+              <form action="<?= base_url("/lugares_alimentaciones/insert"); ?>" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Nuevo</h3>
                   <div class="block-options">
@@ -241,17 +255,25 @@
                           rows="3" readonly><?= $lugar["nombre"] ?></textarea>
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="acceso-ins">Acceso</label>
-                        <select class="form-select" id="acceso-ins" name="acceso-ins" size="5">
+                        <label class="form-label" for="alimentacion-ins">Acceso</label>
+                        <select class="form-select" id="alimentacion-ins" name="alimentacion-ins" size="5">
 
                           <?php
-                            foreach ($accesos as $acceso) {
-                              echo '<option value="' . $acceso["id"] . '">' . $acceso["nombre"] . '</option>';
+                            foreach ($alimentaciones as $alimentacion) {
+                              echo '<option value="' . $alimentacion["id"] . '">' . $alimentacion["nombre"] . '</option>';
                             }
                           ?>
 
                         </select>
-                      </div>                     
+                      </div> 
+                      <div class="mb-4">
+                        <label class="form-label" for="descripcion-ins">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion-ins" name="descripcion-ins" />
+                      </div>                      
+                      <div class="mb-4">
+                        <label class="form-label" for="notas-ins">Notas</label>
+                        <textarea class="form-control" id="notas-ins" name="notas-ins" rows="3"></textarea>
+                      </div>                       
                     </div>
                   </div>                      
                 </div>
@@ -270,7 +292,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="<?= base_url("/lugares_accesos/update"); ?>" method="POST">
+              <form action="<?= base_url("/lugares_alimentaciones/update"); ?>" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Modificación</h3>
                   <div class="block-options">
@@ -289,16 +311,24 @@
                           data-id="<?= $lugar["id"] ?>" readonly><?= $lugar["nombre"] ?></textarea>
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="acceso-upd">Acceso</label>
-                        <select class="form-select" id="acceso-upd" name="acceso-upd" size="5">
+                        <label class="form-label" for="alimentacion-upd">Acceso</label>
+                        <select class="form-select" id="alimentacion-upd" name="alimentacion-upd" size="5">
 
                           <?php
-                            foreach ($accesos as $acceso) {
-                              echo '<option value="' . $acceso["id"] . '">' . $acceso["nombre"] . '</option>';
+                            foreach ($alimentaciones as $alimentacion) {
+                              echo '<option value="' . $alimentacion["id"] . '">' . $alimentacion["nombre"] . '</option>';
                             }
                           ?>
 
                         </select>
+                      </div>  
+                      <div class="mb-4">
+                        <label class="form-label" for="descripcion-upd">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion-upd" name="descripcion-upd" />
+                      </div>                      
+                      <div class="mb-4">
+                        <label class="form-label" for="notas-upd">Notas</label>
+                        <textarea class="form-control" id="notas-upd" name="notas-upd" rows="3"></textarea>
                       </div>                      
                     </div>
                   </div>                      
@@ -351,10 +381,12 @@
         }, 4000);
       });
 
-      function UpdateClick(id, lugar, acceso) {
+      function UpdateClick(id, lugar, alimentacion, descripcion, notas) {
         $("#hid-id-upd").val(id);
         $("#lugar-upd").val(lugar);
-        $("#acceso-upd").val(acceso);
+        $("#alimentacion-upd").val(alimentacion);
+        $("#descripcion-upd").val(descripcion);
+        $("#notas-upd").val(notas);
       }
 
       function DeleteClick(id) {
@@ -376,7 +408,7 @@
 
       function DeleteItem(id) {
         $.ajax({
-          url: '<?= base_url('/lugares_accesos/delete'); ?>',
+          url: '<?= base_url('/lugares_alimentaciones/delete'); ?>',
           type: 'POST',
           data: { id: id },
           dataType: 'json'

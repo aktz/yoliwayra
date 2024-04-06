@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
-class LugarAcceso extends BaseController
+class LugarAlimentacion extends BaseController
 {
   public function index($id)
   {
-    $data["accesos"] = $this->acceso->getAccesosActivos();
+    $data["alimentaciones"] = $this->alimentacion->getAlimentacionesActivas();
     $data["lugar"] = $this->lugar->getLugarActivo($id);
-    $data["array"] = $this->lugar_acceso->getLugarAccesosActivos($id);
+    $data["array"] = $this->lugar_alimentacion->getLugarAlimentacionesActivas($id);
 
     if ($this->session->getFlashdata("insert_fail")) {
       $data["insert_fail"] = "error";
@@ -22,63 +22,67 @@ class LugarAcceso extends BaseController
     if ($this->session->getFlashdata("validation_error")) {
       $data["validation_error"] = $this->session->getFlashdata("validation_error");
     }
-    return view('lugares_accesos', $data);
+    return view('lugares_alimentaciones', $data);
   }
 
   public function insert()  
   {
-    $acceso = $this->request->getPost("acceso-ins");
+    $alimentacion = $this->request->getPost("alimentacion-ins");
     $lugar = $this->request->getPost("lugar-ins");
+    $descripcion = $this->request->getPost("descripcion-ins");
+    $notas = $this->request->getPost("notas-ins");
 
-    $existe = $this->lugar_acceso->getLugarAccesoCombinacion($lugar, $acceso);
+    $existe = $this->lugar_alimentacion->getLugarAlimentacionCombinacion($lugar, $alimentacion, $descripcion);
 
     if ($existe) {
-      $this->session->setFlashdata("validation_error", ["Ya existe el acceso para el lugar."]);
+      $this->session->setFlashdata("validation_error", ["Ya existe la alimentacion para el lugar."]);
     } else {
 
       $data = [
-        "acceso"=>$acceso,
-        "lugar"=>$lugar
+        "alimentacion"=>$alimentacion,
+        "lugar"=>$lugar,
+        "descripcion"=>$descripcion,
+        "notas"=>$notas
       ];
   
-      if (!$this->validation->run($data, 'lugar_acceso')) {
+      if (!$this->validation->run($data, 'lugar_alimentacion')) {
         $this->session->setFlashdata("validation_error", $this->validation->getErrors());
       } else {
-        $this->lugar_acceso->insert($data);
+        $this->lugar_alimentacion->insert($data);
         $this->session->setFlashdata("upsert_success", "Success"); 
       }
     }   
 
-    return redirect()->to(base_url('lugares_accesos' . '/' . $lugar));
+    return redirect()->to(base_url('lugares_alimentaciones' . '/' . $lugar));
   }
 
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
-    $acceso = $this->request->getPost("acceso-upd");
+    $alimentacion = $this->request->getPost("alimentacion-upd");
     $lugar = $this->request->getPost("lugar-upd");
     $descripcion = $this->request->getPost("descripcion-upd");
     $notas = $this->request->getPost("notas-upd");
 
     $data = [
-      "acceso"=>$acceso,
+      "alimentacion"=>$alimentacion,
       "lugar"=>$lugar,
       "descripcion"=>$descripcion,
       "notas"=>$notas
     ];
 
-    if (!$this->validation->run($data, 'lugar_acceso')) {
+    if (!$this->validation->run($data, 'lugar_alimentacion')) {
       $this->session->setFlashdata("validation_error", $this->validation->getErrors());
     } else {
-      $this->lugar_acceso->update($id, $data);
+      $this->lugar_alimentacion->update($id, $data);
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
 
-    return redirect()->to(base_url('lugares_accesos'));    
+    return redirect()->to(base_url('lugares_alimentaciones' . '/' . $lugar));    
   }
 
   public function delete() {
     $id = $this->request->getPost("id");
-    $deleted = $this->lugar_acceso->delete($id);
+    $deleted = $this->lugar_alimentacion->delete($id);
 
     if ($deleted <= 0) {
       $this->session->setFlashdata("delete_fail", "Delete");  
@@ -86,6 +90,6 @@ class LugarAcceso extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
     
-    return redirect()->to(base_url('lugares_accesos')); 
+    return redirect()->to(base_url('lugares_alimentaciones')); 
   }
 }

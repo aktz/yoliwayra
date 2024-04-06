@@ -31,6 +31,7 @@ use App\Models\IdiomaModel;
 use App\Models\IndumentariaModel;
 use App\Models\LugarModel;
 use App\Models\LugarAccesoModel;
+use App\Models\LugarAlimentacionModel;
 use App\Models\PaisDivisaModel;
 use App\Models\PaisIdiomaModel;
 use App\Models\PaisRequerimientoModel;
@@ -107,6 +108,8 @@ abstract class BaseController extends Controller
         $this->idioma = new IdiomaModel();
         $this->indumentaria = new IndumentariaModel();
         $this->lugar = new LugarModel();
+        $this->lugar_acceso = new LugarAccesoModel();
+        $this->lugar_alimentacion = new LugarAlimentacionModel();
         $this->pais_divisa = new PaisDivisaModel();
         $this->pais_idioma = new PaisIdiomaModel();
         $this->pais_requerimiento = new PaisRequerimientoModel();
