@@ -307,7 +307,7 @@
                       <input type="hidden" id="hid-id-upd" name="hid-id-upd" />
                       <div class="mb-4">
                         <label class="form-label" for="lugar-upd">Lugar</label><br />
-                        <textarea class="form-control" id="lugar-ins" name="lugar-ins" rows="3" 
+                        <textarea class="form-control" id="lugar-upd" name="lugar-upd" rows="3" 
                           data-id="<?= $lugar["id"] ?>" readonly><?= $lugar["nombre"] ?></textarea>
                       </div>
                       <div class="mb-4">

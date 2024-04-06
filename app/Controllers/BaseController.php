@@ -19,6 +19,7 @@ use App\Models\CategoriaModel;
 use App\Models\CiudadModel;
 use App\Models\CiudadAlimentacionModel;
 use App\Models\CiudadAlojamientoModel;
+use App\Models\CiudadAtraccionModel;
 use App\Models\CiudadBancoModel;
 use App\Models\CiudadEmbajadaModel;
 use App\Models\CiudadTerminalModel;
@@ -97,6 +98,7 @@ abstract class BaseController extends Controller
         $this->ciudad = new CiudadModel();
         $this->ciudad_alimentacion = new CiudadAlimentacionModel();
         $this->ciudad_alojamiento = new CiudadAlojamientoModel();
+        $this->ciudad_atraccion = new CiudadAtraccionModel();
         $this->ciudad_banco = new CiudadBancoModel();
         $this->ciudad_embajada = new CiudadEmbajadaModel();
         $this->ciudad_terminal = new CiudadTerminalModel();
