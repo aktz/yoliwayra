@@ -714,7 +714,6 @@
       function UpdateClick(id, nombre, ciudad, region, clima, postal, titulo, subtitulo, 
                             descripcion, notas, valor, ancestral, extremo, avistamiento, 
                             deportivo, activo) {
-        console.log("ancestral: " + ancestral + ", extremo: " + extremo + ", avistamiento: " + avistamiento + ", deportivo: " + deportivo);
         $("#hid-id-upd").val(id);
         $("#nombre-upd").val(nombre);
         $("#ciudad-upd").val(ciudad);

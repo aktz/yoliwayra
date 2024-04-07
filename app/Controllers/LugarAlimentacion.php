@@ -53,7 +53,7 @@ class LugarAlimentacion extends BaseController
       }
     }   
 
-    return redirect()->to(base_url('lugares_alimentaciones' . '/' . $lugar));
+    return redirect()->to(base_url('lugares_alimentaciones/' . $lugar));
   }
 
   public function update() {
@@ -77,7 +77,7 @@ class LugarAlimentacion extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
 
-    return redirect()->to(base_url('lugares_alimentaciones' . '/' . $lugar));    
+    return redirect()->to(base_url('lugares_alimentaciones/' . $lugar));    
   }
 
   public function delete() {
@@ -94,6 +94,6 @@ class LugarAlimentacion extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
     
-    return redirect()->to(base_url('lugares_alimentaciones' . '/' . $lugar)); 
+    return redirect()->to(base_url('lugares_alimentaciones/' . $lugar)); 
   }
 }

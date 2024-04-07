@@ -10,13 +10,14 @@ class CiudadAlimentacionModel extends Model
   protected $primaryKey = 'id';
   protected $allowedFields = ['ciudad', 'alimentacion', 'descripcion', 'notas'];  
 
-  public function getCiudadAlimentacionesActivas()
+  public function getCiudadAlimentacionesActivas($id)
   {
     return $this->query("select cia.id, cia.ciudad id_ciudad, ciu.nombre nombre_ciudad, cia.alimentacion id_alimentacion, 
                             ali.nombre nombre_alimentacion, cia.descripcion, cia.notas
                         from ciudades_alimentaciones cia
                         inner join ciudades ciu on cia.ciudad = ciu.id
-                        inner join alimentaciones ali on cia.alimentacion = ali.id")->getResultArray();
+                        inner join alimentaciones ali on cia.alimentacion = ali.id
+                        where ciu.id = " . $id)->getResultArray();
   }
   
   public function getCiudadAlimentacion($id)
@@ -24,8 +25,8 @@ class CiudadAlimentacionModel extends Model
     return $this->find($id);
   }
 
-  public function getCiudadAlimentacionDescripcion($ciudad, $descripcion) 
+  public function getCiudadAlimentacionDescripcion($ciudad, $alimentacion, $descripcion) 
   {
-    return $this->where(["ciudad"=>$ciudad, "descripcion"=>$descripcion])->first();
+    return $this->where(["ciudad"=>$ciudad, "alimentacion"=>$alimentacion, "descripcion"=>$descripcion])->first();
   }
 }

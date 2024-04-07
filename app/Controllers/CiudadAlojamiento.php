@@ -4,11 +4,11 @@ namespace App\Controllers;
 
 class CiudadAlojamiento extends BaseController
 {
-  public function index(): string
+  public function index($id)
   {
     $data["alojamientos"] = $this->alojamiento->getAlojamientosActivos();
-    $data["ciudades"] = $this->ciudad->getCiudadesActivas();
-    $data["array"] = $this->ciudad_alojamiento->getCiudadAlojamientosActivos();
+    $data["ciudad"] = $this->ciudad->getCiudadActivo($id);
+    $data["array"] = $this->ciudad_alojamiento->getCiudadAlojamientosActivos($id);
     if ($this->session->getFlashdata("insert_fail")) {
       $data["insert_fail"] = "error";
     }
@@ -31,7 +31,7 @@ class CiudadAlojamiento extends BaseController
     $descripcion = $this->request->getPost("descripcion-ins");
     $notas = $this->request->getPost("notas-ins");
 
-    $existe = $this->ciudad_alojamiento->getCiudadAlojamiento($ciudad, $alojamiento);
+    $existe = $this->ciudad_alojamiento->getCiudadAlojamientoDescripcion($ciudad, $alojamiento, $descripcion);
 
     if ($existe) {
       $this->session->setFlashdata("validation_error", ["Ya existe la alojamiento para el país."]);
@@ -52,7 +52,7 @@ class CiudadAlojamiento extends BaseController
       }
     }   
 
-    return redirect()->to(base_url('ciudades_alojamientos'));
+    return redirect()->to(base_url('ciudades_alojamientos' . '/' . $ciudad));
   }
 
   public function update() {
@@ -76,11 +76,15 @@ class CiudadAlojamiento extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
 
-    return redirect()->to(base_url('ciudades_alojamientos'));    
+    return redirect()->to(base_url('ciudades_alojamientos' . '/' . $ciudad));    
   }
 
   public function delete() {
     $id = $this->request->getPost("id");
+
+    $ciudad_alojamiento = $this->ciudad_alojamiento->getCiudadAlojamiento($id);
+    $ciudad = $ciudad_alojamiento["ciudad"];
+
     $deleted = $this->ciudad_alojamiento->delete($id);
 
     if ($deleted <= 0) {
@@ -89,6 +93,6 @@ class CiudadAlojamiento extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
     
-    return redirect()->to(base_url('ciudades_alojamientos')); 
+    return redirect()->to(base_url('ciudades_alojamientos' . '/' . $ciudad)); 
   }
 }

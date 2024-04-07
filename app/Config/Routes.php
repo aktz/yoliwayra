@@ -43,12 +43,12 @@ $routes->post('/ciudades/insert', 'Ciudad::insert');
 $routes->post('/ciudades/update', 'Ciudad::update');
 $routes->post('/ciudades/delete', 'Ciudad::delete');
 
-$routes->get('/ciudades_alimentaciones', 'CiudadAlimentacion::index');
+$routes->get('/ciudades_alimentaciones/(:num)', 'CiudadAlimentacion::index/$1');
 $routes->post('/ciudades_alimentaciones/insert', 'CiudadAlimentacion::insert');
 $routes->post('/ciudades_alimentaciones/update', 'CiudadAlimentacion::update');
 $routes->post('/ciudades_alimentaciones/delete', 'CiudadAlimentacion::delete');
 
-$routes->get('/ciudades_alojamientos', 'CiudadAlojamiento::index');
+$routes->get('/ciudades_alojamientos/(:num)', 'CiudadAlojamiento::index/$1');
 $routes->post('/ciudades_alojamientos/insert', 'CiudadAlojamiento::insert');
 $routes->post('/ciudades_alojamientos/update', 'CiudadAlojamiento::update');
 $routes->post('/ciudades_alojamientos/delete', 'CiudadAlojamiento::delete');

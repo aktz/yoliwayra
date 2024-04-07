@@ -255,7 +255,7 @@
                           rows="3" readonly><?= $lugar["nombre"] ?></textarea>
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="alimentacion-ins">Acceso</label>
+                        <label class="form-label" for="alimentacion-ins">Alimentación</label>
                         <select class="form-select" id="alimentacion-ins" name="alimentacion-ins" size="5">
 
                           <?php

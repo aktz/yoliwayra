@@ -200,7 +200,8 @@
                               echo '<td class="text-center">';
                                 echo '<div class="btn-group">';
                                   echo '<button type="button" class="btn btn-sm btn-alt-secondary"' .
-                                      ' data-bs-toggle="modal" data-bs-target="#modal-list" title="Opciones" >';
+                                      ' onclick="ListaRef(' . $item["id_ciudad"] . ')" data-bs-toggle="modal"' .
+                                      ' data-bs-target="#modal-list" title="Opciones" >';
                                     echo '<i class="fa fa-fw fa-list"></i>';
                                   echo '</button>';
                                   echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
@@ -420,16 +421,16 @@
               <div class="block-content fs-sm">
                 <div class="block-content block-content-full">
                   <div class="row">
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_alimentaciones'); ?>">Alimentación</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_alojamientos'); ?>">Alojamientos</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_atracciones'); ?>">Atracciones</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_bancos'); ?>">Bancos</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_coworking'); ?>">Coworking</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_embajadas'); ?>">Embajadas</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_eventos'); ?>">Eventos</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_guianzas'); ?>">Guianzas</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_terminales'); ?>">Terminales</a>
-                    <a class="btn btn-primary mb-2" href="<?= base_url('ciudades_transportes'); ?>">Transportes</a>
+                    <a class="btn btn-primary mb-2" id="a-ciudades-alimentaciones" href="<?= base_url('ciudades_alimentaciones'); ?>">Alimentación</a>
+                    <a class="btn btn-primary mb-2" id="a-ciudades-alojamientos" href="<?= base_url('ciudades_alojamientos'); ?>">Alojamientos</a>
+                    <a class="btn btn-primary mb-2" id="a-ciudades-atracciones" href="<?= base_url('ciudades_atracciones'); ?>">Atracciones</a>
+                    <a class="btn btn-primary mb-2" id="a-ciudades-bancos" href="<?= base_url('ciudades_bancos'); ?>">Bancos</a>
+                    <a class="btn btn-primary mb-2" id="a-ciudades-coworking" href="<?= base_url('ciudades_coworking'); ?>">Coworking</a>
+                    <a class="btn btn-primary mb-2" id="a-ciudades-embajadas" href="<?= base_url('ciudades_embajadas'); ?>">Embajadas</a>
+                    <a class="btn btn-primary mb-2" id="a-ciudades-eventos" href="<?= base_url('ciudades_eventos'); ?>">Eventos</a>
+                    <a class="btn btn-primary mb-2" id="a-ciudades-guianzas" href="<?= base_url('ciudades_guianzas'); ?>">Guianzas</a>
+                    <a class="btn btn-primary mb-2" id="a-ciudades-terminales" href="<?= base_url('ciudades_terminales'); ?>">Terminales</a>
+                    <a class="btn btn-primary mb-2" id="a-ciudades-transportes" href="<?= base_url('ciudades_transportes'); ?>">Transportes</a>
                   </div>
                 </div>                      
               </div>
@@ -539,6 +540,12 @@
           dataType: 'json'
         });
         window.setTimeout(function(){location.reload()},500);
+      }
+
+      function ListaRef(id) {
+        $('a[id^="a-ciudades"]').attr('href', function(index, oldHref) {
+          return oldHref + '/' + id;
+        });
       }
 
     </script>

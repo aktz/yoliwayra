@@ -4,11 +4,12 @@ namespace App\Controllers;
 
 class CiudadAlimentacion extends BaseController
 {
-  public function index(): string
+  public function index($id)
   {
     $data["alimentaciones"] = $this->alimentacion->getAlimentacionesActivas();
-    $data["ciudades"] = $this->ciudad->getCiudadesActivas();
-    $data["array"] = $this->ciudad_alimentacion->getCiudadAlimentacionesActivas();
+    $data["ciudad"] = $this->ciudad->getCiudadActivo($id);
+    $data["array"] = $this->ciudad_alimentacion->getCiudadAlimentacionesActivas($id);
+
     if ($this->session->getFlashdata("insert_fail")) {
       $data["insert_fail"] = "error";
     }
@@ -31,10 +32,10 @@ class CiudadAlimentacion extends BaseController
     $descripcion = $this->request->getPost("descripcion-ins");
     $notas = $this->request->getPost("notas-ins");
 
-    $existe = $this->ciudad_alimentacion->getCiudadAlimentacion($ciudad, $alimentacion);
+    $existe = $this->ciudad_alimentacion->getCiudadAlimentacionDescripcion($ciudad, $alimentacion, $descripcion);
 
     if ($existe) {
-      $this->session->setFlashdata("validation_error", ["Ya existe la alimentacion para el país."]);
+      $this->session->setFlashdata("validation_error", ["Ya existe la alimentacion para la ciudad."]);
     } else {
 
       $data = [
@@ -52,7 +53,7 @@ class CiudadAlimentacion extends BaseController
       }
     }   
 
-    return redirect()->to(base_url('ciudades_alimentaciones'));
+    return redirect()->to(base_url('ciudades_alimentaciones' . '/' . $ciudad));
   }
 
   public function update() {
@@ -76,11 +77,15 @@ class CiudadAlimentacion extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
 
-    return redirect()->to(base_url('ciudades_alimentaciones'));    
+    return redirect()->to(base_url('ciudades_alimentaciones' . '/' . $ciudad));    
   }
 
   public function delete() {
     $id = $this->request->getPost("id");
+
+    $ciudad_alimentacion = $this->ciudad_alimentacion->getCiudadAlimentacion($id);
+    $ciudad = $ciudad_alimentacion["ciudad"];
+
     $deleted = $this->ciudad_alimentacion->delete($id);
 
     if ($deleted <= 0) {
@@ -89,6 +94,6 @@ class CiudadAlimentacion extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
     
-    return redirect()->to(base_url('ciudades_alimentaciones')); 
+    return redirect()->to(base_url('ciudades_alimentaciones' . '/' . $ciudad)); 
   }
 }
