@@ -8,15 +8,14 @@ class CiudadAtraccionModel extends Model
 {
   protected $table = 'ciudades_atracciones';
   protected $primaryKey = 'id';
-  protected $allowedFields = ['ciudad', 'atraccion', 'descripcion', 'notas'];  
+  protected $allowedFields = ['ciudad', 'descripcion', 'notas', 'activo'];  
 
-  public function getCiudadAtraccionesActivos()
+  public function getCiudadAtraccionesActivas($id)
   {
-    return $this->query("select cia.id, cia.ciudad id_ciudad, ciu.nombre nombre_ciudad, cia.atraccion id_atraccion, 
-                            atr.nombre nombre_atraccion, cia.descripcion, cia.notas
+    return $this->query("select cia.id, cia.ciudad id_ciudad, ciu.nombre nombre_ciudad, cia.descripcion, cia.notas, cia.activo
                         from ciudades_atracciones cia
                         inner join ciudades ciu on cia.ciudad = ciu.id
-                        inner join atracciones atr on cia.atraccion = atr.id")->getResultArray();
+                        where ciu.id = " . $id)->getResultArray();
   }
   
   public function getCiudadAtraccion($id)

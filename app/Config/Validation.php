@@ -328,6 +328,45 @@ class Validation extends BaseConfig
             ]
         ],
     ];
+
+    public $ciudad_atraccion = [
+        'ciudad' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Ciudad es obligatorio.',
+                'integer' => 'El campo Ciudad debe ser un número entero.',
+                'min_length' => 'El campo Ciudad debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Ciudad debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'descripcion' => [
+            'rules' => 'required|string|min_length[4]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ&#$\- ]+$/]',
+            'errors' => [
+                'required' => 'El campo Descripción es obligatorio.',
+                'string' => 'El campo Descripción debe ser un texto.',
+                'min_length' => 'El campo Descripción debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Descripción debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Descripción debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'notas' => [
+            'rules' => 'string|max_length[3000]',
+            'errors' => [
+                'string' => 'El campo Notas debe ser un texto.',
+                'min_length' => 'El campo Notas debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Notas debe tener como máximo 3000 caracteres.',
+                'regex_match' => 'El campo Notas debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'activo' => [
+            'rules' => 'required|integer|exact_length[1]',
+            'errors' => [
+                'required' => 'El campo Activo es obligatorio.',
+                'integer' => 'El campo Activo debe ser un número entero.',
+                'exact_length' => 'El campo Activo debe tener una longitud exacta de 1.'
+            ]
+        ]
+    ];
     
     public $ciudad_banco = [
         'ciudad' => [
@@ -346,6 +385,37 @@ class Validation extends BaseConfig
                 'integer' => 'El campo Banco debe ser un número entero.',
                 'min_length' => 'El campo Banco debe tener una longitud mínima de 1.',
                 'max_length' => 'El campo Banco debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'descripcion' => [
+            'rules' => 'required|string|min_length[4]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ&#$\- ]+$/]',
+            'errors' => [
+                'required' => 'El campo Descripción es obligatorio.',
+                'string' => 'El campo Descripción debe ser un texto.',
+                'min_length' => 'El campo Descripción debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Descripción debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Descripción debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'notas' => [
+            'rules' => 'string|max_length[3000]',
+            'errors' => [
+                'string' => 'El campo Notas debe ser un texto.',
+                'min_length' => 'El campo Notas debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Notas debe tener como máximo 3000 caracteres.',
+                'regex_match' => 'El campo Notas debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+    ];
+    
+    public $ciudad_coworking = [
+        'ciudad' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Ciudad es obligatorio.',
+                'integer' => 'El campo Ciudad debe ser un número entero.',
+                'min_length' => 'El campo Ciudad debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Ciudad debe tener una longitud máxima de 3.'
             ]
         ],
         'descripcion' => [

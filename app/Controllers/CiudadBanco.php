@@ -4,11 +4,11 @@ namespace App\Controllers;
 
 class CiudadBanco extends BaseController
 {
-  public function index(): string
+  public function index($id)
   {
     $data["bancos"] = $this->banco->getBancosActivos();
-    $data["ciudades"] = $this->ciudad->getCiudadesActivas();
-    $data["array"] = $this->ciudad_banco->getCiudadBancosActivos();
+    $data["ciudad"] = $this->ciudad->getCiudadActivo($id);
+    $data["array"] = $this->ciudad_banco->getCiudadBancosActivos($id);
     if ($this->session->getFlashdata("insert_fail")) {
       $data["insert_fail"] = "error";
     }
@@ -31,10 +31,10 @@ class CiudadBanco extends BaseController
     $descripcion = $this->request->getPost("descripcion-ins");
     $notas = $this->request->getPost("notas-ins");
 
-    $existe = $this->ciudad_banco->getCiudadBanco($ciudad, $banco);
+    $existe = $this->ciudad_banco->getCiudadBancoDescripcion($ciudad, $banco, $descripcion);
 
     if ($existe) {
-      $this->session->setFlashdata("validation_error", ["Ya existe la banco para el país."]);
+      $this->session->setFlashdata("validation_error", ["Ya existe el banco para el país."]);
     } else {
 
       $data = [
@@ -52,7 +52,7 @@ class CiudadBanco extends BaseController
       }
     }   
 
-    return redirect()->to(base_url('ciudades_bancos'));
+    return redirect()->to(base_url('ciudades_bancos' . '/' . $ciudad));
   }
 
   public function update() {
@@ -76,11 +76,15 @@ class CiudadBanco extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
 
-    return redirect()->to(base_url('ciudades_bancos'));    
+    return redirect()->to(base_url('ciudades_bancos' . '/' . $ciudad));    
   }
 
   public function delete() {
     $id = $this->request->getPost("id");
+
+    $ciudad_banco = $this->ciudad_banco->getCiudadBanco($id);
+    $ciudad = $ciudad_banco["ciudad"];
+
     $deleted = $this->ciudad_banco->delete($id);
 
     if ($deleted <= 0) {
@@ -89,6 +93,6 @@ class CiudadBanco extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
     
-    return redirect()->to(base_url('ciudades_bancos')); 
+    return redirect()->to(base_url('ciudades_bancos' . '/' . $ciudad)); 
   }
 }

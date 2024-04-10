@@ -53,10 +53,20 @@ $routes->post('/ciudades_alojamientos/insert', 'CiudadAlojamiento::insert');
 $routes->post('/ciudades_alojamientos/update', 'CiudadAlojamiento::update');
 $routes->post('/ciudades_alojamientos/delete', 'CiudadAlojamiento::delete');
 
-$routes->get('/ciudades_bancos', 'CiudadBanco::index');
+$routes->get('/ciudades_atracciones/(:num)', 'CiudadAtraccion::index/$1');
+$routes->post('/ciudades_atracciones/insert', 'CiudadAtraccion::insert');
+$routes->post('/ciudades_atracciones/update', 'CiudadAtraccion::update');
+$routes->post('/ciudades_atracciones/delete', 'CiudadAtraccion::delete');
+
+$routes->get('/ciudades_bancos/(:num)', 'CiudadBanco::index/$1');
 $routes->post('/ciudades_bancos/insert', 'CiudadBanco::insert');
 $routes->post('/ciudades_bancos/update', 'CiudadBanco::update');
 $routes->post('/ciudades_bancos/delete', 'CiudadBanco::delete');
+
+$routes->get('/ciudades_coworking/(:num)', 'CiudadCoworking::index/$1');
+$routes->post('/ciudades_coworking/insert', 'CiudadCoworking::insert');
+$routes->post('/ciudades_coworking/update', 'CiudadCoworking::update');
+$routes->post('/ciudades_coworking/delete', 'CiudadCoworking::delete');
 
 $routes->get('/ciudades_embajadas', 'CiudadEmbajada::index');
 $routes->post('/ciudades_embajadas/insert', 'CiudadEmbajada::insert');

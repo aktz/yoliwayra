@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>Alojamientos de Ciudad</title>
+    <title>Coworking de Ciudad</title>
 
     <meta name="description" content="YoliWayra">
     <meta name="author" content="anysw">
@@ -116,7 +116,7 @@
                       <a class="link-fx" href="<?= base_url('ciudades'); ?>">Ciudades</a>
                     </li>
                     <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
-                      Alojamientos
+                      Coworking
                     </li>
                   </ol>
                 </nav>
@@ -182,7 +182,6 @@
                       <thead>
                         <tr>
                           <th>Ciudad</th>
-                          <th>Alojamiento</th>
                           <th>Descripción</th>
                           <th>Notas</th>
                           <th class="text-center" style="width: 100px;"></th>
@@ -194,7 +193,6 @@
                             foreach ($array as $item) {
                               echo '<tr>';
                                 echo '<td>' . $item["nombre_ciudad"] . '</td>';
-                                echo '<td>' . $item["nombre_alojamiento"] . '</td>';
                                 echo '<td>' . $item["descripcion"] . '</td>';
                                 echo '<td>' . $item["notas"] . '</td>';
                                 echo '<td class="text-center">';
@@ -203,8 +201,7 @@
                                           ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
                                           ' onclick="UpdateClick(' . 
                                               $item["id"] . ', ' . 
-                                              $item["id_ciudad"] . ', ' . 
-                                              $item["id_alojamiento"] . ', \'' . 
+                                              $item["id_ciudad"] . ', \'' . 
                                               $item["descripcion"] . '\', \'' . 
                                               $item["notas"] . '\')">';
                                       echo '<i class="fa fa-fw fa-pencil-alt"></i>';
@@ -236,7 +233,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="<?= base_url("/ciudades_alojamientos/insert"); ?>" method="POST">
+              <form action="<?= base_url("/ciudades_coworking/insert"); ?>" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Nuevo</h3>
                   <div class="block-options">
@@ -253,19 +250,7 @@
                         <input type="hidden" id="ciudad-ins" name="ciudad-ins" value="<?= $ciudad["id"] ?>" />
                         <textarea class="form-control" id="ciudad-nombre" name="ciudad-nombre" 
                           rows="3" readonly><?= $ciudad["nombre"] ?></textarea>
-                      </div>
-                      <div class="mb-4">
-                        <label class="form-label" for="alojamiento-ins">Alojamiento</label>
-                        <select class="form-select" id="alojamiento-ins" name="alojamiento-ins" size="5">
-
-                          <?php
-                            foreach ($alojamientos as $alojamiento) {
-                              echo '<option value="' . $alojamiento["id"] . '">' . $alojamiento["nombre"] . '</option>';
-                            }
-                          ?>
-
-                        </select>
-                      </div>                      
+                      </div>                     
                       <div class="mb-4">
                         <label class="form-label" for="descripcion-ins">Descripción</label>
                         <textarea class="form-control" id="descripcion-ins" name="descripcion-ins" rows="3"></textarea>
@@ -292,7 +277,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="<?= base_url("/ciudades_alojamientos/update"); ?>" method="POST">
+              <form action="<?= base_url("/ciudades_coworking/update"); ?>" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Modificación</h3>
                   <div class="block-options">
@@ -310,18 +295,6 @@
                         <textarea class="form-control" id="ciudad-upd" name="ciudad-upd" rows="3" 
                           data-id="<?= $ciudad["id"] ?>" readonly><?= $ciudad["nombre"] ?></textarea>
                       </div>
-                      <div class="mb-4">
-                        <label class="form-label" for="alojamiento-upd">Alimentación</label>
-                        <select class="form-select" id="alojamiento-upd" name="alojamiento-upd" size="5">
-
-                          <?php
-                            foreach ($alojamientos as $alojamiento) {
-                              echo '<option value="' . $alojamiento["id"] . '">' . $alojamiento["nombre"] . '</option>';
-                            }
-                          ?>
-
-                        </select>
-                      </div> 
                       <div class="mb-4">
                         <label class="form-label" for="descripcion-upd">Descripción</label>
                         <textarea class="form-control" id="descripcion-upd" name="descripcion-upd" rows="3"></textarea>
@@ -381,10 +354,9 @@
         }, 4000);
       });
 
-      function UpdateClick(id, ciudad, alojamiento, descripcion, notas) {
+      function UpdateClick(id, ciudad, descripcion, notas) {
         $("#hid-id-upd").val(id);
         $("#ciudad-upd").val(ciudad);
-        $("#alojamiento-upd").val(alojamiento);
         $("#descripcion-upd").val(descripcion);
         $("#notas-upd").val(notas);
       }
@@ -408,7 +380,7 @@
 
       function DeleteItem(id) {
         $.ajax({
-          url: '<?= base_url('/ciudades_alojamientos/delete'); ?>',
+          url: '<?= base_url('/ciudades_coworking/delete'); ?>',
           type: 'POST',
           data: { id: id },
           dataType: 'json'

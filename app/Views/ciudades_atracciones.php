@@ -17,14 +17,14 @@
     <meta property="og:url" content="">
     <meta property="og:image" content="">
 
-    <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+    <link rel="shortcut icon" href="<?= base_url(); ?>assets/media/favicons/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="<?= base_url(); ?>assets/media/favicons/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>assets/media/favicons/apple-touch-icon-180x180.png">
 
-    <link rel="stylesheet" href="assets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="assets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
-    <link rel="stylesheet" href="assets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
-    <link rel="stylesheet" id="css-main" href="assets/css/oneui.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" id="css-main" href="<?= base_url(); ?>assets/css/oneui.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
   </head>
@@ -182,9 +182,9 @@
                       <thead>
                         <tr>
                           <th>Ciudad</th>
-                          <th>Atraccion</th>
                           <th>Descripción</th>
                           <th>Notas</th>
+                          <th class="text-center" style="width: 12%;">Activo</th>
                           <th class="text-center" style="width: 100px;"></th>
                         </tr>
                       </thead>
@@ -192,21 +192,22 @@
 
                         <?php
                             foreach ($array as $item) {
+                              $active = $item["activo"] == 1 ? "SI" : "NO";
                               echo '<tr>';
                                 echo '<td>' . $item["nombre_ciudad"] . '</td>';
-                                echo '<td>' . $item["nombre_atraccion"] . '</td>';
                                 echo '<td>' . $item["descripcion"] . '</td>';
                                 echo '<td>' . $item["notas"] . '</td>';
+                                echo '<td class="text-center">' . $active . '</td>';
                                 echo '<td class="text-center">';
                                   echo '<div class="btn-group">';
                                     echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
                                           ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
                                           ' onclick="UpdateClick(' . 
                                               $item["id"] . ', ' . 
-                                              $item["id_ciudad"] . ', ' . 
-                                              $item["id_atraccion"] . ', \'' . 
+                                              $item["id_ciudad"] . ', \'' . 
                                               $item["descripcion"] . '\', \'' . 
-                                              $item["notas"] . '\')">';
+                                              $item["notas"] . '\', '.
+                                              $item['activo'] . ')">';
                                       echo '<i class="fa fa-fw fa-pencil-alt"></i>';
                                     echo '</button>';
                                     echo '<button type="button" id="delete" onclick="DeleteClick(' . $item["id"] . ')" class="btn btn-sm btn-alt-secondary" title="Eliminar">';
@@ -236,7 +237,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="ciudades_atracciones/insert" method="POST">
+              <form action="<?= base_url("/ciudades_atracciones/insert"); ?>" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Nuevo</h3>
                   <div class="block-options">
@@ -250,36 +251,30 @@
                     <div class="row">
                       <div class="mb-4">
                         <label class="form-label" for="ciudad-ins">Ciudad</label>
-                        <select class="form-select" id="ciudad-ins" name="ciudad-ins" size="5">
-
-                          <?php
-                            foreach ($ciudades as $ciudad) {
-                              echo '<option value="' . $ciudad["id_ciudad"] . '">' . $ciudad["nombre_ciudad"] . '</option>';
-                            }
-                          ?>
-
-                        </select>
-                      </div>
-                      <div class="mb-4">
-                        <label class="form-label" for="atraccion-ins">Atraccion</label>
-                        <select class="form-select" id="atraccion-ins" name="atraccion-ins" size="5">
-
-                          <?php
-                            foreach ($atracciones as $atraccion) {
-                              echo '<option value="' . $atraccion["id"] . '">' . $atraccion["nombre"] . '</option>';
-                            }
-                          ?>
-
-                        </select>
-                      </div>                      
+                        <input type="hidden" id="ciudad-ins" name="ciudad-ins" value="<?= $ciudad["id"] ?>" />
+                        <textarea class="form-control" id="ciudad-nombre" name="ciudad-nombre" 
+                          rows="3" readonly><?= $ciudad["nombre"] ?></textarea>
+                      </div>                     
                       <div class="mb-4">
                         <label class="form-label" for="descripcion-ins">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion-ins" name="descripcion-ins" />
+                        <textarea class="form-control" id="descripcion-ins" name="descripcion-ins" 
+                          rows="3"></textarea>
                       </div>                      
                       <div class="mb-4">
                         <label class="form-label" for="notas-ins">Notas</label>
                         <textarea class="form-control" id="notas-ins" name="notas-ins" rows="3"></textarea>
-                      </div>                      
+                      </div> 
+                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
+                        <input class="form-check-input" type="checkbox" value="" id="activo-ins" name="activo-ins" checked />
+                        <label class="form-check-label" for="activo-ins">
+                          <span class="d-flex align-items-center">
+                            <span class="ms-2">
+                              <input type="hidden" id="hid-activo-ins" name="hid-activo-ins" value="1" />
+                              <span id="activoTitulo">Activo</span>
+                            </span>
+                          </span>
+                        </label>
+                      </div>                     
                     </div>
                   </div>                      
                 </div>
@@ -298,7 +293,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="ciudades_atracciones/update" method="POST">
+              <form action="<?= base_url("/ciudades_atracciones/update"); ?>" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Modificación</h3>
                   <div class="block-options">
@@ -313,28 +308,9 @@
                       <input type="hidden" id="hid-id-upd" name="hid-id-upd" />
                       <div class="mb-4">
                         <label class="form-label" for="ciudad-upd">Ciudad</label>
-                        <select class="form-select" id="ciudad-upd" name="ciudad-upd" size="5">
-
-                          <?php
-                            foreach ($ciudades as $ciudad) {
-                              echo '<option value="' . $ciudad["id_ciudad"] . '">' . $ciudad["nombre_ciudad"] . '</option>';
-                            }
-                          ?>
-
-                        </select>
+                        <textarea class="form-control" id="ciudad-upd" name="ciudad-upd" rows="3" 
+                          data-id="<?= $ciudad["id"] ?>" readonly><?= $ciudad["nombre"] ?></textarea>
                       </div>
-                      <div class="mb-4">
-                        <label class="form-label" for="atraccion-upd">Atraccion</label>
-                        <select class="form-select" id="atraccion-upd" name="atraccion-upd" size="5">
-
-                          <?php
-                            foreach ($atracciones as $atraccion) {
-                              echo '<option value="' . $atraccion["id"] . '">' . $atraccion["nombre"] . '</option>';
-                            }
-                          ?>
-
-                        </select>
-                      </div> 
                       <div class="mb-4">
                         <label class="form-label" for="descripcion-upd">Descripción</label>
                         <input type="text" class="form-control" id="descripcion-upd" name="descripcion-upd" />
@@ -342,7 +318,18 @@
                       <div class="mb-4">
                         <label class="form-label" for="notas-upd">Notas</label>
                         <textarea class="form-control" id="notas-upd" name="notas-upd" rows="3"></textarea>
-                      </div>                      
+                      </div> 
+                      <div class="form-check form-block mb-4" style="padding: 0px 13px">
+                        <input class="form-check-input" type="checkbox" value="" id="activo-upd" name="activo-upd" />
+                        <label class="form-check-label" for="activo-upd">
+                          <span class="d-flex align-items-center">
+                            <span class="ms-2">
+                              <input type="hidden" id="hid-activo-upd" name="hid-activo-upd" value="1" />
+                              <span id="activoTitulo">Activo</span>
+                            </span>
+                          </span>
+                        </label>
+                      </div>                     
                     </div>
                   </div>                      
                 </div>
@@ -358,21 +345,21 @@
 
     </div>
     <!-- END Page Container -->
-    <script src="assets/js/oneui.app.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/oneui.app.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js">
 
-    </script><script src="assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="assets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
-    <script src="assets/js/plugins/datatables-buttons/buttons.print.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
-    <script src="assets/js/pages/be_tables_datatables.min.js"></script>
+    </script><script src="<?= base_url(); ?>assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons/buttons.print.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/pages/be_tables_datatables.min.js"></script>
 
     <script>
       $(document).ready(function() {
@@ -394,12 +381,13 @@
         }, 4000);
       });
 
-      function UpdateClick(id, ciudad, atraccion, descripcion, notas) {
+      function UpdateClick(id, ciudad, descripcion, notas, activo) {
         $("#hid-id-upd").val(id);
         $("#ciudad-upd").val(ciudad);
-        $("#atraccion-upd").val(atraccion);
         $("#descripcion-upd").val(descripcion);
         $("#notas-upd").val(notas);
+        $("#activo-upd").prop("checked", active == 1 ? true : false);
+        $("#hid-activo-upd").val(active);
       }
 
       function DeleteClick(id) {
