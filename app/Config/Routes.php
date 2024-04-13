@@ -68,10 +68,15 @@ $routes->post('/ciudades_coworking/insert', 'CiudadCoworking::insert');
 $routes->post('/ciudades_coworking/update', 'CiudadCoworking::update');
 $routes->post('/ciudades_coworking/delete', 'CiudadCoworking::delete');
 
-$routes->get('/ciudades_embajadas', 'CiudadEmbajada::index');
+$routes->get('/ciudades_embajadas/(:num)', 'CiudadEmbajada::index/$1');
 $routes->post('/ciudades_embajadas/insert', 'CiudadEmbajada::insert');
 $routes->post('/ciudades_embajadas/update', 'CiudadEmbajada::update');
 $routes->post('/ciudades_embajadas/delete', 'CiudadEmbajada::delete');
+
+$routes->get('/ciudades_eventos/(:num)', 'CiudadEvento::index/$1');
+$routes->post('/ciudades_eventos/insert', 'CiudadEvento::insert');
+$routes->post('/ciudades_eventos/update', 'CiudadEvento::update');
+$routes->post('/ciudades_eventos/delete', 'CiudadEvento::delete');
 
 $routes->get('/ciudades_terminales', 'CiudadTerminal::index');
 $routes->post('/ciudades_terminales/insert', 'CiudadTerminal::insert');

@@ -431,10 +431,10 @@ class Validation extends BaseConfig
         'notas' => [
             'rules' => 'string|max_length[3000]',
             'errors' => [
-                'string' => 'El campo Notas debe ser un texto.',
-                'min_length' => 'El campo Notas debe tener al menos 4 caracteres.',
-                'max_length' => 'El campo Notas debe tener como máximo 3000 caracteres.',
-                'regex_match' => 'El campo Notas debe contener sólo caracteres alfanuméricos',
+                'string' => 'El campo Notasx debe ser un texto.',
+                'min_length' => 'El campo Notasx debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Notasx debe tener como máximo 3000 caracteres.',
+                'regex_match' => 'El campo Notasx debe contener sólo caracteres alfanuméricos',
             ]
         ],
     ];
@@ -475,6 +475,75 @@ class Validation extends BaseConfig
                 'min_length' => 'El campo Notas debe tener al menos 4 caracteres.',
                 'max_length' => 'El campo Notas debe tener como máximo 3000 caracteres.',
                 'regex_match' => 'El campo Notas debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+    ];
+
+    public $ciudad_evento = [
+        'ciudad' => [
+            'rules' => 'required|integer|min_length[1]|max_length[3]',
+            'errors' => [
+                'required' => 'El campo Ciudad es obligatorio.',
+                'integer' => 'El campo Ciudad debe ser un número entero.',
+                'min_length' => 'El campo Ciudad debe tener una longitud mínima de 1.',
+                'max_length' => 'El campo Ciudad debe tener una longitud máxima de 3.'
+            ]
+        ],
+        'titulo' => [
+            'rules' => 'required|string|min_length[4]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ&#$\- ]+$/]',
+            'errors' => [
+                'required' => 'El campo Título es obligatorio.',
+                'string' => 'El campo Título debe ser un texto.',
+                'min_length' => 'El campo Título debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Título debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Título debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'subtitulo' => [
+            'rules' => 'required|string|min_length[4]|max_length[512]|regex_match[/^[a-zA-Z0-9áéíóúñÑ&#$\- ]+$/]',
+            'errors' => [
+                'required' => 'El campo Subtítulo es obligatorio.',
+                'string' => 'El campo Subtítulo debe ser un texto.',
+                'min_length' => 'El campo Subtítulo debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Subtítulo debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Subtítulo debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'descripcion' => [
+            'rules' => 'required|string|min_length[4]|max_length[3000]|regex_match[/^[a-zA-Z0-9áéíóúñÑ&#$\- ]+$/]',
+            'errors' => [
+                'required' => 'El campo Descripción es obligatorio.',
+                'string' => 'El campo Descripción debe ser un texto.',
+                'min_length' => 'El campo Descripción debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Descripción debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Descripción debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
+        'fecha_inicio' => [
+            'rules' => 'required|string|min_length[9]|max_length[10]|regex_match[/^[0-9\-\/\.]+$/]',
+            'errors' => [
+                'required' => 'El campo Fecha Inicio es obligatorio.',
+                'min_length' => 'El campo Fecha Inicio debe tener al menos 9 caracteres.',
+                'max_length' => 'El campo Fecha Inicio debe tener como máximo 10 caracteres.',
+                'regex_match' => 'El campo Fecha Inicio debe contener sólo caracteres numéricos y algunos especiales',
+            ]
+        ],
+        'fecha_fin' => [
+            'rules' => 'required|string|min_length[9]|max_length[10]|regex_match[/^[0-9\-\/\.]+$/]',
+            'errors' => [
+                'required' => 'El campo Fecha Fin es obligatorio.',
+                'min_length' => 'El campo Fecha Fin debe tener al menos 9 caracteres.',
+                'max_length' => 'El campo Fecha Fin debe tener como máximo 10 caracteres.',
+                'regex_match' => 'El campo Fecha Fin debe contener sólo caracteres numéricos y algunos especiales',
+            ]
+        ],
+        'valor' => [
+            'rules' => 'string|max_length[3000]|regex_match[/^[0-9\.]+$/]',
+            'errors' => [
+                'string' => 'El campo Valor debe ser un texto.',
+                'min_length' => 'El campo Valor debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Valor debe tener como máximo 3000 caracteres.',
+                'regex_match' => 'El campo Valor debe contener sólo caracteres numéricos y punto.',
             ]
         ],
     ];

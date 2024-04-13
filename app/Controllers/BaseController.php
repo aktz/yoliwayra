@@ -23,6 +23,7 @@ use App\Models\CiudadAtraccionModel;
 use App\Models\CiudadBancoModel;
 use App\Models\CiudadCoworkingModel;
 use App\Models\CiudadEmbajadaModel;
+use App\Models\CiudadEventoModel;
 use App\Models\CiudadTerminalModel;
 use App\Models\CiudadTransporteModel;
 use App\Models\ClimaModel;
@@ -103,6 +104,7 @@ abstract class BaseController extends Controller
         $this->ciudad_banco = new CiudadBancoModel();
         $this->ciudad_coworking = new CiudadCoworkingModel();
         $this->ciudad_embajada = new CiudadEmbajadaModel();
+        $this->ciudad_evento = new CiudadEventoModel();
         $this->ciudad_terminal = new CiudadTerminalModel();
         $this->ciudad_transporte = new CiudadTransporteModel();
         $this->clima = new ClimaModel();

@@ -6,9 +6,9 @@ use CodeIgniter\Model;
 
 class CiudadCoworkingModel extends Model
 {
-  protected $table = 'ciudades_bancos';
+  protected $table = 'ciudades_coworking';
   protected $primaryKey = 'id';
-  protected $allowedFields = ['ciudad', 'banco', 'descripcion', 'notas'];  
+  protected $allowedFields = ['ciudad', 'descripcion', 'notas'];  
 
   public function getCiudadCoworkingActivos($id)
   {

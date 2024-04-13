@@ -4,11 +4,11 @@ namespace App\Controllers;
 
 class CiudadEmbajada extends BaseController
 {
-  public function index(): string
+  public function index($id)
   {
     $data["embajadas"] = $this->embajada->getEmbajadasActivas();
-    $data["ciudades"] = $this->ciudad->getCiudadesActivas();
-    $data["array"] = $this->ciudad_embajada->getCiudadEmbajadasActivas();
+    $data["ciudad"] = $this->ciudad->getCiudadActivo($id);
+    $data["array"] = $this->ciudad_embajada->getCiudadEmbajadasActivos($id);
     if ($this->session->getFlashdata("insert_fail")) {
       $data["insert_fail"] = "error";
     }
@@ -31,10 +31,10 @@ class CiudadEmbajada extends BaseController
     $descripcion = $this->request->getPost("descripcion-ins");
     $notas = $this->request->getPost("notas-ins");
 
-    $existe = $this->ciudad_embajada->getCiudadEmbajada($ciudad, $embajada);
+    $existe = $this->ciudad_embajada->getCiudadEmbajadaDescripcion($ciudad, $embajada, $descripcion);
 
     if ($existe) {
-      $this->session->setFlashdata("validation_error", ["Ya existe la embajada para la ciudad."]);
+      $this->session->setFlashdata("validation_error", ["Ya existe la embajada para el país."]);
     } else {
 
       $data = [
@@ -52,7 +52,7 @@ class CiudadEmbajada extends BaseController
       }
     }   
 
-    return redirect()->to(base_url('ciudades_embajadas'));
+    return redirect()->to(base_url('ciudades_embajadas' . '/' . $ciudad));
   }
 
   public function update() {
@@ -76,11 +76,15 @@ class CiudadEmbajada extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
 
-    return redirect()->to(base_url('ciudades_embajadas'));    
+    return redirect()->to(base_url('ciudades_embajadas' . '/' . $ciudad));    
   }
 
   public function delete() {
     $id = $this->request->getPost("id");
+
+    $ciudad_embajada = $this->ciudad_embajada->getCiudadEmbajada($id);
+    $ciudad = $ciudad_embajada["ciudad"];
+
     $deleted = $this->ciudad_embajada->delete($id);
 
     if ($deleted <= 0) {
@@ -89,6 +93,6 @@ class CiudadEmbajada extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
     
-    return redirect()->to(base_url('ciudades_embajadas')); 
+    return redirect()->to(base_url('ciudades_embajadas' . '/' . $ciudad)); 
   }
 }

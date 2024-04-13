@@ -10,13 +10,14 @@ class CiudadEmbajadaModel extends Model
   protected $primaryKey = 'id';
   protected $allowedFields = ['ciudad', 'embajada', 'descripcion', 'notas'];  
 
-  public function getCiudadEmbajadasActivas()
+  public function getCiudadEmbajadasActivos($id)
   {
-    return $this->query("select cie.id, cie.ciudad id_ciudad, ciu.nombre nombre_ciudad, cie.embajada id_embajada, 
-                            emb.nombre nombre_embajada, cie.descripcion, cie.notas
-                        from ciudades_embajadas cie
-                        inner join ciudades ciu on cie.ciudad = ciu.id
-                        inner join embajadas emb on cie.embajada = emb.id")->getResultArray();
+    return $this->query("select cia.id, cia.ciudad id_ciudad, ciu.nombre nombre_ciudad, cia.embajada id_embajada, 
+                            emb.nombre nombre_embajada, cia.descripcion, cia.notas
+                        from ciudades_embajadas cia
+                        inner join ciudades ciu on cia.ciudad = ciu.id
+                        inner join embajadas emb on cia.embajada = emb.id
+                        where ciu.id = " . $id)->getResultArray();
   }
   
   public function getCiudadEmbajada($id)
@@ -24,8 +25,8 @@ class CiudadEmbajadaModel extends Model
     return $this->find($id);
   }
 
-  public function getCiudadEmbajadaDescripcion($ciudad, $descripcion) 
+  public function getCiudadEmbajadaDescripcion($ciudad, $embajada, $descripcion) 
   {
-    return $this->where(["ciudad"=>$ciudad, "descripcion"=>$descripcion])->first();
+    return $this->where(["ciudad"=>$ciudad, "embajada"=>$embajada, "descripcion"=>$descripcion])->first();
   }
 }
