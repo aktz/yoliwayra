@@ -183,8 +183,6 @@
                         <tr>
                           <th>Ciudad</th>
                           <th>Título</th>
-                          <th>Subtítulo</th>
-                          <th>Descripción</th>
                           <th>Inicio</th>
                           <th>Fin</th>
                           <th>Valor</th>
@@ -198,8 +196,6 @@
                               echo '<tr>';
                                 echo '<td>' . $item["nombre_ciudad"] . '</td>';
                                 echo '<td>' . $item["titulo"] . '</td>';
-                                echo '<td>' . $item["subtitulo"] . '</td>';
-                                echo '<td>' . $item["descripcion"] . '</td>';
                                 echo '<td>' . $item["fecha_inicio"] . '</td>';
                                 echo '<td>' . $item["fecha_fin"] . '</td>';
                                 echo '<td>' . $item["valor"] . '</td>';
@@ -208,8 +204,8 @@
                                     echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
                                           ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
                                           ' onclick="UpdateClick(' . 
-                                              $item["id"] . ', ' . 
-                                              $item["id_ciudad"] . ', \'' . 
+                                              $item["id"] . ', \'' . 
+                                              $item["id_ciudad"] . '\', \'' . 
                                               $item["titulo"] . '\', \'' . 
                                               $item["subtitulo"] . '\', \'' . 
                                               $item["descripcion"] . '\', \'' . 
