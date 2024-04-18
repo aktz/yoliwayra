@@ -27,7 +27,7 @@ class CiudadBanco extends BaseController
   public function insert()  
   {
     $banco = $this->request->getPost("banco-ins");
-    $ciudad = $this->request->getPost("ciudad-ins");
+    $ciudad = $this->request->getPost("hid-id-ciudad-ins");
     $descripcion = $this->request->getPost("descripcion-ins");
     $notas = $this->request->getPost("notas-ins");
 
@@ -58,7 +58,7 @@ class CiudadBanco extends BaseController
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
     $banco = $this->request->getPost("banco-upd");
-    $ciudad = $this->request->getPost("ciudad-upd");
+    $ciudad = $this->request->getPost("hid-id-ciudad-upd");
     $descripcion = $this->request->getPost("descripcion-upd");
     $notas = $this->request->getPost("notas-upd");
 

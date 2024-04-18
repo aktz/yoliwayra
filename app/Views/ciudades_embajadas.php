@@ -203,7 +203,8 @@
                                           ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
                                           ' onclick="UpdateClick(' . 
                                               $item["id"] . ', ' . 
-                                              $item["id_ciudad"] . ', ' . 
+                                              $item["id_ciudad"] . ', \'' . 
+                                              $item["nombre_ciudad"] . '\', ' .  
                                               $item["id_embajada"] . ', \'' . 
                                               $item["descripcion"] . '\', \'' . 
                                               $item["notas"] . '\')">';
@@ -305,10 +306,10 @@
                   <div class="block-content block-content-full">
                     <div class="row">
                       <input type="hidden" id="hid-id-upd" name="hid-id-upd" />
+                      <input type="hidden" id="hid-id-ciudad-upd" name="hid-id-ciudad-upd" />
                       <div class="mb-4">
                         <label class="form-label" for="ciudad-upd">Ciudad</label>
-                        <textarea class="form-control" id="ciudad-upd" name="ciudad-upd" rows="3" 
-                          data-id="<?= $ciudad["id"] ?>" readonly><?= $ciudad["nombre"] ?></textarea>
+                        <textarea class="form-control" id="ciudad-upd" name="ciudad-upd" rows="3" readonly></textarea>
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="embajada-upd">Embajada</label>
@@ -381,9 +382,10 @@
         }, 4000);
       });
 
-      function UpdateClick(id, ciudad, embajada, descripcion, notas) {
+      function UpdateClick(id, ciudad, nombre_ciudad, embajada, descripcion, notas) {
         $("#hid-id-upd").val(id);
-        $("#ciudad-upd").val(ciudad);
+        $("#hid-id-ciudad-upd").val(ciudad);
+        $("#ciudad-upd").val(nombre_ciudad);
         $("#embajada-upd").val(embajada);
         $("#descripcion-upd").val(descripcion);
         $("#notas-upd").val(notas);

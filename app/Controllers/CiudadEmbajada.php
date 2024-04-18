@@ -58,7 +58,7 @@ class CiudadEmbajada extends BaseController
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
     $embajada = $this->request->getPost("embajada-upd");
-    $ciudad = $this->request->getPost("ciudad-upd");
+    $ciudad = $this->request->getPost("hid-id-ciudad-upd");
     $descripcion = $this->request->getPost("descripcion-upd");
     $notas = $this->request->getPost("notas-upd");
 

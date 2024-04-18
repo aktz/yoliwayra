@@ -205,6 +205,7 @@
                                           ' onclick="UpdateClick(' . 
                                               $item["id"] . ', ' . 
                                               $item["id_ciudad"] . ', \'' . 
+                                              $item["nombre_ciudad"] . '\', \'' . 
                                               $item["descripcion"] . '\', \'' . 
                                               $item["notas"] . '\', '.
                                               $item['activo'] . ')">';
@@ -306,14 +307,14 @@
                   <div class="block-content block-content-full">
                     <div class="row">
                       <input type="hidden" id="hid-id-upd" name="hid-id-upd" />
+                      <input type="hidden" id="hid-id-ciudad-upd" name="hid-id-ciudad-upd" />
                       <div class="mb-4">
                         <label class="form-label" for="ciudad-upd">Ciudad</label>
-                        <textarea class="form-control" id="ciudad-upd" name="ciudad-upd" rows="3" 
-                          data-id="<?= $ciudad["id"] ?>" readonly><?= $ciudad["nombre"] ?></textarea>
+                        <textarea class="form-control" id="ciudad-upd" name="ciudad-upd" rows="3" readonly></textarea>
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="descripcion-upd">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion-upd" name="descripcion-upd" />
+                        <textarea class="form-control" id="descripcion-upd" name="descripcion-upd" rows="3"></textarea>
                       </div>                      
                       <div class="mb-4">
                         <label class="form-label" for="notas-upd">Notas</label>
@@ -381,12 +382,13 @@
         }, 4000);
       });
 
-      function UpdateClick(id, ciudad, descripcion, notas, activo) {
+      function UpdateClick(id, ciudad, nombre_ciudad, descripcion, notas, activo) {
         $("#hid-id-upd").val(id);
-        $("#ciudad-upd").val(ciudad);
+        $("#hid-id-ciudad-upd").val(ciudad);
+        $("#ciudad-upd").val(nombre_ciudad);
         $("#descripcion-upd").val(descripcion);
         $("#notas-upd").val(notas);
-        $("#activo-upd").prop("checked", active == 1 ? true : false);
+        $("#activo-upd").prop("checked", activo == 1 ? true : false);
         $("#hid-activo-upd").val(active);
       }
 

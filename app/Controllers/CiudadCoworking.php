@@ -55,7 +55,7 @@ class CiudadCoworking extends BaseController
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
     $coworking = $this->request->getPost("coworking-upd");
-    $ciudad = $this->request->getPost("ciudad-upd");
+    $ciudad = $this->request->getPost("hid-id-ciudad-upd");
     $descripcion = $this->request->getPost("descripcion-upd");
     $notas = $this->request->getPost("notas-upd");
 

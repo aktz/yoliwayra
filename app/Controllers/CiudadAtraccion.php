@@ -56,7 +56,7 @@ class CiudadAtraccion extends BaseController
 
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
-    $ciudad = $this->request->getPost("ciudad-upd");
+    $ciudad = $this->request->getPost("hid-id-ciudad-upd");
     $descripcion = $this->request->getPost("descripcion-upd");
     $notas = $this->request->getPost("notas-upd");
     $activo = $this->request->getPost("hid-activo-upd");

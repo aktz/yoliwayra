@@ -202,6 +202,7 @@
                                           ' onclick="UpdateClick(' . 
                                               $item["id"] . ', ' . 
                                               $item["id_ciudad"] . ', \'' . 
+                                              $item["nombre_ciudad"] . '\', \'' . 
                                               $item["descripcion"] . '\', \'' . 
                                               $item["notas"] . '\')">';
                                       echo '<i class="fa fa-fw fa-pencil-alt"></i>';
@@ -290,10 +291,10 @@
                   <div class="block-content block-content-full">
                     <div class="row">
                       <input type="hidden" id="hid-id-upd" name="hid-id-upd" />
+                      <input type="hidden" id="hid-id-ciudad-upd" name="hid-id-ciudad-upd" />
                       <div class="mb-4">
                         <label class="form-label" for="ciudad-upd">Ciudad</label>
-                        <textarea class="form-control" id="ciudad-upd" name="ciudad-upd" rows="3" 
-                          data-id="<?= $ciudad["id"] ?>" readonly><?= $ciudad["nombre"] ?></textarea>
+                        <textarea class="form-control" id="ciudad-upd" name="ciudad-upd" rows="3" readonly></textarea>
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="descripcion-upd">Descripción</label>
@@ -354,9 +355,10 @@
         }, 4000);
       });
 
-      function UpdateClick(id, ciudad, descripcion, notas) {
+      function UpdateClick(id, ciudad, nombre_ciudad, descripcion, notas) {
         $("#hid-id-upd").val(id);
-        $("#ciudad-upd").val(ciudad);
+        $("#hid-id-ciudad-upd").val(ciudad);
+        $("#ciudad-upd").val(nombre_ciudad);
         $("#descripcion-upd").val(descripcion);
         $("#notas-upd").val(notas);
       }
