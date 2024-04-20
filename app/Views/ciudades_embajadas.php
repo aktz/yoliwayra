@@ -252,8 +252,7 @@
                       <div class="mb-4">
                         <label class="form-label" for="ciudad-ins">Ciudad</label>
                         <input type="hidden" id="ciudad-ins" name="ciudad-ins" value="<?= $ciudad["id"] ?>" />
-                        <textarea class="form-control" id="ciudad-nombre" name="ciudad-nombre" 
-                          rows="3" readonly><?= $ciudad["nombre"] ?></textarea>
+                        <textarea class="form-control" id="ciudad-upd" name="ciudad-upd" rows="3" readonly></textarea>
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="embajada-ins">Embajada</label>

@@ -62,7 +62,7 @@ class CiudadEvento extends BaseController
 
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
-    $ciudad = $this->request->getPost("ciudad-upd");
+    $ciudad = $this->request->getPost("hid-id-ciudad-upd");
     $titulo = $this->request->getPost("titulo-upd");
     $subtitulo = $this->request->getPost("subtitulo-upd");
     $descripcion = $this->request->getPost("descripcion-upd");

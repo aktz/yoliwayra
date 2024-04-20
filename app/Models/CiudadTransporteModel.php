@@ -10,7 +10,7 @@ class CiudadTransporteModel extends Model
   protected $primaryKey = 'id';
   protected $allowedFields = ['origen', 'destino', 'transporte', 'descripcion', 'notas'];  
 
-  public function getCiudadTransportesActivos()
+  public function getCiudadTransportesActivos($id)
   {
     return $this->query("select cit.id, cit.origen id_origen, cit.destino id_destino, 
                             ciu_1.nombre nombre_origen, ciu_2.nombre nombre_destino, 
@@ -19,7 +19,8 @@ class CiudadTransporteModel extends Model
                         from ciudades_transportes cit
                         inner join ciudades ciu_1 on cit.origen = ciu_1.id
                         inner join ciudades ciu_2 on cit.destino = ciu_2.id
-                        inner join transportes tra on cit.transporte = tra.id")->getResultArray();
+                        inner join transportes tra on cit.transporte = tra.id
+                        where cit.origen = " . $id . " or cit.destino = " . $id)->getResultArray();
   }
   
   public function getCiudadTransporte($id)

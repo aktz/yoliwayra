@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>Eventos de Ciudad</title>
+    <title>Guianzas de Ciudad</title>
 
     <meta name="description" content="YoliWayra">
     <meta name="author" content="anysw">
@@ -116,7 +116,7 @@
                       <a class="link-fx" href="<?= base_url('ciudades'); ?>">Ciudades</a>
                     </li>
                     <li class="breadcrumb-item" style="font-size:1.1rem" aria-current="page">
-                      Eventos
+                      Guianzas
                     </li>
                   </ol>
                 </nav>
@@ -182,10 +182,9 @@
                       <thead>
                         <tr>
                           <th>Ciudad</th>
-                          <th>Título</th>
-                          <th>Inicio</th>
-                          <th>Fin</th>
-                          <th>Valor</th>
+                          <th>Guianza</th>
+                          <th>Descripción</th>
+                          <th>Notas</th>
                           <th class="text-center" style="width: 100px;"></th>
                         </tr>
                       </thead>
@@ -195,10 +194,9 @@
                             foreach ($array as $item) {
                               echo '<tr>';
                                 echo '<td>' . $item["nombre_ciudad"] . '</td>';
-                                echo '<td>' . $item["titulo"] . '</td>';
-                                echo '<td>' . $item["fecha_inicio"] . '</td>';
-                                echo '<td>' . $item["fecha_fin"] . '</td>';
-                                echo '<td>' . $item["valor"] . '</td>';
+                                echo '<td>' . $item["nombre_guianza"] . '</td>';
+                                echo '<td>' . $item["descripcion"] . '</td>';
+                                echo '<td>' . $item["notas"] . '</td>';
                                 echo '<td class="text-center">';
                                   echo '<div class="btn-group">';
                                     echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
@@ -206,13 +204,10 @@
                                           ' onclick="UpdateClick(' . 
                                               $item["id"] . ', ' . 
                                               $item["id_ciudad"] . ', \'' . 
-                                              $item["nombre_ciudad"] . '\', \'' .  
-                                              $item["titulo"] . '\', \'' . 
-                                              $item["subtitulo"] . '\', \'' . 
+                                              $item["nombre_ciudad"] . '\', \'' . 
+                                              $item["nombre_guianza"] . '\', \'' . 
                                               $item["descripcion"] . '\', \'' . 
-                                              $item["fecha_inicio"] . '\', \'' . 
-                                              $item["fecha_fin"] . '\', ' . 
-                                              $item["valor"] . ')">';
+                                              $item["notas"] . '\')">';
                                       echo '<i class="fa fa-fw fa-pencil-alt"></i>';
                                     echo '</button>';
                                     echo '<button type="button" id="delete" onclick="DeleteClick(' . $item["id"] . ')" class="btn btn-sm btn-alt-secondary" title="Eliminar">';
@@ -242,7 +237,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="<?= base_url("/ciudades_eventos/insert"); ?>" method="POST">
+              <form action="<?= base_url("/ciudades_guianzas/insert"); ?>" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Nuevo</h3>
                   <div class="block-options">
@@ -259,30 +254,18 @@
                         <input type="hidden" id="ciudad-ins" name="ciudad-ins" value="<?= $ciudad["id"] ?>" />
                         <textarea class="form-control" id="ciudad-nombre" name="ciudad-nombre" 
                           rows="3" readonly><?= $ciudad["nombre"] ?></textarea>
+                      </div>
+                      <div class="mb-4">
+                        <label class="form-label" for="guianza-ins">Descripción</label>
+                        <textarea class="form-control" id="guianza-ins" name="guianza-ins" rows="3"></textarea>
                       </div>                     
-                      <div class="mb-4">
-                        <label class="form-label" for="titulo-ins">Título</label>
-                        <textarea class="form-control" id="titulo-ins" name="titulo-ins" rows="3"></textarea>
-                      </div>                      
-                      <div class="mb-4">
-                        <label class="form-label" for="subtitulo-ins">Subtítulo</label>
-                        <textarea class="form-control" id="subtitulo-ins" name="subtitulo-ins" rows="3"></textarea>
-                      </div>                      
                       <div class="mb-4">
                         <label class="form-label" for="descripcion-ins">Descripción</label>
                         <textarea class="form-control" id="descripcion-ins" name="descripcion-ins" rows="3"></textarea>
                       </div>                      
                       <div class="mb-4">
-                        <label class="form-label" for="fecha-inicio-ins">Fecha Inicio</label>
-                        <input type="text" class="form-control" id="fecha-inicio-ins" name="fecha-inicio-ins" />
-                      </div>                      
-                      <div class="mb-4">
-                        <label class="form-label" for="fecha-fin-ins">Fecha Fin</label>
-                        <input type="text" class="form-control" id="fecha-fin-ins" name="fecha-fin-ins" />
-                      </div>                      
-                      <div class="mb-4">
-                        <label class="form-label" for="valor-ins">Valor</label>
-                        <input type="text" class="form-control" id="valor-ins" name="valor-ins" />
+                        <label class="form-label" for="notas-ins">Notas</label>
+                        <textarea class="form-control" id="notas-ins" name="notas-ins" rows="3"></textarea>
                       </div>                      
                     </div>
                   </div>                      
@@ -302,7 +285,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="<?= base_url("/ciudades_eventos/update"); ?>" method="POST">
+              <form action="<?= base_url("/ciudades_guianzas/update"); ?>" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Modificación</h3>
                   <div class="block-options">
@@ -321,28 +304,16 @@
                         <textarea class="form-control" id="ciudad-upd" name="ciudad-upd" rows="3" readonly></textarea>
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="titulo-upd">Título</label>
-                        <textarea class="form-control" id="titulo-upd" name="titulo-upd" rows="3"></textarea>
-                      </div>                      
-                      <div class="mb-4">
-                        <label class="form-label" for="subtitulo-upd">Subtítulo</label>
-                        <textarea class="form-control" id="subtitulo-upd" name="subtitulo-upd" rows="3"></textarea>
+                        <label class="form-label" for="guianza-upd">Guianza</label>
+                        <textarea class="form-control" id="guianza-upd" name="guianza-upd" rows="3"></textarea>
                       </div> 
                       <div class="mb-4">
                         <label class="form-label" for="descripcion-upd">Descripción</label>
                         <textarea class="form-control" id="descripcion-upd" name="descripcion-upd" rows="3"></textarea>
-                      </div> 
-                      <div class="mb-4">
-                        <label class="form-label" for="fecha-inicio-upd">Fecha Inicio</label>
-                        <input type="text" class="form-control" id="fecha-inicio-upd" name="fecha-inicio-upd" />
                       </div>                      
                       <div class="mb-4">
-                        <label class="form-label" for="fecha-fin-upd">Fecha Fin</label>
-                        <input type="text" class="form-control" id="fecha-fin-upd" name="fecha-fin-upd" />
-                      </div>                      
-                      <div class="mb-4">
-                        <label class="form-label" for="valor-upd">Valor</label>
-                        <textarea class="form-control" id="valor-upd" name="valor-upd" rows="3"></textarea>
+                        <label class="form-label" for="notas-upd">Notas</label>
+                        <textarea class="form-control" id="notas-upd" name="notas-upd" rows="3"></textarea>
                       </div>                      
                     </div>
                   </div>                      
@@ -395,16 +366,13 @@
         }, 4000);
       });
 
-      function UpdateClick(id, ciudad, nombre_ciudad, titulo, subtitulo, descripcion, fecha_inicio, fecha_fin, valor) {
+      function UpdateClick(id, ciudad, nombre_ciudad, guianza, descripcion, notas) {
         $("#hid-id-upd").val(id);
         $("#hid-id-ciudad-upd").val(ciudad);
         $("#ciudad-upd").val(nombre_ciudad);
-        $("#titulo-upd").val(titulo);
-        $("#subtitulo-upd").val(subtitulo);
+        $("#guianza-upd").val(guianza);
         $("#descripcion-upd").val(descripcion);
-        $("#fecha-inicio-upd").val(fecha_inicio);
-        $("#fecha-fin-upd").val(fecha_fin);
-        $("#valor-upd").val(valor);
+        $("#notas-upd").val(notas);
       }
 
       function DeleteClick(id) {
@@ -426,7 +394,7 @@
 
       function DeleteItem(id) {
         $.ajax({
-          url: '<?= base_url('/ciudades_eventos/delete'); ?>',
+          url: '<?= base_url('/ciudades_guianzas/delete'); ?>',
           type: 'POST',
           data: { id: id },
           dataType: 'json'

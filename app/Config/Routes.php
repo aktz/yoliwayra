@@ -78,12 +78,17 @@ $routes->post('/ciudades_eventos/insert', 'CiudadEvento::insert');
 $routes->post('/ciudades_eventos/update', 'CiudadEvento::update');
 $routes->post('/ciudades_eventos/delete', 'CiudadEvento::delete');
 
-$routes->get('/ciudades_terminales', 'CiudadTerminal::index');
+$routes->get('/ciudades_guianzas/(:num)', 'CiudadGuianza::index/$1');
+$routes->post('/ciudades_guianzas/insert', 'CiudadGuianza::insert');
+$routes->post('/ciudades_guianzas/update', 'CiudadGuianza::update');
+$routes->post('/ciudades_guianzas/delete', 'CiudadGuianza::delete');
+
+$routes->get('/ciudades_terminales/(:num)', 'CiudadTerminal::index/$1');
 $routes->post('/ciudades_terminales/insert', 'CiudadTerminal::insert');
 $routes->post('/ciudades_terminales/update', 'CiudadTerminal::update');
 $routes->post('/ciudades_terminales/delete', 'CiudadTerminal::delete');
 
-$routes->get('/ciudades_transportes', 'CiudadTransporte::index');
+$routes->get('/ciudades_transportes/(:num)', 'CiudadTransporte::index/$1');
 $routes->post('/ciudades_transportes/insert', 'CiudadTransporte::insert');
 $routes->post('/ciudades_transportes/update', 'CiudadTransporte::update');
 $routes->post('/ciudades_transportes/delete', 'CiudadTransporte::delete');

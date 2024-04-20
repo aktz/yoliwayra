@@ -17,14 +17,14 @@
     <meta property="og:url" content="">
     <meta property="og:image" content="">
 
-    <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+    <link rel="shortcut icon" href="<?= base_url(); ?>assets/media/favicons/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="<?= base_url(); ?>assets/media/favicons/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>assets/media/favicons/apple-touch-icon-180x180.png">
 
-    <link rel="stylesheet" href="assets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="assets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
-    <link rel="stylesheet" href="assets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
-    <link rel="stylesheet" id="css-main" href="assets/css/oneui.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" id="css-main" href="<?= base_url(); ?>assets/css/oneui.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
   </head>
@@ -203,7 +203,8 @@
                                           ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
                                           ' onclick="UpdateClick(' . 
                                               $item["id"] . ', ' . 
-                                              $item["id_ciudad"] . ', ' . 
+                                              $item["id_ciudad"] . ', \'' . 
+                                              $item["nombre_ciudad"] . '\', ' . 
                                               $item["id_terminal"] . ', \'' . 
                                               $item["descripcion"] . '\', \'' . 
                                               $item["notas"] . '\')">';
@@ -236,7 +237,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="ciudades_terminales/insert" method="POST">
+              <form action="<?= base_url("/ciudades_terminales/insert"); ?>" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Nuevo</h3>
                   <div class="block-options">
@@ -250,15 +251,9 @@
                     <div class="row">
                       <div class="mb-4">
                         <label class="form-label" for="ciudad-ins">Ciudad</label>
-                        <select class="form-select" id="ciudad-ins" name="ciudad-ins" size="5">
-
-                          <?php
-                            foreach ($ciudades as $ciudad) {
-                              echo '<option value="' . $ciudad["id_ciudad"] . '">' . $ciudad["nombre_ciudad"] . '</option>';
-                            }
-                          ?>
-
-                        </select>
+                        <input type="hidden" id="ciudad-ins" name="ciudad-ins" value="<?= $ciudad["id"] ?>" />
+                        <textarea class="form-control" id="ciudad-nombre" name="ciudad-nombre" 
+                          rows="3" readonly><?= $ciudad["nombre"] ?></textarea>
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="terminal-ins">Terminal</label>
@@ -274,7 +269,7 @@
                       </div>                      
                       <div class="mb-4">
                         <label class="form-label" for="descripcion-ins">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion-ins" name="descripcion-ins" />
+                        <textarea class="form-control" id="descripcion-ins" name="descripcion-ins" rows="3"></textarea>
                       </div>                      
                       <div class="mb-4">
                         <label class="form-label" for="notas-ins">Notas</label>
@@ -298,7 +293,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="block block-rounded block-transparent mb-0">
-              <form action="ciudades_terminales/update" method="POST">
+              <form action="<?= base_url("/ciudades_terminales/update"); ?>" method="POST">
                 <div class="block-header block-header-default">
                   <h3 class="block-title">Modificación</h3>
                   <div class="block-options">
@@ -311,17 +306,10 @@
                   <div class="block-content block-content-full">
                     <div class="row">
                       <input type="hidden" id="hid-id-upd" name="hid-id-upd" />
+                      <input type="hidden" id="hid-id-ciudad-upd" name="hid-id-ciudad-upd" />
                       <div class="mb-4">
                         <label class="form-label" for="ciudad-upd">Ciudad</label>
-                        <select class="form-select" id="ciudad-upd" name="ciudad-upd" size="5">
-
-                          <?php
-                            foreach ($ciudades as $ciudad) {
-                              echo '<option value="' . $ciudad["id_ciudad"] . '">' . $ciudad["nombre_ciudad"] . '</option>';
-                            }
-                          ?>
-
-                        </select>
+                        <textarea class="form-control" id="ciudad-upd" name="ciudad-upd" rows="3" readonly></textarea>
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="terminal-upd">Terminal</label>
@@ -337,7 +325,7 @@
                       </div> 
                       <div class="mb-4">
                         <label class="form-label" for="descripcion-upd">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion-upd" name="descripcion-upd" />
+                        <textarea class="form-control" id="descripcion-upd" name="descripcion-upd" rows="3"></textarea>
                       </div>                      
                       <div class="mb-4">
                         <label class="form-label" for="notas-upd">Notas</label>
@@ -358,21 +346,21 @@
 
     </div>
     <!-- END Page Container -->
-    <script src="assets/js/oneui.app.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/oneui.app.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js">
 
-    </script><script src="assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="assets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
-    <script src="assets/js/plugins/datatables-buttons/buttons.print.min.js"></script>
-    <script src="assets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
-    <script src="assets/js/pages/be_tables_datatables.min.js"></script>
+    </script><script src="<?= base_url(); ?>assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons/buttons.print.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/pages/be_tables_datatables.min.js"></script>
 
     <script>
       $(document).ready(function() {
@@ -394,9 +382,10 @@
         }, 4000);
       });
 
-      function UpdateClick(id, ciudad, terminal, descripcion, notas) {
+      function UpdateClick(id, ciudad, nombre_ciudad, terminal, descripcion, notas) {
         $("#hid-id-upd").val(id);
-        $("#ciudad-upd").val(ciudad);
+        $("#hid-id-ciudad-upd").val(ciudad);
+        $("#ciudad-upd").val(nombre_ciudad);
         $("#terminal-upd").val(terminal);
         $("#descripcion-upd").val(descripcion);
         $("#notas-upd").val(notas);

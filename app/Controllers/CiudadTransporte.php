@@ -4,12 +4,12 @@ namespace App\Controllers;
 
 class CiudadTransporte extends BaseController
 {
-  public function index(): string
+  public function index($id)
   {
     $data["transportes"] = $this->transporte->getTransportesActivos();
     $data["origenes"] = $this->ciudad->getCiudadesActivas();
     $data["destinos"] = $this->ciudad->getCiudadesActivas();
-    $data["array"] = $this->ciudad_transporte->getCiudadTransportesActivos();
+    $data["array"] = $this->ciudad_transporte->getCiudadTransportesActivos($id);
     if ($this->session->getFlashdata("insert_fail")) {
       $data["insert_fail"] = "error";
     }
@@ -58,7 +58,7 @@ class CiudadTransporte extends BaseController
       }
     }   
 
-    return redirect()->to(base_url('ciudades_transportes'));
+    return redirect()->to(base_url('ciudades_transportes' . '/' . $origen));
   }
 
   public function update() {
@@ -84,7 +84,7 @@ class CiudadTransporte extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
 
-    return redirect()->to(base_url('ciudades_transportes'));    
+    return redirect()->to(base_url('ciudades_transportes' . '/' . $origen));    
   }
 
   public function delete() {

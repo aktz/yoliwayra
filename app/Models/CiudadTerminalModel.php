@@ -10,13 +10,14 @@ class CiudadTerminalModel extends Model
   protected $primaryKey = 'id';
   protected $allowedFields = ['ciudad', 'terminal', 'descripcion', 'notas'];  
 
-  public function getCiudadTerminalesActivos()
+  public function getCiudadTerminalesActivos($id)
   {
-    return $this->query("select cit.id, cit.ciudad id_ciudad, ciu.nombre nombre_ciudad, cit.terminal id_terminal, 
-                            ter.nombre nombre_terminal, cit.descripcion, cit.notas
-                        from ciudades_terminales cit
-                        inner join ciudades ciu on cit.ciudad = ciu.id
-                        inner join terminales ter on cit.terminal = ter.id")->getResultArray();
+    return $this->query("select cia.id, cia.ciudad id_ciudad, ciu.nombre nombre_ciudad, cia.terminal id_terminal, 
+                            ter.nombre nombre_terminal, cia.descripcion, cia.notas
+                        from ciudades_terminales cia
+                        inner join ciudades ciu on cia.ciudad = ciu.id
+                        inner join terminales ter on cia.terminal = ter.id
+                        where ciu.id = " . $id)->getResultArray();
   }
   
   public function getCiudadTerminal($id)
@@ -24,8 +25,8 @@ class CiudadTerminalModel extends Model
     return $this->find($id);
   }
 
-  public function getCiudadTerminalDescripcion($ciudad, $descripcion) 
+  public function getCiudadTerminalDescripcion($ciudad, $terminal, $descripcion) 
   {
-    return $this->where(["ciudad"=>$ciudad, "descripcion"=>$descripcion])->first();
+    return $this->where(["ciudad"=>$ciudad, "terminal"=>$terminal, "descripcion"=>$descripcion])->first();
   }
 }
