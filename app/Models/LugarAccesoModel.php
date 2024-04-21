@@ -8,12 +8,12 @@ class LugarAccesoModel extends Model
 {
   protected $table = 'lugares_accesos';
   protected $primaryKey = 'id';
-  protected $allowedFields = ['lugar', 'acceso'];  
+  protected $allowedFields = ['lugar', 'acceso', 'descripcion'];  
 
   public function getLugarAccesosActivos($id)
   {
     return $this->query("select lua.id, lua.lugar id_lugar, lug.nombre nombre_lugar, lua.acceso id_acceso, 
-                            acc.nombre nombre_acceso
+                            acc.nombre nombre_acceso, lua.descripcion
                         from lugares_accesos lua
                         inner join lugares lug on lua.lugar = lug.id
                         inner join accesos acc on lua.acceso = acc.id

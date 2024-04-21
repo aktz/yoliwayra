@@ -967,7 +967,17 @@ class Validation extends BaseConfig
                 'min_length' => 'El campo Acceso debe tener una longitud mínima de 1.',
                 'max_length' => 'El campo Acceso debe tener una longitud máxima de 3.'
             ]
-        ]
+        ],
+        'descripcion' => [
+            'rules' => 'required|string|min_length[5]|max_length[255]|regex_match[/^[a-zA-Z0-9áéíóúñÑ ]+$/]',
+            'errors' => [
+                'required' => 'El campo Descripción es obligatorio.',
+                'string' => 'El campo Descripción debe ser un texto.',
+                'min_length' => 'El campo Descripción debe tener al menos 4 caracteres.',
+                'max_length' => 'El campo Descripción debe tener como máximo 255 caracteres.',
+                'regex_match' => 'El campo Descripción debe contener sólo caracteres alfanuméricos',
+            ]
+        ],
     ];
     
     public $lugar_alimentacion = [

@@ -35,7 +35,7 @@ class LugarAlimentacion extends BaseController
     $existe = $this->lugar_alimentacion->getLugarAlimentacionCombinacion($lugar, $alimentacion, $descripcion);
 
     if ($existe) {
-      $this->session->setFlashdata("validation_error", ["Ya existe la alimentacion para el lugar."]);
+      $this->session->setFlashdata("validation_error", ["Ya existe el alimentacion para el lugar."]);
     } else {
 
       $data = [
@@ -53,13 +53,13 @@ class LugarAlimentacion extends BaseController
       }
     }   
 
-    return redirect()->to(base_url('lugares_alimentaciones/' . $lugar));
+    return redirect()->to(base_url('lugares_alimentaciones' . '/' . $lugar));
   }
 
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
-    $alimentacion = $this->request->getPost("alimentacion-upd");
-    $lugar = $this->request->getPost("lugar-upd");
+    $alimentacion = $this->request->getPost("hid-id-alimentacion-upd");
+    $lugar = $this->request->getPost("hid-id-lugar-upd");
     $descripcion = $this->request->getPost("descripcion-upd");
     $notas = $this->request->getPost("notas-upd");
 
@@ -77,15 +77,11 @@ class LugarAlimentacion extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
 
-    return redirect()->to(base_url('lugares_alimentaciones/' . $lugar));    
+    return redirect()->to(base_url('lugares_alimentaciones' . '/' . $lugar));    
   }
 
   public function delete() {
     $id = $this->request->getPost("id");
-
-    $lugar_alimentacion = $this->lugar_alimentacion->getLugarAlimentacion($id);
-    $lugar = $lugar_alimentacion["lugar"];
-
     $deleted = $this->lugar_alimentacion->delete($id);
 
     if ($deleted <= 0) {
@@ -94,6 +90,6 @@ class LugarAlimentacion extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
     
-    return redirect()->to(base_url('lugares_alimentaciones/' . $lugar)); 
+    return redirect()->to(base_url('lugares_alimentaciones' . '/' . $lugar)); 
   }
 }

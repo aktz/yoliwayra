@@ -182,7 +182,7 @@
                       <thead>
                         <tr>
                           <th>Lugar</th>
-                          <th>Alimentación</th>
+                          <th>Alimentacion</th>
                           <th>Descripción</th>
                           <th>Notas</th>
                           <th class="text-center" style="width: 100px;"></th>
@@ -194,7 +194,7 @@
                             foreach ($array as $item) {
                               echo '<tr>';
                                 echo '<td>' . $item["nombre_lugar"] . '</td>';
-                                echo '<td>' . $item["nombre_alimentacion"] . '</td>';                                
+                                echo '<td>' . $item["nombre_alimentacion"] . '</td>';
                                 echo '<td>' . $item["descripcion"] . '</td>';
                                 echo '<td>' . $item["notas"] . '</td>';
                                 echo '<td class="text-center">';
@@ -203,8 +203,10 @@
                                           ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
                                           ' onclick="UpdateClick(' . 
                                               $item["id"] . ', ' . 
-                                              $item["id_lugar"] . ', ' . 
-                                              $item["id_alimentacion"] . ', \'' . 
+                                              $item["id_lugar"] . ', \'' . 
+                                              $item["nombre_lugar"] . '\', ' . 
+                                              $item["id_alimentacion"] . ', \'' .
+                                              $item["nombre_alimentacion"] . '\', \'' . 
                                               $item["descripcion"] . '\', \'' . 
                                               $item["notas"] . '\')">';
                                       echo '<i class="fa fa-fw fa-pencil-alt"></i>';
@@ -255,7 +257,7 @@
                           rows="3" readonly><?= $lugar["nombre"] ?></textarea>
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="alimentacion-ins">Alimentación</label>
+                        <label class="form-label" for="alimentacion-ins">Alimentacion</label>
                         <select class="form-select" id="alimentacion-ins" name="alimentacion-ins" size="5">
 
                           <?php
@@ -267,13 +269,13 @@
                         </select>
                       </div> 
                       <div class="mb-4">
-                        <label class="form-label" for="descripcion-ins">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion-ins" name="descripcion-ins" />
-                      </div>                      
+                        <label class="form-label" for="descripcion-ins">Descripción</label><br />
+                        <textarea class="form-control" id="descripcion-ins" name="descripcion-ins" rows="3"></textarea>
+                      </div>
                       <div class="mb-4">
-                        <label class="form-label" for="notas-ins">Notas</label>
+                        <label class="form-label" for="notas-ins">Notas</label><br />
                         <textarea class="form-control" id="notas-ins" name="notas-ins" rows="3"></textarea>
-                      </div>                       
+                      </div>
                     </div>
                   </div>                      
                 </div>
@@ -305,31 +307,24 @@
                   <div class="block-content block-content-full">
                     <div class="row">
                       <input type="hidden" id="hid-id-upd" name="hid-id-upd" />
+                      <input type="hidden" id="hid-id-lugar-upd" name="hid-id-lugar-upd" />
+                      <input type="hidden" id="hid-id-alimentacion-upd" name="hid-id-alimentacion-upd" />
                       <div class="mb-4">
                         <label class="form-label" for="lugar-upd">Lugar</label><br />
-                        <textarea class="form-control" id="lugar-upd" name="lugar-upd" rows="3" 
-                          data-id="<?= $lugar["id"] ?>" readonly><?= $lugar["nombre"] ?></textarea>
+                        <textarea class="form-control" id="lugar-upd" name="lugar-upd" rows="3" readonly></textarea>
                       </div>
                       <div class="mb-4">
-                        <label class="form-label" for="alimentacion-upd">Acceso</label>
-                        <select class="form-select" id="alimentacion-upd" name="alimentacion-upd" size="5">
-
-                          <?php
-                            foreach ($alimentaciones as $alimentacion) {
-                              echo '<option value="' . $alimentacion["id"] . '">' . $alimentacion["nombre"] . '</option>';
-                            }
-                          ?>
-
-                        </select>
-                      </div>  
+                        <label class="form-label" for="alimentacion-upd">Alimentacion</label>
+                        <textarea class="form-control" id="alimentacion-upd" name="alimentacion-upd" rows="3" readonly></textarea>
+                      </div> 
                       <div class="mb-4">
-                        <label class="form-label" for="descripcion-upd">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion-upd" name="descripcion-upd" />
-                      </div>                      
+                        <label class="form-label" for="descripcion-upd">Descripción</label><br />
+                        <textarea class="form-control" id="descripcion-upd" name="descripcion-upd" rows="3"></textarea>
+                      </div>                     
                       <div class="mb-4">
-                        <label class="form-label" for="notas-upd">Notas</label>
+                        <label class="form-label" for="notas-upd">Descripción</label><br />
                         <textarea class="form-control" id="notas-upd" name="notas-upd" rows="3"></textarea>
-                      </div>                      
+                      </div>                     
                     </div>
                   </div>                      
                 </div>
@@ -381,10 +376,12 @@
         }, 4000);
       });
 
-      function UpdateClick(id, lugar, alimentacion, descripcion, notas) {
+      function UpdateClick(id, lugar, nombre_lugar, alimentacion, nombre_alimentacion, descripcion, notas) {
         $("#hid-id-upd").val(id);
-        $("#lugar-upd").val(lugar);
-        $("#alimentacion-upd").val(alimentacion);
+        $("#hid-id-lugar-upd").val(lugar);
+        $("#hid-id-alimentacion-upd").val(alimentacion);
+        $("#lugar-upd").val(nombre_lugar);
+        $("#alimentacion-upd").val(nombre_alimentacion);
         $("#descripcion-upd").val(descripcion);
         $("#notas-upd").val(notas);
       }

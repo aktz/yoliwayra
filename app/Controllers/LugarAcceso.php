@@ -29,6 +29,7 @@ class LugarAcceso extends BaseController
   {
     $acceso = $this->request->getPost("acceso-ins");
     $lugar = $this->request->getPost("lugar-ins");
+    $descripcion = $this->request->getPost("descripcion-ins");
 
     $existe = $this->lugar_acceso->getLugarAccesoCombinacion($lugar, $acceso);
 
@@ -38,7 +39,8 @@ class LugarAcceso extends BaseController
 
       $data = [
         "acceso"=>$acceso,
-        "lugar"=>$lugar
+        "lugar"=>$lugar,
+        "descripcion"=>$descripcion
       ];
   
       if (!$this->validation->run($data, 'lugar_acceso')) {
@@ -54,16 +56,14 @@ class LugarAcceso extends BaseController
 
   public function update() {
     $id = $this->request->getPost("hid-id-upd");
-    $acceso = $this->request->getPost("acceso-upd");
-    $lugar = $this->request->getPost("lugar-upd");
+    $acceso = $this->request->getPost("hid-id-acceso-upd");
+    $lugar = $this->request->getPost("hid-id-lugar-upd");
     $descripcion = $this->request->getPost("descripcion-upd");
-    $notas = $this->request->getPost("notas-upd");
 
     $data = [
       "acceso"=>$acceso,
       "lugar"=>$lugar,
-      "descripcion"=>$descripcion,
-      "notas"=>$notas
+      "descripcion"=>$descripcion
     ];
 
     if (!$this->validation->run($data, 'lugar_acceso')) {
@@ -73,7 +73,7 @@ class LugarAcceso extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
 
-    return redirect()->to(base_url('lugares_accesos'));    
+    return redirect()->to(base_url('lugares_accesos' . '/' . $lugar));    
   }
 
   public function delete() {
@@ -86,6 +86,6 @@ class LugarAcceso extends BaseController
       $this->session->setFlashdata("upsert_success", "Success"); 
     }
     
-    return redirect()->to(base_url('lugares_accesos')); 
+    return redirect()->to(base_url('lugares_accesos' . '/' . $lugar)); 
   }
 }

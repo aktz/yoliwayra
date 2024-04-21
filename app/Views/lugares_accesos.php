@@ -183,6 +183,7 @@
                         <tr>
                           <th>Lugar</th>
                           <th>Acceso</th>
+                          <th>Descripción</th>
                           <th class="text-center" style="width: 100px;"></th>
                         </tr>
                       </thead>
@@ -193,8 +194,20 @@
                               echo '<tr>';
                                 echo '<td>' . $item["nombre_lugar"] . '</td>';
                                 echo '<td>' . $item["nombre_acceso"] . '</td>';
+                                echo '<td>' . $item["descripcion"] . '</td>';
                                 echo '<td class="text-center">';
                                   echo '<div class="btn-group">';
+                                    echo '<button type="button" class="btn btn-sm btn-alt-secondary"' . 
+                                          ' data-bs-toggle="modal" data-bs-target="#modal-update" title="Editar"' . 
+                                          ' onclick="UpdateClick(' . 
+                                              $item["id"] . ', ' . 
+                                              $item["id_lugar"] . ', \'' . 
+                                              $item["nombre_lugar"] . '\', ' . 
+                                              $item["id_acceso"] . ', \'' .
+                                              $item["nombre_acceso"] . '\', \'' . 
+                                              $item["descripcion"] . '\')">';
+                                      echo '<i class="fa fa-fw fa-pencil-alt"></i>';
+                                    echo '</button>';
                                     echo '<button type="button" id="delete" onclick="DeleteClick(' . $item["id"] . ')" class="btn btn-sm btn-alt-secondary" title="Eliminar">';
                                       echo '<i class="fa fa-fw fa-times"></i>';
                                     echo '</button>';
@@ -251,7 +264,11 @@
                           ?>
 
                         </select>
-                      </div>                     
+                      </div> 
+                      <div class="mb-4">
+                        <label class="form-label" for="descripcion-ins">Descripción</label><br />
+                        <textarea class="form-control" id="descripcion-ins" name="descripcion-ins" rows="3"></textarea>
+                      </div>
                     </div>
                   </div>                      
                 </div>
@@ -283,23 +300,20 @@
                   <div class="block-content block-content-full">
                     <div class="row">
                       <input type="hidden" id="hid-id-upd" name="hid-id-upd" />
+                      <input type="hidden" id="hid-id-lugar-upd" name="hid-id-lugar-upd" />
+                      <input type="hidden" id="hid-id-acceso-upd" name="hid-id-acceso-upd" />
                       <div class="mb-4">
                         <label class="form-label" for="lugar-upd">Lugar</label><br />
-                        <textarea class="form-control" id="lugar-ins" name="lugar-ins" rows="3" 
-                          data-id="<?= $lugar["id"] ?>" readonly><?= $lugar["nombre"] ?></textarea>
+                        <textarea class="form-control" id="lugar-upd" name="lugar-upd" rows="3" readonly></textarea>
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="acceso-upd">Acceso</label>
-                        <select class="form-select" id="acceso-upd" name="acceso-upd" size="5">
-
-                          <?php
-                            foreach ($accesos as $acceso) {
-                              echo '<option value="' . $acceso["id"] . '">' . $acceso["nombre"] . '</option>';
-                            }
-                          ?>
-
-                        </select>
-                      </div>                      
+                        <textarea class="form-control" id="acceso-upd" name="acceso-upd" rows="3" readonly></textarea>
+                      </div> 
+                      <div class="mb-4">
+                        <label class="form-label" for="descripcion-upd">Descripción</label><br />
+                        <textarea class="form-control" id="descripcion-upd" name="descripcion-upd" rows="3"></textarea>
+                      </div>                     
                     </div>
                   </div>                      
                 </div>
@@ -351,10 +365,13 @@
         }, 4000);
       });
 
-      function UpdateClick(id, lugar, acceso) {
+      function UpdateClick(id, lugar, nombre_lugar, acceso, nombre_acceso, descripcion) {
         $("#hid-id-upd").val(id);
-        $("#lugar-upd").val(lugar);
-        $("#acceso-upd").val(acceso);
+        $("#hid-id-lugar-upd").val(lugar);
+        $("#hid-id-acceso-upd").val(acceso);
+        $("#lugar-upd").val(nombre_lugar);
+        $("#acceso-upd").val(nombre_acceso);
+        $("#descripcion-upd").val(descripcion);
       }
 
       function DeleteClick(id) {
