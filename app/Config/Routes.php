@@ -133,6 +133,31 @@ $routes->post('/lugares_alimentaciones/insert', 'LugarAlimentacion::insert');
 $routes->post('/lugares_alimentaciones/update', 'LugarAlimentacion::update');
 $routes->post('/lugares_alimentaciones/delete', 'LugarAlimentacion::delete');
 
+$routes->get('/lugares_alojamientos/(:num)', 'LugarAlojamiento::index/$1');
+$routes->post('/lugares_alojamientos/insert', 'LugarAlojamiento::insert');
+$routes->post('/lugares_alojamientos/update', 'LugarAlojamiento::update');
+$routes->post('/lugares_alojamientos/delete', 'LugarAlojamiento::delete');
+
+$routes->get('/lugares_categorias/(:num)', 'LugarCategoria::index/$1');
+$routes->post('/lugares_categorias/insert', 'LugarCategoria::insert');
+$routes->post('/lugares_categorias/update', 'LugarCategoria::update');
+$routes->post('/lugares_categorias/delete', 'LugarCategoria::delete');
+
+$routes->get('/lugares_eventos/(:num)', 'LugarEvento::index/$1');
+$routes->post('/lugares_eventos/insert', 'LugarEvento::insert');
+$routes->post('/lugares_eventos/update', 'LugarEvento::update');
+$routes->post('/lugares_eventos/delete', 'LugarEvento::delete');
+
+$routes->get('/lugares_guianzas/(:num)', 'LugarGuianza::index/$1');
+$routes->post('/lugares_guianzas/insert', 'LugarGuianza::insert');
+$routes->post('/lugares_guianzas/update', 'LugarGuianza::update');
+$routes->post('/lugares_guianzas/delete', 'LugarGuianza::delete');
+
+$routes->get('/lugares_transportes/(:num)', 'LugarTransporte::index/$1');
+$routes->post('/lugares_transportes/insert', 'LugarTransporte::insert');
+$routes->post('/lugares_transportes/update', 'LugarTransporte::update');
+$routes->post('/lugares_transportes/delete', 'LugarTransporte::delete');
+
 $routes->get('/paises', 'Pais::index');
 $routes->post('/paises/insert', 'Pais::insert');
 $routes->post('/paises/update', 'Pais::update');

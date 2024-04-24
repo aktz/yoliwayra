@@ -566,12 +566,9 @@
                     <a class="btn btn-primary mb-2" id="a-lugares-accesos" href="<?= base_url('lugares_accesos'); ?>">Accesos</a>
                     <a class="btn btn-primary mb-2" id="a-lugares-alimentaciones" href="<?= base_url('lugares_alimentaciones'); ?>">Alimentaciones</a>
                     <a class="btn btn-primary mb-2" id="a-lugares-alojamientos" href="<?= base_url('lugares_alojamientos'); ?>">Alojamientos</a>
-                    <a class="btn btn-primary mb-2" id="a-lugares-atracciones" href="<?= base_url('lugares_atracciones'); ?>">Atracciones</a>
-                    <a class="btn btn-primary mb-2" id="a-lugares-autoridades" href="<?= base_url('lugares_autoridades'); ?>">Autoridades</a>
                     <a class="btn btn-primary mb-2" id="a-lugares-categorias" href="<?= base_url('lugares_categorias'); ?>">Categorias</a>
-                    <a class="btn btn-primary mb-2" id="a-lugares-coworking" href="<?= base_url('lugares_coworking'); ?>">Coworking</a>
                     <a class="btn btn-primary mb-2" id="a-lugares-eventos" href="<?= base_url('lugares_eventos'); ?>">Eventos</a>
-                    <a class="btn btn-primary mb-2" id="a-lugares-contactos" href="<?= base_url('lugares_contactos'); ?>">Contactos</a>
+                    <a class="btn btn-primary mb-2" id="a-lugares-contactos" href="<?= base_url('lugares_guianzas'); ?>">Guianzas</a>
                     <a class="btn btn-primary mb-2" id="a-lugares-transportes" href="<?= base_url('lugares_transportes'); ?>">Transportes</a>
                   </div>
                 </div>                      
